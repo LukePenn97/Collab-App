@@ -7,6 +7,7 @@ import MatchProject from "./MatchProject";
 import ProjectDetail from "./ProjectDetail";
 import Button from "./Button";
 import ChatRoom from "./ChatRoom";
+import Profile from "./Profile";
 
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
@@ -17,7 +18,8 @@ function App() {
   const {
     state,
     setProject,
-    setProjects
+    setProjects,
+    setUser
   } = useAppData();
 
   
@@ -32,6 +34,7 @@ function App() {
   const MATCH = "MATCH";
   const DETAIL = "DETAIL";
   const CHAT = "CHAT";
+  const PROFILE = "PROFILE";
   const { mode, transition, back } = useVisualMode(DISPLAY);
   
 
@@ -44,6 +47,11 @@ function App() {
   function pickAProject(project){
     setProject(project)
     transition(DETAIL)
+  }
+  function pickAUser(user){
+    console.log('hiiiiiiii')
+    setUser(user)
+    transition(PROFILE)
   }
   function chatToAGroup(){
     transition(CHAT)
@@ -60,25 +68,40 @@ function App() {
 
       <section>
         {mode === DISPLAY && <Display 
+        user = {state.user}
         project = {state.project}
         projects={state.projects} 
         onMatch={onMatch} 
         pickAProject = {pickAProject}
+        pickAUser = {pickAUser}
         />}
         {mode === MATCH && <MatchProject 
+        user = {state.user}
         project = {state.project}
         projects={state.projects.slice(1)} 
         pickAProject = {pickAProject}
+        pickAUser = {pickAUser}
         />}
-        {mode === DETAIL && <ProjectDetail 
+        {mode === DETAIL && <ProjectDetail
+        user = {state.user} 
         project={state.project}
         projects={state.projects}  
         pickAProject = {pickAProject}
         chatToAGroup = {chatToAGroup}
+        pickAUser = {pickAUser}
         />}
         {mode === CHAT && <ChatRoom 
+        user = {state.user}
         project={state.project}
         projects={state.projects}
+        pickAUser = {pickAUser}
+        />}
+        {mode === PROFILE && <Profile
+        user = {state.user}
+        project={state.project}
+        projects={state.projects}
+        pickAProject = {pickAProject}
+        pickAUser = {pickAUser}
         />}
       </section>
 
