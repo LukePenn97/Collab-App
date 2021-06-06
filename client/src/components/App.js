@@ -9,6 +9,7 @@ import Button from "./Button";
 import ChatRoom from "./ChatRoom";
 import Profile from "./Profile";
 import Register from "./Register";
+import Skills from "./Skills";
 
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
@@ -62,6 +63,7 @@ function App() {
     transition(REGISTER)
   }
   function pickSkills(){
+    console.log("hiiiiii")
     transition(SKILLS)
   }
 
@@ -113,6 +115,14 @@ function App() {
         pickAUser = {pickAUser}
         />}
         {mode === REGISTER && <Register
+        // user = {state.user}
+        // project={state.project}
+        // projects={state.projects}
+        // pickAProject = {pickAProject}
+        // pickAUser = {pickAUser}
+        pickSkills = {pickSkills}
+        />}
+        {mode === SKILLS && <Skills
         // user = {state.user}
         // project={state.project}
         // projects={state.projects}

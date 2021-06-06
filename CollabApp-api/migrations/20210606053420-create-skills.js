@@ -1,33 +1,27 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Projects', {
+    await queryInterface.createTable('skills', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
+      javascript: {
+        type: Sequelize.BOOLEAN
       },
-      description: {
-        type: Sequelize.STRING
+      python: {
+        type: Sequelize.BOOLEAN
       },
-      url: {
-        type: Sequelize.STRING
+      react: {
+        type: Sequelize.BOOLEAN
       },
-      imgUrl: {
-        type: Sequelize.STRING
+      ruby: {
+        type: Sequelize.BOOLEAN
       },
-      deadline: {
-        type: Sequelize.DATE
-      },
-      startDate: {
-        type: Sequelize.DATE
-      },
-      endDate: {
-        type: Sequelize.DATE
+      css: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -40,6 +34,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Projects');
+    await queryInterface.dropTable('skills');
   }
 };

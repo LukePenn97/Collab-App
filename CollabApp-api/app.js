@@ -1,5 +1,5 @@
 const { sequelize, User } = require('./models')
-
+const PORT = process.env.PORT || 5000;
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -17,25 +17,14 @@ const path = require('path');
 
 
 const app = express();
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/users', async(req, res) => {
-    const { firstName, lastName, email, password } = req.body
+//CollabApp Routes
+app.use('/users', require('./routes/users'));
+app.use('/projects', require('./routes/projects'));
+app.use('/', (req, res) => res.send("Hello World. This is the CollabApp"));
 
-    try {
-        const user = await User.create({firstName, lastName, email, password})
-
-        return res.json(user)
-    } catch (err) {
-        console.log(err)
-        return res.status(500).json(err);
-    }
-});
-
-// //CollabApp Routes
-// app.use('/users', require('./routes/users'))
-
-const PORT = process.env.PORT || 5000;
 
 
 app.listen(PORT, async () => {
