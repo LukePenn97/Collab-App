@@ -8,6 +8,7 @@ import ProjectDetail from "./ProjectDetail";
 import Button from "./Button";
 import ChatRoom from "./ChatRoom";
 import Profile from "./Profile";
+import Register from "./Register";
 
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
@@ -35,6 +36,8 @@ function App() {
   const DETAIL = "DETAIL";
   const CHAT = "CHAT";
   const PROFILE = "PROFILE";
+  const REGISTER = "REGISTER";
+  const SKILLS = "SKILLS";
   const { mode, transition, back } = useVisualMode(DISPLAY);
   
 
@@ -49,12 +52,17 @@ function App() {
     transition(DETAIL)
   }
   function pickAUser(user){
-    console.log('hiiiiiiii')
     setUser(user)
     transition(PROFILE)
   }
   function chatToAGroup(){
     transition(CHAT)
+  }
+  function registration(){
+    transition(REGISTER)
+  }
+  function pickSkills(){
+    transition(SKILLS)
   }
 
   return (
@@ -63,6 +71,7 @@ function App() {
         <div>
           <h2>navbar</h2>
           <Button onClick={backToHome}>home</Button>
+          <Button onClick={registration}>Register</Button>
         </div>
       </section>
 
@@ -102,6 +111,13 @@ function App() {
         projects={state.projects}
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
+        />}
+        {mode === REGISTER && <Register
+        // user = {state.user}
+        // project={state.project}
+        // projects={state.projects}
+        // pickAProject = {pickAProject}
+        // pickAUser = {pickAUser}
         />}
       </section>
 

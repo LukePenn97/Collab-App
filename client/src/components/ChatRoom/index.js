@@ -11,7 +11,7 @@ export default function ChatRoom(props) {
     pickAProject = {props.pickAProject}
     /> */}
       <div>
-        <h1>chatBox</h1>
+        <h1>------------------------chatBox---------------</h1>
         <p>blahblahblahblahblahblah</p>
         <p> blahblahblahblahblahblahblah</p>
         <p>blahblahblah</p>
