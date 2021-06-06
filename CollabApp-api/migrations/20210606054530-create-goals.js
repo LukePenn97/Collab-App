@@ -1,16 +1,15 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('projects', {
+    await queryInterface.createTable('Goals', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      projectLeadId: {
-        type: Sequelize.INTEGER,
-        allowNull: false
+      ProjectId: {
+        type: Sequelize.INTEGER
       },
       name: {
         type: Sequelize.STRING
@@ -18,20 +17,17 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      url: {
-        type: Sequelize.STRING
-      },
-      imgUrl: {
-        type: Sequelize.STRING
+      startDate: {
+        type: Sequelize.DATE
       },
       deadline: {
         type: Sequelize.DATE
       },
-      startDate: {
+      completedAt: {
         type: Sequelize.DATE
       },
-      endDate: {
-        type: Sequelize.DATE
+      completedBy: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -44,6 +40,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('projects');
+    await queryInterface.dropTable('Goals');
   }
 };
