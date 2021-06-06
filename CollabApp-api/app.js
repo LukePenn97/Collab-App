@@ -3,7 +3,7 @@ const PORT = process.env.PORT || 5000;
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-
+const createAssociations = require('./associations')
 
 
 // //Databse
@@ -19,7 +19,7 @@ const path = require('path');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+createAssociations();
 //CollabApp Routes
 app.use('/users', require('./routes/users'));
 app.use('/projects', require('./routes/projects'));
