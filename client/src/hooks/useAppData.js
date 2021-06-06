@@ -22,6 +22,7 @@ export default function useApplicationData() {
 
 
   const [state, setState] = useState({
+    user:null,
     project:null,
     projects: fakeProjects
   });
@@ -39,6 +40,8 @@ export default function useApplicationData() {
 
   //update project state when user click on a project
   const setProject = project => setState({ ...state, project });
+  //update user state when user click on a user
+  const setUser = user => setState({ ...state, user });
 
   //update projects state when user do a search
   const setProjects = projects => setState({...state, projects})
@@ -47,5 +50,5 @@ export default function useApplicationData() {
 
   
   
-  return { state, setProject, setProjects }
+  return { state, setProject, setProjects, setUser }
 }
