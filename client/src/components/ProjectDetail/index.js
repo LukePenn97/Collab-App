@@ -10,7 +10,7 @@ return (
     <h2>{props.project.name}</h2>
     <h3>{props.project.lead}</h3>
     <p>{props.project.description} </p>
-    <Button>chatRoom</Button>
+    <Button onClick = {props.chatToAGroup} >chatRoom</Button>
   </article>
 )
 } 
