@@ -6,7 +6,7 @@ import ProjectList from "../ProjectList";
 export default function Display(props) {
 return (
   <article>
-    <Button>find a group</Button>
+    <Button onClick ={props.onMatch}>find a group</Button>
     <Button>create a project</Button>
     <ProjectList projects={props.projects}/>
   </article>
