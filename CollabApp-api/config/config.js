@@ -1,8 +1,9 @@
-{
+
+module.exports = {
   "development": {
-    "username": "labber",
-    "password": "labber",
-    "database": "collabapp",
+    "username": process.env.DB_USERNAME,
+    "password": process.env.DB_PASSWORD,
+    "database": process.env.DB_DATABASE,
     "host": "localhost",
     "dialect": "postgres"
   },
