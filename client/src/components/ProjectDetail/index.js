@@ -7,8 +7,8 @@ export default function ProjectDetail(props) {
 return (
   <article>
     <h1>Project Detail page</h1>
-    <h2>{props.project.name}</h2>
-    <h3>{props.project.lead}</h3>
+    <h2 >{props.project.name}</h2>
+    <h3 onClick ={()=> props.pickAUser(props.project.lead)}>{props.project.lead}</h3>
     <p>{props.project.description} </p>
     <Button onClick = {props.chatToAGroup} >chatRoom</Button>
   </article>

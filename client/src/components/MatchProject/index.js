@@ -10,6 +10,7 @@ return (
     <ProjectList 
     projects={props.projects}
     pickAProject = {props.pickAProject}
+    pickAUser = {props.pickAUser}
     />
   </article>
 )

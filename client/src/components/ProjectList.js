@@ -14,6 +14,7 @@ export default function ProjectList(props) {
       lead = {project.lead}
       description = {project.description}
       pickAProject = {props.pickAProject}
+      pickAUser = {props.pickAUser}
       />
     )
   })

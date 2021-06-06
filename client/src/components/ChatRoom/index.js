@@ -22,7 +22,7 @@ export default function ChatRoom(props) {
       </div>
       <div>
         <h2>{props.project.name}</h2> 
-        <h3>{props.project.lead}</h3> 
+        <h3 onClick ={()=> props.pickAUser(props)}>{props.project.lead}</h3> 
         <p>{props.project.description}</p> 
 
         </div>

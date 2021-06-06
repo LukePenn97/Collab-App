@@ -12,7 +12,7 @@ export default function ProjectListItem(props) {
 
   return (
     <li onClick ={() => props.pickAProject(props)} >
-      <h2 >{props.name}</h2>
+      <h2  >{props.name}</h2>
       <h3 >{props.lead}</h3>
       <p >{props.description}</p>
     </li>
