@@ -3,7 +3,7 @@ import React from "react";
 
 // const classnames = require('classnames');
 
-export default function DayListItem(props) {
+export default function ProjectListItem(props) {
   // const itemClass = classnames("day-list__item", {
   //   "day-list__item--selected": props.selected, "day-list__item--full": props.spots === 0
   // })
