@@ -1,9 +1,5 @@
 const router = require("express").Router();
-const db = require('../config/database')
 const {sequelize, User } = require('../models');
-// const User = require('../models/User.js')
-// const User = require('../models/User.js')
-// const Project = require('../models/project.js')
 
 //get user list
 router.get('/', (req, res) =>
@@ -23,6 +19,7 @@ User.findByPk(req.params.id)
   })
   .catch(err => console.log("Error:"+ err)));
 
+//Post (create) new user
 router.post('/', async(req, res) => {
   const { firstName, lastName, email, password } = req.body
   try {
@@ -34,6 +31,7 @@ router.post('/', async(req, res) => {
   }
 });
 
+//patch (update) user's attr.
 router.patch('/:id', async(req, res) => {
   const { firstName, lastName, email, password } = req.body
   try {
@@ -48,13 +46,14 @@ router.patch('/:id', async(req, res) => {
   }
 });
 
+//Delete a user
 router.delete('/:id', async(req, res) => {
     User.destroy({
     where: {
       id: req.params.id
     }
   }).then (data => {
-    console.log("Deleting done successfully", data);
+    console.log("Deleting was successfull for user ID:", data);
     res.sendStatus(200);
   })
   .catch ((err) => {
