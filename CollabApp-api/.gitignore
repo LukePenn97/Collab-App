@@ -1,4 +1,4 @@
 node_modules/
-CollabApp/config/
-CollabApp/CollapApp-api/
+config/
+CollapApp-api/
 .env
