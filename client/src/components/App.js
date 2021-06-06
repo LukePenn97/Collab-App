@@ -6,6 +6,7 @@ import Display from "./Display";
 import MatchProject from "./MatchProject";
 import ProjectDetail from "./ProjectDetail";
 import Button from "./Button";
+import ChatRoom from "./ChatRoom";
 
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
@@ -30,6 +31,7 @@ function App() {
   const DISPLAY = "DISPLAY";
   const MATCH = "MATCH";
   const DETAIL = "DETAIL";
+  const CHAT = "CHAT";
   const { mode, transition, back } = useVisualMode(DISPLAY);
   
 
@@ -43,6 +45,9 @@ function App() {
     setProject(project)
     transition(DETAIL)
   }
+  function chatToAGroup(){
+    transition(CHAT)
+  }
 
   return (
     <main>
@@ -55,17 +60,25 @@ function App() {
 
       <section>
         {mode === DISPLAY && <Display 
+        project = {state.project}
         projects={state.projects} 
         onMatch={onMatch} 
         pickAProject = {pickAProject}
         />}
         {mode === MATCH && <MatchProject 
+        project = {state.project}
         projects={state.projects.slice(1)} 
         pickAProject = {pickAProject}
         />}
         {mode === DETAIL && <ProjectDetail 
-        project={state.project} 
+        project={state.project}
+        projects={state.projects}  
         pickAProject = {pickAProject}
+        chatToAGroup = {chatToAGroup}
+        />}
+        {mode === CHAT && <ChatRoom 
+        project={state.project}
+        projects={state.projects}
         />}
       </section>
 

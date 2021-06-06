@@ -13,5 +13,4 @@ return (
     pickAProject = {props.pickAProject}
     />
   </article>
-)
-} 
+)} 
