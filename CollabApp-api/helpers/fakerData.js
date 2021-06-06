@@ -8,8 +8,27 @@ const randomRecentDate = faker.date.recent();
 const randomSoonDate = faker.date.soon();
 const randomSentence = faker.lorem.sentence();
 const randomJobDescriptor = faker.name.jobDescriptor();
-const 
 
-const fakerData = () => {
-  
+const fakerData = {
+  userData: () => {
+    return  {
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      email: faker.internet.email(),
+      password: "password",
+      photo: faker.internet.avatar(),
+      bio: faker.lorem.sentence()
+    }
+  },
+  projectData: () => {
+
+  },
+  goalData: () => {
+
+  },
+  messageData: () => {
+
+  },
 }
+
+module.exports = fakerData

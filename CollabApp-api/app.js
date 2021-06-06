@@ -3,8 +3,8 @@ const { sequelize, User, Project, users_projects, Goals, mentor_requests, messag
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-
-
+const axios = require('axios')
+const fakerData = require('./helpers/fakerData');
 
 // //Databse
 // const db = require('./config/database')
@@ -18,6 +18,8 @@ const path = require('path');
 
 const app = express();
 app.use(express.json());
+
+
 
 User.belongsToMany(Project, { through: 'users_projects' })
 Project.belongsToMany(User, { through: 'users_projects' })
@@ -113,4 +115,14 @@ app.listen(PORT, async () => {
     console.log(`Server started on port, ${PORT}`);
     await sequelize.sync({ force: true })
     console.log('database synced!')
+    axios
+        .post('http://localhost:5000/users', fakerData.userData())
+        .then(res => {
+            console.log(`statusCode: ${res.statusCode}`)
+            console.log(res)
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    console.log("Faker Data:", )
 });

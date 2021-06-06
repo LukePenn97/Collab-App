@@ -14,8 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Skills.init({
-    skillone: DataTypes.BOOLEAN,
-    skilltwo: DataTypes.BOOLEAN
+    javascript: DataTypes.BOOLEAN,
+    python: DataTypes.BOOLEAN,
+    react: DataTypes.BOOLEAN,
+    ruby: DataTypes.BOOLEAN,
+    css: DataTypes.BOOLEAN
   }, {
     sequelize,
     tableName: 'skills',
