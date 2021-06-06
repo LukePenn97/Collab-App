@@ -1,43 +1,47 @@
 import React from "react";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 // import "./App.css";
 
 import Display from "./Display";
 import MatchProject from "./MatchProject";
-
-import useVisualMode from "../hooks/useVisualMode";
+import ProjectDetail from "./ProjectDetail";
 import Button from "./Button";
 
+import useVisualMode from "../hooks/useVisualMode";
+import useAppData from "../hooks/useAppData";
+
+
 function App() {
-  const projects = [
-    {
-      id: 1,
-      name: "react-app",
-      lead: "Amy",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    },
-    {
-      id: 2,
-      name: "Ruby",
-      lead: "Bell",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    },
-  ];
-  // this.state = projects
+  //set the initial state 
+  const {
+    state,
+    setProject,
+    setProjects
+  } = useAppData();
+
+  
+
+  //set the projects state to the hard code data
+  // const [projects, setProjects] = useState(props.interviewer || null);
+// setProjects(fakeProjects)
+
+
+ 
   const DISPLAY = "DISPLAY";
   const MATCH = "MATCH";
+  const DETAIL = "DETAIL";
   const { mode, transition, back } = useVisualMode(DISPLAY);
-  // const [state, setState] = useState({
-  //   projects: [],
-  // });
+  
 
   function onMatch() {
     transition(MATCH);
   }
   function backToHome() {
     transition(DISPLAY);
+  }
+  function pickAProject(project){
+    setProject(project)
+    transition(DETAIL)
   }
 
   return (
@@ -50,8 +54,19 @@ function App() {
       </section>
 
       <section>
-        {mode === DISPLAY && <Display projects={projects} onMatch={onMatch} />}
-        {mode === MATCH && <MatchProject projects={projects.slice(1)} />}
+        {mode === DISPLAY && <Display 
+        projects={state.projects} 
+        onMatch={onMatch} 
+        pickAProject = {pickAProject}
+        />}
+        {mode === MATCH && <MatchProject 
+        projects={state.projects.slice(1)} 
+        pickAProject = {pickAProject}
+        />}
+        {mode === DETAIL && <ProjectDetail 
+        project={state.project} 
+        pickAProject = {pickAProject}
+        />}
       </section>
 
       <section>
