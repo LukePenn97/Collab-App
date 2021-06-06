@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //CollabApp Routes
-app.use('/register', require('./routes/register'));
+// app.use('/register', require('./routes/register'));
 app.use('/users', require('./routes/users'));
 app.use('/projects', require('./routes/projects'));
 app.use('/', (req, res) => res.send("Hello World. This is the CollabApp"));

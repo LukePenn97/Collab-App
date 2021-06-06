@@ -1,22 +1,27 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Users_Projects', {
+    await queryInterface.createTable('skills', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
-        type: Sequelize.INTEGER,
-        foriegnKey: true,
-        allowNull: false
+      javascript: {
+        type: Sequelize.BOOLEAN
       },
-      project_id: {
-        type: Sequelize.INTEGER,
-        foriegnKey: true,
-        allowNull: false
+      python: {
+        type: Sequelize.BOOLEAN
+      },
+      react: {
+        type: Sequelize.BOOLEAN
+      },
+      ruby: {
+        type: Sequelize.BOOLEAN
+      },
+      css: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -29,6 +34,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Users_Projects');
+    await queryInterface.dropTable('skills');
   }
 };
