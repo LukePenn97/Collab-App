@@ -3,11 +3,14 @@ import React from "react";
 import ProjectList from "../ProjectList";
 
 
-export default function Display(props) {
+export default function MatchProject(props) {
 return (
   <article>
-    <h1>Project page</h1>
-    <ProjectList projects={props.projects}/>
+    <h1>Project List page</h1>
+    <ProjectList 
+    projects={props.projects}
+    pickAProject = {props.pickAProject}
+    />
   </article>
 )
 } 

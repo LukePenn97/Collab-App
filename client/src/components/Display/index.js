@@ -8,7 +8,10 @@ return (
   <article>
     <Button onClick ={props.onMatch}>find a group</Button>
     <Button>create a project</Button>
-    <ProjectList projects={props.projects}/>
+    <ProjectList 
+    projects={props.projects}
+    pickAProject = {props.pickAProject}
+    />
   </article>
 )
 } 
