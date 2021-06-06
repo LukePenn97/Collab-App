@@ -23,7 +23,7 @@ Project.findByPk(req.params.id)
 // router.get('/:id/chat', (req, res) =>
 //   Message.findAll({
 //     where: {
-//       user_id: req.params.id
+//       project_id: req.params.id
 //     }
 //   })
 //   .then(messages => {
