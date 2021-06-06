@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      mentorId: {
+      UserId: {
         type: Sequelize.INTEGER
       },
-      projectId: {
+      ProjectId: {
         type: Sequelize.INTEGER
       },
       message: {
