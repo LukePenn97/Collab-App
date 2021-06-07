@@ -3,12 +3,12 @@ const PORT = process.env.PORT || 5000;
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-
+const createAssociations = require('./associations')
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+createAssociations();
 //CollabApp Routes
 // app.use('/register', require('./routes/register'));
 app.use('/users', require('./routes/users'));
