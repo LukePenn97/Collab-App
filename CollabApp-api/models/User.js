@@ -9,8 +9,6 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({Project}) {
-      this.hasMany(Project, {foreignKey: 'projectLeadId'})
-      this.belongsToMany(Project, { as: "user", foreignKey: "userId", through: 'users_projects' });
     }
 
     // toJSON(){
