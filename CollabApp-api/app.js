@@ -5,22 +5,12 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const createAssociations = require('./associations')
 
-
-// //Databse
-// const db = require('./config/database')
-
-// // Test db
-
-// db.authenticate()
-//     .then(() => console.log('Connection to database has been established successfully.'))
-//     .catch (error => console.log('Unable to connect to the database. Error:'+ error));
-
-
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 createAssociations();
 //CollabApp Routes
+// app.use('/register', require('./routes/register'));
 app.use('/users', require('./routes/users'));
 app.use('/projects', require('./routes/projects'));
 app.use('/', (req, res) => res.send("Hello World. This is the CollabApp"));
