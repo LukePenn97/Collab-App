@@ -9,16 +9,22 @@ User.findAll()
     res.set('Access-Control-Allow-Origin','*');
     res.json(users);
   })
-  .catch(err => console.log("Error:"+ err)));
+  .catch(err => {
+    console.log("Error:"+ err)
+    res.status(500).json(err)
+    }));
 
 //get user by ID
 router.get('/:id', (req, res) =>
 User.findByPk(req.params.id)
   .then(users => {
     console.log("Users:", users.dataValues);
-    res.sendStatus(200);
+    res.json(users.dataValues);
   })
-  .catch(err => console.log("Error:"+ err)));
+  .catch(err => {
+    console.log("Error:"+ err)
+    res.status(500).json(err)
+    }));
 
 //Post (create) new user
 router.post('/', async(req, res) => {
