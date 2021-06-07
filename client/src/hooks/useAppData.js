@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// const axios = require('axios').default;
+const axios = require('axios').default;
 
 
 export default function useApplicationData() {
@@ -25,19 +25,22 @@ export default function useApplicationData() {
     user:null,
     project:null,
     users:{},
-    projects: fakeProjects
+    projects: []
   });
   // fetch the initial data in database;
-  // useEffect(() => {
-  //   axios.defaults.baseURL = "http://localhost:8001";
-  //   Promise.all([
-  //     axios.get('/api/days'),
-  //     axios.get('/api/appointments'),
-  //     axios.get('/api/interviewers')
-  //   ]).then((all) => {
-  //     setState(prev => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data, spots: all[0].data.spots }));
-  //   })
-  // }, []);
+  useEffect(() => {
+    axios.defaults.baseURL = "http://localhost:5000";
+    Promise.all([
+      axios.get('/projects'),
+      // axios.get('/api/appointments'),
+      // axios.get('/api/interviewers')
+    ]).then((all) => {
+      // setState(prev => ({ 
+      //   ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data, spots: all[0].data.spots 
+      // }));
+      console.log(all)
+    })
+  }, []);
 
   //update project state when user click on a project
   const setProject = project => setState({ ...state, project });
