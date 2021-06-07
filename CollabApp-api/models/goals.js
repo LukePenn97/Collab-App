@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Goals.init({
-    ProjectId: DataTypes.INTEGER,
+    projectId: DataTypes.INTEGER,
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     startDate: DataTypes.DATE,
@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     deadline: DataTypes.DATE
   }, {
     sequelize,
+    tableName: 'goals',
     modelName: 'Goals',
   });
   return Goals;

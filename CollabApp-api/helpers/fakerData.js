@@ -20,8 +20,15 @@ const fakerData = {
       bio: faker.lorem.sentence()
     }
   },
-  projectData: () => {
-
+  projectData: (projectLeadId) => {
+    return  {
+      projectLeadId: projectLeadId,
+      name: faker.intenet.domainName(),
+      description: faker.lorem.sentence(),
+      imgUrl: faker.image.technics(),
+      deadline: faker.date.soon(),
+      startDate: faker.date.recent()
+    }
   },
   goalData: () => {
 

@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   completed_goals.init({
-    UserId: DataTypes.INTEGER,
-    GoalId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    goalId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'completed_goals',
