@@ -6,7 +6,7 @@ router.get('/', (req, res) =>
 Project.findAll()
   .then(projects => {
     console.log("Projects:", projects);
-    res.sendStatus(200);
+    res.json(projects);
   })
   .catch(err => console.log("Error:"+ err)));
 

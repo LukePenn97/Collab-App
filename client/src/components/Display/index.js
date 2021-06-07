@@ -7,7 +7,7 @@ export default function Display(props) {
 return (
   <article>
     <Button onClick ={props.onMatch}>find a group</Button>
-    <Button>create a project</Button>
+    <Button onClick = {props.createNewProject}>create a project</Button>
     <ProjectList 
     user = {props.user}
     projects={props.projects}
