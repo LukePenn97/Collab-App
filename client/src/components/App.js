@@ -22,17 +22,13 @@ function App() {
     state,
     setProject,
     setProjects,
-    setUser
+    setUser,
+    setUsers
   } = useAppData();
 
-  
-
-  //set the projects state to the hard code data
-  // const [projects, setProjects] = useState(props.interviewer || null);
-// setProjects(fakeProjects)
 
 
- 
+//modes to navigate the components 
   const DISPLAY = "DISPLAY";
   const MATCH = "MATCH";
   const DETAIL = "DETAIL";

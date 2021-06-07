@@ -24,6 +24,7 @@ export default function useApplicationData() {
   const [state, setState] = useState({
     user:null,
     project:null,
+    users:{},
     projects: fakeProjects
   });
   // fetch the initial data in database;
@@ -46,9 +47,11 @@ export default function useApplicationData() {
   //update projects state when user do a search
   const setProjects = projects => setState({...state, projects})
 
+  const setUsers = users => setState({...state, users})
+
 
 
   
   
-  return { state, setProject, setProjects, setUser }
+  return { state, setProject, setProjects, setUser , setUsers}
 }
