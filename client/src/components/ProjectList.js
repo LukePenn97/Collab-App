@@ -11,7 +11,7 @@ export default function ProjectList(props) {
       <ProjectListItem 
       key={index}
       name = {project.name}
-      lead = {project.lead}
+      projectLeadId = {project.projectLeadId}
       description = {project.description}
       pickAProject = {props.pickAProject}
       pickAUser = {props.pickAUser}

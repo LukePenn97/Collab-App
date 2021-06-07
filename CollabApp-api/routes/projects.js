@@ -5,7 +5,8 @@ const { Project } = require('../models');
 router.get('/', (req, res) =>
 Project.findAll()
   .then(projects => {
-    console.log("Projects:", projects);
+    // console.log("Projects:", projects);
+    res.set('Access-Control-Allow-Origin','*');
     res.json(projects);
   })
   .catch(err => console.log("Error:"+ err)));
