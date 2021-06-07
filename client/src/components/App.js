@@ -10,6 +10,7 @@ import ChatRoom from "./ChatRoom";
 import Profile from "./Profile";
 import Register from "./Register";
 import Skills from "./Skills";
+import CreateProject from "./CreateProject";
 
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
@@ -21,17 +22,13 @@ function App() {
     state,
     setProject,
     setProjects,
-    setUser
+    setUser,
+    setUsers
   } = useAppData();
 
-  
-
-  //set the projects state to the hard code data
-  // const [projects, setProjects] = useState(props.interviewer || null);
-// setProjects(fakeProjects)
 
 
- 
+//modes to navigate the components 
   const DISPLAY = "DISPLAY";
   const MATCH = "MATCH";
   const DETAIL = "DETAIL";
@@ -39,6 +36,8 @@ function App() {
   const PROFILE = "PROFILE";
   const REGISTER = "REGISTER";
   const SKILLS = "SKILLS";
+  const CREATE = "CREATE";
+
   const { mode, transition, back } = useVisualMode(DISPLAY);
   
 
@@ -63,8 +62,10 @@ function App() {
     transition(REGISTER)
   }
   function pickSkills(){
-    console.log("hiiiiii")
     transition(SKILLS)
+  }
+  function createNewProject(){
+    transition(CREATE)
   }
 
   return (
@@ -85,6 +86,7 @@ function App() {
         onMatch={onMatch} 
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
+        createNewProject = {createNewProject}
         />}
         {mode === MATCH && <MatchProject 
         user = {state.user}
@@ -123,6 +125,14 @@ function App() {
         pickSkills = {pickSkills}
         />}
         {mode === SKILLS && <Skills
+        // user = {state.user}
+        // project={state.project}
+        // projects={state.projects}
+        // pickAProject = {pickAProject}
+        // pickAUser = {pickAUser}
+        backToHome = {backToHome}
+        />}
+        {mode === CREATE && <CreateProject
         // user = {state.user}
         // project={state.project}
         // projects={state.projects}

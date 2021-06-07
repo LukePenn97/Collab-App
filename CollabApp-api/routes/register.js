@@ -3,4 +3,4 @@ const {sequelize, User } = require('../models');
 
 
 //The
-router.get('/', redirect to "/register");
+// router.get('/', redirect to "/register");
