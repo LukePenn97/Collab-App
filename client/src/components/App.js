@@ -39,6 +39,8 @@ function App() {
   const PROFILE = "PROFILE";
   const REGISTER = "REGISTER";
   const SKILLS = "SKILLS";
+  const CREATE = "CREATE";
+
   const { mode, transition, back } = useVisualMode(DISPLAY);
   
 
@@ -63,8 +65,10 @@ function App() {
     transition(REGISTER)
   }
   function pickSkills(){
-    console.log("hiiiiii")
     transition(SKILLS)
+  }
+  function CreateAProject(){
+    transition(CREATE)
   }
 
   return (
