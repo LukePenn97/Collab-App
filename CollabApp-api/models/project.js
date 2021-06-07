@@ -11,8 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({User}) {
-      this.belongsTo(User, {foreignKey: 'projectLeadId'})
-      this.belongsToMany(User, { as: "project", foreignKey: "projectId", through: 'users_projects' });
     }
   };
   Project.init({
