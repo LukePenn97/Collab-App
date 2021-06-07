@@ -7,7 +7,7 @@
     "test": "  ",
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "db:reset": "npx sequelize-cli db:seed:undo:all && sequelize-cli db:seed:all"
+    "db:reset": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:undo:all && sequelize-cli db:seed:all"
   },
   "author": "",
   "license": "MIT",
