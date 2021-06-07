@@ -17,7 +17,9 @@ const fakerData = {
       email: faker.internet.email(),
       password: "password",
       photo: faker.internet.avatar(),
-      bio: faker.lorem.sentence()
+      bio: faker.lorem.sentence(),
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
   },
   projectData: (projectLeadId) => {
