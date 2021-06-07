@@ -10,6 +10,7 @@ import ChatRoom from "./ChatRoom";
 import Profile from "./Profile";
 import Register from "./Register";
 import Skills from "./Skills";
+import CreateProject from "./CreateProject";
 
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
@@ -67,7 +68,7 @@ function App() {
   function pickSkills(){
     transition(SKILLS)
   }
-  function CreateAProject(){
+  function createNewProject(){
     transition(CREATE)
   }
 
@@ -89,6 +90,7 @@ function App() {
         onMatch={onMatch} 
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
+        createNewProject = {createNewProject}
         />}
         {mode === MATCH && <MatchProject 
         user = {state.user}
@@ -127,6 +129,14 @@ function App() {
         pickSkills = {pickSkills}
         />}
         {mode === SKILLS && <Skills
+        // user = {state.user}
+        // project={state.project}
+        // projects={state.projects}
+        // pickAProject = {pickAProject}
+        // pickAUser = {pickAUser}
+        backToHome = {backToHome}
+        />}
+        {mode === CREATE && <CreateProject
         // user = {state.user}
         // project={state.project}
         // projects={state.projects}

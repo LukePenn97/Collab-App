@@ -9,15 +9,13 @@ export default function CreateProject(props) {
       <h2>--------------------Create Project-----------------</h2>
       
       <div>
-        
       </div>
     
-      {/* <Button onClick={()=>props.pickSkills}>Register</Button>
-      */}
+      {/* <Button 
+      onClick={()=>props.pickAProject}>Register</Button> */}
+     
       
       <div>
-        
-
       </div>
     </article>
   );
