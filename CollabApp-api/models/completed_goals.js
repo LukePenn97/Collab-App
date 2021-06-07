@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     goalId: DataTypes.INTEGER
   }, {
     sequelize,
-    tableName: completed_goals,
+    tableName: "completed_goals",
     modelName: 'Completed_Goals',
   });
   return Completed_Goals;
