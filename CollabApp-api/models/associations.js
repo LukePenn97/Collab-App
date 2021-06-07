@@ -1,8 +1,10 @@
-const { sequelize, User, Project, users_projects, Goals, mentor_requests, messages, projects_skills, Skills, users_skills } = require('./models')
+const { sequelize, User, Project, users_projects, Goals, mentor_requests, messages, projects_skills, Skills, users_skills } = require('.')
 
 function createAssociations() {
   User.belongsToMany(Project, { through: 'users_projects' })
   Project.belongsToMany(User, { through: 'users_projects' })
+  User.hasMany(users_projects)
+  Project.hasMany(users_projects)
   Goals.belongsTo(Project)
   Project.hasMany(Goals)
   User.belongsToMany(Project, { through: 'messages' })
