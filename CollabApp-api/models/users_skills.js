@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Users_Skills.init({
-    userId: DataTypes.INTEGER,
-    skillId: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER,
+    SkillId: DataTypes.INTEGER
   }, {
     sequelize,
     tableName: 'users_skills',

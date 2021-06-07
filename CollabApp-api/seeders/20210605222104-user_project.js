@@ -3,8 +3,8 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('users_projects', [{
-      userId: 1,
-      projectId: 1,
+      UserId: 1,
+      ProjectId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     }]);
