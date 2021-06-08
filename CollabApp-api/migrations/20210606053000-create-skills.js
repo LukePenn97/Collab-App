@@ -8,20 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      javascript: {
-        type: Sequelize.BOOLEAN
-      },
-      python: {
-        type: Sequelize.BOOLEAN
-      },
-      react: {
-        type: Sequelize.BOOLEAN
-      },
-      ruby: {
-        type: Sequelize.BOOLEAN
-      },
-      css: {
-        type: Sequelize.BOOLEAN
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
