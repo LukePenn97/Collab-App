@@ -16,8 +16,6 @@ app.use('/users', require('./routes/users'));
 app.use('/projects', require('./routes/projects'));
 app.use('/', (req, res) => res.send("Hello World. This is the CollabApp"));
 
-
-
 app.listen(PORT, async () => {
     console.log(`Server started on port, ${PORT}`);
     await sequelize.authenticate()
