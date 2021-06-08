@@ -1,37 +1,11 @@
 'use strict';
 
-const fakerData = require('../helpers/fakerData')
+const fakerData = require('../helpers/fakerData');
 
-const users = [{
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'John@example.com',
-    password: 'password',
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    firstName: 'Susan',
-    lastName: 'Green',
-    email: 'Susan@example.com',
-    password: 'password',
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    firstName: 'Bob',
-    lastName: 'Bobson',
-    email: 'Bob@example.com',
-    password: 'password',
-    createdAt: new Date(),
-    updatedAt: new Date()
-  }
-]
-
-for (let i = 1; i <= 17; i++) {
-  users.push(fakerData.userData())
+const users = [];
+while (users.length < 100) {
+  users.push(fakerData.userData());
 }
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
 
