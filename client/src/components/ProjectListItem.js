@@ -9,8 +9,9 @@ export default function ProjectListItem(props) {
   //   "day-list__item--selected": props.selected, "day-list__item--full": props.spots === 0
   // })
   
-  
+ 
   const projectLead = findTheLead(props.projectLeadId, props.project_users);
+  
   
 
   return (
