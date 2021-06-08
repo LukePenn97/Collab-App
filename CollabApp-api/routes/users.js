@@ -5,7 +5,8 @@ const {sequelize, User } = require('../models');
 router.get('/', (req, res) =>
 User.findAll()
   .then(users => {
-    console.log("Users:", users);
+    // console.log("Users:", users);
+    res.set('Access-Control-Allow-Origin','*');
     res.json(users);
   })
   .catch(err => {

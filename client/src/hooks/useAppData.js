@@ -32,13 +32,15 @@ export default function useApplicationData() {
     axios.defaults.baseURL = "http://localhost:5000";
     Promise.all([
       axios.get('/projects'),
-      // axios.get('/api/appointments'),
+      axios.get('/users'),
       // axios.get('/api/interviewers')
     ]).then((all) => {
-      // setState(prev => ({ 
-      //   ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data, spots: all[0].data.spots 
-      // }));
-      console.log(all)
+      setState(prev => ({ 
+        ...prev, projects: all[0].data, users: all[1].data
+        // , 
+        // interviewers: all[2].data, spots: all[0].data.spots 
+      }));
+      // console.log(all)
     })
   }, []);
 
