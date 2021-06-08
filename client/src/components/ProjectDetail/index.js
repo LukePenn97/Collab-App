@@ -6,6 +6,8 @@ import { findUserById } from "../../helpers/selectors";
 export default function ProjectDetail(props) {
   const projectLead = findUserById(props.project.projectLeadId, props.project.project_users);
 
+  // const projectMembers = 
+
   return (
     <article>
       <h1>---------------Project Detail page----------------</h1>
