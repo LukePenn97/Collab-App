@@ -4,7 +4,7 @@ const {sequelize, User, Skill, Users_Skills } = require('../models');
 
 //get user list
 router.get('/', (req, res) =>
-User.findAll({include: "user_skills"})
+User.findAll({include: ["user_skills", "user_messages"]})
   .then(users => {
     console.log("Users:", users);
     res.set('Access-Control-Allow-Origin','*');

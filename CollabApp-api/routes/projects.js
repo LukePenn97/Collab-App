@@ -4,7 +4,7 @@ const { Project, Users_Projects } = require('../models');
 //get project list
 router.get('/', (req, res) =>
 Project.findAll({ 
-  include: ["project_users", "project_skills"]})
+  include: ["project_users", "project_skills", "project_messages"]})
   .then(projects => {
     // console.log("Projects:", projects);
     res.set('Access-Control-Allow-Origin','*');

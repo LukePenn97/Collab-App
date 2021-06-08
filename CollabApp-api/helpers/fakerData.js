@@ -27,7 +27,7 @@ const fakerData = {
       projectLeadId: LeadId,
       name: faker.company.catchPhraseAdjective() + " " + faker.company.catchPhraseNoun(),
       description: faker.company.catchPhrase(),
-      imgUrl: faker.image.technics(),
+      imgUrl: faker.image.technics(200, 600, true),
       deadline: faker.date.soon(),
       startDate: faker.date.recent(),
       createdAt: new Date(),
@@ -35,10 +35,17 @@ const fakerData = {
     }
   },
   goalData: () => {
-
+    
   },
-  messageData: () => {
-
+  messageData: (maxUsers, maxProjects) => {
+    return {
+      UserId: Math.ceil(Math.random() * maxUsers),
+      ProjectId: Math.ceil(Math.random() * maxProjects),
+      message: faker.hacker.phrase(),
+      datePosted: faker.date.recent(),
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
   },
 }
 
