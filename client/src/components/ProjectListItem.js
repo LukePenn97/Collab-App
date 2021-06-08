@@ -17,7 +17,7 @@ export default function ProjectListItem(props) {
   return (
     <li>
       <h2 onClick={() => props.pickAProject(props)}>{props.name}</h2>
-      <h3 onClick={() => props.pickAUser(props.user)}>
+      <h3 onClick={() => props.pickAUser(props.projectLeadId)}>
         {`${projectLead.firstName}  
         ${projectLead.lastName}`}
       </h3>
