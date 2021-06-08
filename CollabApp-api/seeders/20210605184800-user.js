@@ -1,34 +1,14 @@
 'use strict';
 
+const fakerData = require('../helpers/fakerData');
 
+const users = [];
+while (users.length < 100) {
+  users.push(fakerData.userData());
+}
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('users', [{
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'John@example.com',
-      password: 'password',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      firstName: 'Susan',
-      lastName: 'Green',
-      email: 'Susan@example.com',
-      password: 'password',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      firstName: 'Bob',
-      lastName: 'Bobson',
-      email: 'Bob@example.com',
-      password: 'password',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }
-    ]);
-  },
+    return queryInterface.bulkInsert('users', users, {})},
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('users', null, {});
   }

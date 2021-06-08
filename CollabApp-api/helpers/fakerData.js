@@ -17,17 +17,21 @@ const fakerData = {
       email: faker.internet.email(),
       password: "password",
       photo: faker.internet.avatar(),
-      bio: faker.lorem.sentence()
+      bio: faker.lorem.sentence(),
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
   },
   projectData: (projectLeadId) => {
     return  {
       projectLeadId: projectLeadId,
-      name: faker.intenet.domainName(),
+      name: faker.internet.domainName(),
       description: faker.lorem.sentence(),
       imgUrl: faker.image.technics(),
       deadline: faker.date.soon(),
-      startDate: faker.date.recent()
+      startDate: faker.date.recent(),
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
   },
   goalData: () => {
