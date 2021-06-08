@@ -4,7 +4,7 @@ const { Project, Users_Projects } = require('../models');
 //get project list
 router.get('/', (req, res) =>
 Project.findAll({ 
-  include: "project_users"})
+  include: ["project_users", "project_skills"]})
   .then(projects => {
     // console.log("Projects:", projects);
     res.set('Access-Control-Allow-Origin','*');
@@ -17,6 +17,7 @@ router.get('/:id', (req, res) =>
 Project.findByPk(req.params.id)
   .then(projects => {
     console.log("Projects:", projects.dataValues);
+    res.set('Access-Control-Allow-Origin','*');
     res.sendStatus(200);
   })
   .catch(err => console.log("Error:"+ err)));

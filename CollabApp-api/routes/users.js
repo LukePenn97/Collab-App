@@ -2,12 +2,13 @@ const router = require("express").Router();
 const {sequelize, User, Skill, Users_Skills } = require('../models');
 
 
-//get skill list
-router.get('/skills', (req, res) =>
-Skill.findAll()
-  .then(skills => {
-    console.log("Skills:", skills);
-    res.json(skills);
+//get user list
+router.get('/', (req, res) =>
+User.findAll({include: "user_skills"})
+  .then(users => {
+    console.log("Users:", users);
+    res.set('Access-Control-Allow-Origin','*');
+    res.json(users);
   })
   .catch(err => console.log("Error:"+ err)));
 
@@ -26,17 +27,9 @@ router.get('/:id', (req, res) =>
 User.findByPk(req.params.id)
   .then(users => {
     console.log("Users:", users.dataValues);
+    res.set('Access-Control-Allow-Origin','*');
     return res.json(users);
-  })
-  .catch(err => console.log("Error:"+ err))
-);
-
-//get user list
-router.get('/', (req, res) =>
-User.findAll()
-  .then(users => {
-    console.log("Users:", users);
-    res.sendStatus(200);
+    
   })
   .catch(err => console.log("Error:"+ err))
 );
