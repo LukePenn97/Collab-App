@@ -38,7 +38,40 @@ User.findAll()
     console.log("Users:", users);
     res.sendStatus(200);
   })
-  .catch(err => console.log("Error:"+ err)));
+  .catch(err => console.log("Error:"+ err))
+);
+
+//get user's skills.
+router.get('/:id/skills', async(req, res) => {
+  try {
+      const skills = Users_Skills.findAll({
+        where: {
+          UserId: req.params.id
+        }
+      }).then(skills => {
+        console.log("SKILLS:",skills)
+        return res.json(skills)
+      })
+  } catch (err) {
+      console.log(err)
+      return res.status(500).json(err);
+  }
+
+});
+
+//patch (update) user's skills.
+router.post('/:id/skills', async(req, res) => {
+  const { javascript, phyton, react, ruby, css } = req.body
+  try {
+      const userSkill = await Skill.create({javascript, phyton, react, ruby, css})
+      const  skillId = await Users_Skills.create({userId: req.params.id, skillId: userSkill.id})
+      return res.json(userSkill, skillId)
+  } catch (err) {
+      console.log(err)
+      return res.status(500).json(err);
+  }
+
+});
 
 //patch (update) user's skills.
 router.post('/:id/skills', async(req, res) => {

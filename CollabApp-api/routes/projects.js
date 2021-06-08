@@ -1,11 +1,13 @@
 const router = require("express").Router();
-const { Project } = require('../models');
+const { Project, Users_Projects } = require('../models');
 
 //get project list
 router.get('/', (req, res) =>
-Project.findAll()
+Project.findAll({ 
+  include: "project_users"})
   .then(projects => {
-    console.log("Projects:", projects);
+    // console.log("Projects:", projects);
+    res.set('Access-Control-Allow-Origin','*');
     res.json(projects);
   })
   .catch(err => console.log("Error:"+ err)));
@@ -55,6 +57,21 @@ router.post('/', async(req, res) => {
         endDate
       })
       return res.json(project)
+  } catch (err) {
+      console.log(err)
+      return res.status(500).json(err);
+  }
+});
+
+//add user to project
+router.post('/:id/adduser', async(req, res) => {
+  const { id } = req.body
+  try {
+      const user_project = await Users_Projects.create({
+        UserId: id,
+        ProjectId: req.params.id
+      })
+      return res.json(user_project)
   } catch (err) {
       console.log(err)
       return res.status(500).json(err);

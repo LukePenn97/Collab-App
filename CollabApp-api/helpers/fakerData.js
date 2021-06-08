@@ -22,11 +22,11 @@ const fakerData = {
       updatedAt: new Date()
     }
   },
-  projectData: (projectLeadId) => {
+  projectData: (LeadId) => {
     return  {
-      projectLeadId: projectLeadId,
+      projectLeadId: LeadId,
       name: faker.company.catchPhraseAdjective() + " " + faker.company.catchPhraseNoun(),
-      description: faker.lorem.sentence(),
+      description: faker.company.catchPhrase(),
       imgUrl: faker.image.technics(),
       deadline: faker.date.soon(),
       startDate: faker.date.recent(),

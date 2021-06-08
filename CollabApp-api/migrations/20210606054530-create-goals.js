@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      projectId: {
+      ProjectId: {
         type: Sequelize.INTEGER,
         references: {
             model: "projects",

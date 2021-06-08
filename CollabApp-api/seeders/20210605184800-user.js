@@ -8,7 +8,9 @@ while (users.length < 100) {
 }
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('users', users, {})},
+
+    return queryInterface.bulkInsert('users', users, {});
+  },
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('users', null, {});
   }

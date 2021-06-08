@@ -1,20 +1,14 @@
 'use strict';
 const fakerData = require('../helpers/fakerData');
 
-const projects = [];
-while (projects.length < 20) projects.push(fakerData.projectData());
+const fakerData = require('../helpers/fakerData')
 
-// const projects = [...Array(10)].map((project) => (
-//   {
-//     projectLeadId: faker.random.number(10, 50),
-//     name: faker.intenet.domainName(),
-//     description: faker.lorem.sentence(),
-//     imgUrl: faker.image.technics(),
-//     deadline: faker.date.soon(),
-//     startDate: faker.date.recent()
-//   }
-// ))
-console.log()
+const projects = []
+
+for (let i = 1; i <= 10; i++) {
+  projects.push(fakerData.projectData( i ))
+}
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('projects', projects, {});

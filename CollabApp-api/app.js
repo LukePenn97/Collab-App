@@ -1,4 +1,4 @@
-const { Sequelize, sequelize, User, Project, Users_projects, Goals, mentor_requests, messages, Projects_skills, Skills, Users_skills } = require('./models/')
+const { Sequelize, sequelize, User, Project, Users_Projects} = require('./models/')
 
 const PORT = process.env.PORT || 5000;
 const express = require('express');
