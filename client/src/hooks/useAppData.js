@@ -40,7 +40,7 @@ export default function useApplicationData() {
         // , 
         // interviewers: all[2].data, spots: all[0].data.spots 
       }));
-      console.log(all)
+      // console.log(all)
     })
   }, []);
 
