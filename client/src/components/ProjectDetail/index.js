@@ -15,6 +15,10 @@ export default function ProjectDetail(props) {
         ${projectLead.lastName}`}
       </h3>
       <p>{props.project.description} </p>
+      <img
+      src={props.project.imgUrl}
+      alt={props.project.name}
+    />
       <Button onClick={props.chatToAGroup}>chatRoom</Button>
     </article>
   );

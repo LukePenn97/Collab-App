@@ -22,6 +22,10 @@ export default function ProjectListItem(props) {
         ${projectLead.lastName}`}
       </h3>
       <p>{props.description}</p>
+      <img
+      src={props.imgUrl}
+      alt={props.name}
+    />
     </li>
   );
 }

@@ -27,7 +27,7 @@ const fakerData = {
       projectLeadId: LeadId,
       name: faker.company.catchPhraseAdjective() + " " + faker.company.catchPhraseNoun(),
       description: faker.company.catchPhrase(),
-      imgUrl: faker.image.technics(),
+      imgUrl: faker.image.technics(200, 200, true),
       deadline: faker.date.soon(),
       startDate: faker.date.recent(),
       createdAt: new Date(),
