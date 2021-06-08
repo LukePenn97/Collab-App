@@ -6,7 +6,7 @@ router.get('/', (req, res) =>
 Project.findAll({ 
   include: "project_users"})
   .then(projects => {
-    console.log("Projects:", projects);
+    // console.log("Projects:", projects);
     res.set('Access-Control-Allow-Origin','*');
     res.json(projects);
   })
