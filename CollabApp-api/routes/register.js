@@ -24,9 +24,9 @@ router.post('/', async(req, res) => {
 
   User.create({firstName, lastName, email, password})
   .then(data => res.json(data))
-   .catch (err) {
+   .catch ((err)=> {
     console.log(err)
     return res.status(500).json(err);
-   }
+   })
 
 });
