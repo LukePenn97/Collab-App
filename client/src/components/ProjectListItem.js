@@ -11,7 +11,7 @@ export default function ProjectListItem(props) {
   
  
   const projectLead = findTheLead(props.projectLeadId, props.project_users);
-  
+  // console.log(projectLead)
   
 
   return (

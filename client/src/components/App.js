@@ -1,8 +1,8 @@
 import React from "react";
 // import { useState, useEffect } from "react";
 // import "./App.css";
-//TODO:SHOW THE OWNER OF THE PROJECT
-//TODO:
+
+
 
 import Display from "./Display";
 import MatchProject from "./MatchProject";
