@@ -1,6 +1,6 @@
 'use strict';
 
-const fakerData = require('../helpers/fakerData')
+// const fakerData = require('../helpers/fakerData')
 
 const projects = []
 

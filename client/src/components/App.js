@@ -1,8 +1,8 @@
 import React from "react";
 // import { useState, useEffect } from "react";
 // import "./App.css";
-//TODO:SHOW THE OWNER OF THE PROJECT
-//TODO:
+
+
 
 import Display from "./Display";
 import MatchProject from "./MatchProject";
@@ -78,6 +78,7 @@ function App() {
           <Button onClick={backToHome}>home</Button>
           <Button onClick={registration}>Register</Button>
         </div>
+        <p>**--**--**--**--**--**--**--**--**--**--**--**--**-HELLO-**--**--**--**--**--**--**--**--**-HELLO-**--**--**--**--**--**--**--**--**--**--**</p>
       </section>
 
       <section>
@@ -85,6 +86,7 @@ function App() {
         user = {state.user}
         project = {state.project}
         projects={state.projects} 
+        users = {state.users}
         onMatch={onMatch} 
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
@@ -92,6 +94,7 @@ function App() {
         />}
         {mode === MATCH && <MatchProject 
         user = {state.user}
+        users = {state.users}
         project = {state.project}
         projects={state.projects.slice(1)} 
         pickAProject = {pickAProject}
@@ -99,6 +102,7 @@ function App() {
         />}
         {mode === DETAIL && <ProjectDetail
         user = {state.user} 
+        users = {state.users}
         project={state.project}
         projects={state.projects}  
         pickAProject = {pickAProject}
@@ -107,12 +111,14 @@ function App() {
         />}
         {mode === CHAT && <ChatRoom 
         user = {state.user}
+        users = {state.users}
         project={state.project}
         projects={state.projects}
         pickAUser = {pickAUser}
         />}
         {mode === PROFILE && <Profile
         user = {state.user}
+        users = {state.users}
         project={state.project}
         projects={state.projects}
         pickAProject = {pickAProject}

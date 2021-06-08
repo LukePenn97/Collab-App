@@ -24,7 +24,7 @@ export default function useApplicationData() {
   const [state, setState] = useState({
     user:null,
     project:null,
-    users:{},
+    users:[],
     projects: []
   });
   // fetch the initial data in database;
