@@ -10,7 +10,7 @@ export default function ProjectDetail(props) {
     <article>
       <h1>---------------Project Detail page----------------</h1>
       <h2>{props.project.name}</h2>
-      <h3 onClick={() => props.pickAUser(props.project.lead)}>
+      <h3 onClick={() => props.pickAUser(props.project.projectLeadId)}>
         {`${projectLead.firstName}  
         ${projectLead.lastName}`}
       </h3>
