@@ -1,4 +1,4 @@
-require('dotenv').config({path: '.env'});
+require('dotenv').config({path: '.env'}); // this is important!
 module.exports = {
   "development": {
     "username": process.env.PGUSERNAME,
