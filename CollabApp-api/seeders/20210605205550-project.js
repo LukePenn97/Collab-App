@@ -12,7 +12,7 @@ const projects = [{
     }]
 
 for (let i = 1; i <= 10; i++) {
-  projects.push(fakerData.projectData(i))
+  projects.push(fakerData.projectData( i+1 ))
 }
 
 module.exports = {

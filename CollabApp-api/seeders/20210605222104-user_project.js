@@ -2,10 +2,10 @@
 
 const usersProjects = []
 
-for (let i = 1; i <= 10; i++) {
+for (let i = 1; i < 12; i++) {
   usersProjects.push({
     UserId: i,
-    ProjectId: Math.ceil(Math.random() * 10),
+    ProjectId:  i,
     createdAt: new Date(),
     updatedAt: new Date()
   })
