@@ -22,14 +22,16 @@ const fakerData = {
       updatedAt: new Date()
     }
   },
-  projectData: (projectLeadId) => {
+  projectData: (LeadId) => {
     return  {
-      projectLeadId: projectLeadId,
-      name: faker.intenet.domainName(),
-      description: faker.lorem.sentence(),
+      projectLeadId: LeadId,
+      name: faker.company.catchPhraseAdjective() + " " + faker.company.catchPhraseNoun(),
+      description: faker.company.catchPhrase(),
       imgUrl: faker.image.technics(),
       deadline: faker.date.soon(),
-      startDate: faker.date.recent()
+      startDate: faker.date.recent(),
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
   },
   goalData: () => {
