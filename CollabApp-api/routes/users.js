@@ -3,10 +3,11 @@ const {sequelize, User, Skill, Users_Skills } = require('../models');
 
 //get user list
 router.get('/', (req, res) =>
-User.findAll()
+User.findAll({include: "user_skills"})
   .then(users => {
     console.log("Users:", users);
-    res.sendStatus(200);
+    res.set('Access-Control-Allow-Origin','*');
+    res.json(users);
   })
   .catch(err => console.log("Error:"+ err)));
 
@@ -15,6 +16,7 @@ router.get('/:id', (req, res) =>
 User.findByPk(req.params.id)
   .then(users => {
     console.log("Users:", users.dataValues);
+    res.set('Access-Control-Allow-Origin','*');
     res.sendStatus(200);
   })
   .catch(err => console.log("Error:"+ err))

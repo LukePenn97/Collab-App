@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate({User, Skill}) {
       this.belongsTo(User, {foreignKey: "projectLeadId", as: "projectLead"})
       this.belongsToMany(User, {through: "users_projects", as: "project_users", foreignKey: "ProjectId"})
+      this.belongsToMany(User, {through: "messages", as: "project_messages", foreignKey: "ProjectId"})
       this.belongsToMany(Skill, {through: "projects_skills", as: "project_skills"})
     }
   };
