@@ -35,10 +35,17 @@ const fakerData = {
     }
   },
   goalData: () => {
-
+    
   },
-  messageData: () => {
-
+  messageData: (maxUsers, maxProjects) => {
+    return {
+      UserId: Math.ceil(Math.random() * maxUsers),
+      ProjectId: Math.ceil(Math.random() * maxProjects),
+      message: faker.hacker.phrase(),
+      datePosted: faker.date.recent(),
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
   },
 }
 

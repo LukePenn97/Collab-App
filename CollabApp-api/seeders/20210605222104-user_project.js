@@ -1,17 +1,17 @@
 'use strict';
 
-const usersProjects = []
+const usersProjects = [];
 
 for (let i = 1; i <= 10; i++) {
   usersProjects.push({
     UserId: i,
-    ProjectId: Math.ceil(Math.random() * 10),
+    ProjectId: i,
     createdAt: new Date(),
     updatedAt: new Date()
   })
 }
 
-for (let i = 11; i <= 20; i++) {
+for (let i = 11; i <= 100; i++) {
   usersProjects.push({
     UserId: i,
     ProjectId: Math.ceil(Math.random() * 10),
