@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "../Button";
-import { findTheLead } from "../../helpers/selectors";
+import { findUserById } from "../../helpers/selectors";
 
 
 export default function ProjectDetail(props) {
-  const projectLead = findTheLead(props.project.projectLeadId, props.project.project_users);
+  const projectLead = findUserById(props.project.projectLeadId, props.project.project_users);
 
   return (
     <article>

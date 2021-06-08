@@ -1,5 +1,5 @@
 import React from "react";
-import { findTheLead } from "../helpers/selectors"
+import { findUserById } from "../helpers/selectors"
 // import "components/DayListItem.scss";
 
 // const classnames = require('classnames');
@@ -10,7 +10,7 @@ export default function ProjectListItem(props) {
   // })
   
  
-  const projectLead = findTheLead(props.projectLeadId, props.project_users);
+  const projectLead = findUserById(props.projectLeadId, props.project_users);
   // console.log(projectLead)
   
 

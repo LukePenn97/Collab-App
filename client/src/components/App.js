@@ -78,6 +78,7 @@ function App() {
           <Button onClick={backToHome}>home</Button>
           <Button onClick={registration}>Register</Button>
         </div>
+        <p>**--**--**--**--**--**--**--**--**--**--**--**--**-HELLO-**--**--**--**--**--**--**--**--**-HELLO-**--**--**--**--**--**--**--**--**--**--**</p>
       </section>
 
       <section>
