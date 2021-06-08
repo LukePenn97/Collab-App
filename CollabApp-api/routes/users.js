@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const {sequelize, User } = require('../models');
+const {sequelize, User, Skill, Users_Skills } = require('../models');
 
 //get user list
 router.get('/', (req, res) =>
@@ -17,7 +17,22 @@ User.findByPk(req.params.id)
     console.log("Users:", users.dataValues);
     res.sendStatus(200);
   })
-  .catch(err => console.log("Error:"+ err)));
+  .catch(err => console.log("Error:"+ err))
+);
+
+//patch (update) user's skills.
+router.post('/:id/skills', async(req, res) => {
+  const { javascript, phyton, react, ruby, css } = req.body
+  try {
+      const userSkill = await Skill.create({javascript, phyton, react, ruby, css})
+      const  skillId = await Users_Skills.create({userId: req.params.id, skillId: userSkill.id})
+      return res.json(userSkill, skillId)
+  } catch (err) {
+      console.log(err)
+      return res.status(500).json(err);
+  }
+
+});
 
 //Post (create) new user
 router.post('/', async(req, res) => {

@@ -25,7 +25,7 @@ const fakerData = {
   projectData: (projectLeadId) => {
     return  {
       projectLeadId: projectLeadId,
-      name: faker.internet.domainName(),
+      name: faker.company.catchPhraseAdjective() + " " + faker.company.catchPhraseNoun(),
       description: faker.lorem.sentence(),
       imgUrl: faker.image.technics(),
       deadline: faker.date.soon(),
