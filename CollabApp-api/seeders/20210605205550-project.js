@@ -2,17 +2,10 @@
 
 const fakerData = require('../helpers/fakerData')
 
-const projects = [{
-      projectLeadId: 1,
-      name: 'My Project',
-      description: 'My first project',
-      startDate: new Date(),
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }]
+const projects = []
 
 for (let i = 1; i <= 10; i++) {
-  projects.push(fakerData.projectData( i+1 ))
+  projects.push(fakerData.projectData( i ))
 }
 
 module.exports = {
