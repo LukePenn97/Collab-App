@@ -9,6 +9,7 @@ export default function ProjectList(props) {
     return (
       <ProjectListItem
         key={index}
+        id = {project.id}
         name={project.name}
         imgUrl={project.imgUrl}
         projectLeadId={project.projectLeadId}

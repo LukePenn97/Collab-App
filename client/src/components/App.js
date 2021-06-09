@@ -25,7 +25,8 @@ function App() {
     setProject,
     setProjects,
     setUser,
-    setUsers
+    setUsers,
+    setRoomName
   } = useAppData();
 
 
@@ -57,7 +58,8 @@ function App() {
     setUser(user)
     transition(PROFILE)
   }
-  function chatToAGroup(){
+  function chatToAGroup(roomName){
+    setRoomName(roomName)
     transition(CHAT)
   }
   function registration(){
@@ -69,6 +71,7 @@ function App() {
   function createNewProject(){
     transition(CREATE)
   }
+  
 
   return (
     <main>
@@ -87,6 +90,7 @@ function App() {
         project = {state.project}
         projects={state.projects} 
         users = {state.users}
+        // roomName = {state.roomName}
         onMatch={onMatch} 
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
@@ -105,6 +109,7 @@ function App() {
         users = {state.users}
         project={state.project}
         projects={state.projects}  
+        roomName = {state.roomName}
         pickAProject = {pickAProject}
         chatToAGroup = {chatToAGroup}
         pickAUser = {pickAUser}
@@ -114,6 +119,7 @@ function App() {
         users = {state.users}
         project={state.project}
         projects={state.projects}
+        roomName = {state.roomName}
         pickAUser = {pickAUser}
         />}
         {mode === PROFILE && <Profile

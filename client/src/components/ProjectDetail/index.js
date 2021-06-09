@@ -21,7 +21,7 @@ export default function ProjectDetail(props) {
       src={props.project.imgUrl}
       alt={props.project.name}
     />
-      <Button onClick={props.chatToAGroup}>chatRoom</Button>
+      <Button onClick={()=>props.chatToAGroup(props.project.id)}>chatRoom</Button>
     </article>
   );
 }
