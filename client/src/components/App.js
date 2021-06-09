@@ -1,8 +1,8 @@
 import React from "react";
 // import { useState, useEffect } from "react";
 // import "./App.css";
-//TODO:SHOW THE OWNER OF THE PROJECT
-//TODO:
+
+
 
 import Display from "./Display";
 import MatchProject from "./MatchProject";
@@ -25,7 +25,8 @@ function App() {
     setProject,
     setProjects,
     setUser,
-    setUsers
+    setUsers,
+    setRoomName
   } = useAppData();
 
 
@@ -57,7 +58,8 @@ function App() {
     setUser(user)
     transition(PROFILE)
   }
-  function chatToAGroup(){
+  function chatToAGroup(roomName){
+    setRoomName(roomName)
     transition(CHAT)
   }
   function registration(){
@@ -69,6 +71,7 @@ function App() {
   function createNewProject(){
     transition(CREATE)
   }
+  
 
   return (
     <main>
@@ -78,6 +81,7 @@ function App() {
           <Button onClick={backToHome}>home</Button>
           <Button onClick={registration}>Register</Button>
         </div>
+        <p>**--**--**--**--**--**--**--**--**--**--**--**--**-HELLO-**--**--**--**--**--**--**--**--**-HELLO-**--**--**--**--**--**--**--**--**--**--**</p>
       </section>
 
       <section>
@@ -85,6 +89,8 @@ function App() {
         user = {state.user}
         project = {state.project}
         projects={state.projects} 
+        users = {state.users}
+        // roomName = {state.roomName}
         onMatch={onMatch} 
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
@@ -92,6 +98,7 @@ function App() {
         />}
         {mode === MATCH && <MatchProject 
         user = {state.user}
+        users = {state.users}
         project = {state.project}
         projects={state.projects.slice(1)} 
         pickAProject = {pickAProject}
@@ -99,20 +106,25 @@ function App() {
         />}
         {mode === DETAIL && <ProjectDetail
         user = {state.user} 
+        users = {state.users}
         project={state.project}
         projects={state.projects}  
+        roomName = {state.roomName}
         pickAProject = {pickAProject}
         chatToAGroup = {chatToAGroup}
         pickAUser = {pickAUser}
         />}
         {mode === CHAT && <ChatRoom 
         user = {state.user}
+        users = {state.users}
         project={state.project}
         projects={state.projects}
+        roomName = {state.roomName}
         pickAUser = {pickAUser}
         />}
         {mode === PROFILE && <Profile
         user = {state.user}
+        users = {state.users}
         project={state.project}
         projects={state.projects}
         pickAProject = {pickAProject}

@@ -1,5 +1,5 @@
 import React from "react";
-import { findTheLead } from "../helpers/selectors"
+import { findUserById } from "../helpers/selectors"
 // import "components/DayListItem.scss";
 
 // const classnames = require('classnames');
@@ -10,18 +10,22 @@ export default function ProjectListItem(props) {
   // })
   
  
-  const projectLead = findTheLead(props.projectLeadId, props.project_users);
-  
+  const projectLead = findUserById(props.projectLeadId, props.project_users);
+  // console.log(projectLead)
   
 
   return (
     <li>
       <h2 onClick={() => props.pickAProject(props)}>{props.name}</h2>
-      <h3 onClick={() => props.pickAUser(props.user)}>
+      <h3 onClick={() => props.pickAUser(props.projectLeadId)}>
         {`${projectLead.firstName}  
         ${projectLead.lastName}`}
       </h3>
       <p>{props.description}</p>
+      <img
+      src={props.imgUrl}
+      alt={props.name}
+    />
     </li>
   );
 }
