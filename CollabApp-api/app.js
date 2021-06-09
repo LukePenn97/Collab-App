@@ -21,3 +21,11 @@ app.listen(PORT, async () => {
     await sequelize.authenticate()
     console.log('database synced!')
 });
+process.once('SIGUSR2', function () {
+  process.kill(process.pid, 'SIGUSR2');
+});
+
+process.on('SIGINT', function () {
+  // this is only called on ctrl+c, not restart
+  process.kill(process.pid, 'SIGINT');
+});

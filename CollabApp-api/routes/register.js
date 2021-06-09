@@ -18,15 +18,15 @@ router.post('/', async(req, res) => {
 });
 
 // Post for the skills of new user
-router.post('/', async(req, res) => {
+// router.post('/', async(req, res) => {
 
-  const { firstName, lastName, email, password } = req.body
+//   const { firstName, lastName, email, password } = req.body
 
-  User.create({firstName, lastName, email, password})
-  .then(data => res.json(data))
-   .catch ((err)=> {
-    console.log(err)
-    return res.status(500).json(err);
-   })
+  // User.create({firstName, lastName, email, password})
+  // .then(data => res.json(data))
+  //  .catch ((err)=> {
+  //   console.log(err)
+  //   return res.status(500).json(err);
+  //  })
 
-});
+// });
