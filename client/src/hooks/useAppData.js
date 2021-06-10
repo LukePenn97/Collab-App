@@ -8,6 +8,7 @@ export default function useApplicationData() {
     users: [],
     projects: [],
     roomName:"",
+    currentUser:1
   });
   // fetch the initial data in database;
   useEffect(() => {
@@ -32,6 +33,7 @@ export default function useApplicationData() {
   const setProject = (project) => setState({ ...state, project });
   //update user state when user click on a user
   const setUser = (user) => setState({ ...state, user });
+  const setCurrentUser = (currentUser) => setState({ ...state, currentUser });
 
   //update projects state when user do a search
   const setProjects = (projects) => setState({ ...state, projects });
@@ -40,5 +42,5 @@ export default function useApplicationData() {
 
   const setRoomName = (roomName) => setState({ ...state, roomName });
 
-  return { state, setProject, setProjects, setUser, setUsers,setRoomName };
+  return { state, setProject, setProjects, setUser, setUsers,setRoomName, setCurrentUser };
 }

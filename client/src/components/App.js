@@ -26,7 +26,8 @@ function App() {
     setProjects,
     setUser,
     setUsers,
-    setRoomName
+    setRoomName,
+    setCurrentUser
   } = useAppData();
 
 
@@ -87,6 +88,7 @@ function App() {
       <section>
         {mode === DISPLAY && <Display 
         user = {state.user}
+        currentUser = {state.user}
         project = {state.project}
         projects={state.projects} 
         users = {state.users}
@@ -99,6 +101,7 @@ function App() {
         {mode === MATCH && <MatchProject 
         user = {state.user}
         users = {state.users}
+        currentUser = {state.user}
         project = {state.project}
         projects={state.projects.slice(1)} 
         pickAProject = {pickAProject}
@@ -107,6 +110,7 @@ function App() {
         {mode === DETAIL && <ProjectDetail
         user = {state.user} 
         users = {state.users}
+        currentUser = {state.user}
         project={state.project}
         projects={state.projects}  
         roomName = {state.roomName}
@@ -117,6 +121,7 @@ function App() {
         {mode === CHAT && <ChatRoom 
         user = {state.user}
         users = {state.users}
+        currentUser = {state.user}
         project={state.project}
         projects={state.projects}
         roomName = {state.roomName}
@@ -125,6 +130,7 @@ function App() {
         {mode === PROFILE && <Profile
         user = {state.user}
         users = {state.users}
+        currentUser = {state.user}
         project={state.project}
         projects={state.projects}
         pickAProject = {pickAProject}
