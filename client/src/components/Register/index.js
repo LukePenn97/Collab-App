@@ -14,7 +14,7 @@ export default function Register(props) {
       {/* <form onSubmit={event => event.preventDefault()}>please Register!
       <input></input>
       </form> */}
-      <Button onClick={props.pickSkills}>Register</Button>
+      <Button onClick={props.pickSkills(1)}>Register</Button>
       
       <div>
         
