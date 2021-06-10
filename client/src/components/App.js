@@ -1,7 +1,7 @@
 import React from "react";
 // import { useState, useEffect } from "react";
 // import "./App.css";
-
+import axios from 'axios';
 
 
 import Display from "./Display";
@@ -26,7 +26,7 @@ function App() {
     setProjects,
     setUser,
     setUsers,
-    setRoomName
+    setRoomName,
   } = useAppData();
 
 
@@ -42,10 +42,20 @@ function App() {
   const CREATE = "CREATE";
 
   const { mode, transition, back } = useVisualMode(DISPLAY);
-  
+
+  function getProjectsByUserSkills(id){
+    const url = `http://localhost:5000/users/${id}/match`
+    Promise.all([
+      axios.get(url)
+    ]).then((all) => {
+        console.log(all[0].data);
+        setProjects(all[0].data)
+        transition(MATCH);
+      })
+  }
 
   function onMatch() {
-    transition(MATCH);
+    getProjectsByUserSkills(2)
   }
   function backToHome() {
     transition(DISPLAY);
@@ -73,7 +83,7 @@ function App() {
   function createNewProject(){
     transition(CREATE)
   }
-  
+
 
   return (
     <main>
@@ -102,7 +112,7 @@ function App() {
         user = {state.user}
         users = {state.users}
         project = {state.project}
-        projects={state.projects.slice(1)} 
+        projects={state.projects}
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
         />}

@@ -41,6 +41,7 @@ router.get('/:id/match', async(req, res) => {
       .then(async projectSkills => {
         const projectIds = projectSkills.map(ele => ele.dataValues.ProjectId)
         const projects = await Project.findAll({
+          include: ["project_users", "project_skills", "project_messages"],
           where: {id: {[Op.or]: projectIds}},
         })
         res.json(projects)
@@ -50,26 +51,6 @@ router.get('/:id/match', async(req, res) => {
       console.log(err)
       return res.status(500).json(err);
     });
-  //     .then( async (mySkill) =>{
-  //       console.log("my Skills", mySkill)
-  //       projects = await Projects_Skills.findAll({
-  //         where: {
-  //           SkillId:{
-  //             [Op.an]: [2, 4]
-  //           }
-  //         },
-  //         attributes: ['ProjectId']
-  //       })
-  //     }
-  //     ).then(
-  //        (data) => console.log(data)
-  //     ).catch((err) => {
-  //       console.log(err)
-  //       return res.status(500).json(err);
-  //     })
-  // )
-  // .then(() => res.sendStatus(200))
-  
 });
 
 //get user by ID
