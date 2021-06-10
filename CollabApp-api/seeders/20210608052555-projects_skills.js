@@ -1,40 +1,20 @@
 'use strict';
 
+
+const ProjectSkills = []
+
+for (let i = 1; i <= 10; i++) {
+  ProjectSkills.push({
+    ProjectId: i,
+    SkillId: Math.ceil(Math.random() * 5),
+    createdAt: new Date(),
+    updatedAt: new Date()
+  })
+}
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('projects_skills', [{
-      ProjectId: 1,
-      SkillId: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      ProjectId: 1,
-      SkillId: 5,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      ProjectId: 2,
-      SkillId: 4,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      ProjectId: 3,
-      SkillId: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      ProjectId: 3,
-      SkillId: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-
-    
-    ]);
+    return queryInterface.bulkInsert('projects_skills', ProjectSkills, {});
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('projects_skills', null, {});

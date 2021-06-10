@@ -62,10 +62,12 @@ function App() {
     setRoomName(roomName)
     transition(CHAT)
   }
-  function registration(){
+  function registration(user){
+    
     transition(REGISTER)
   }
-  function pickSkills(){
+  function pickSkills(user){
+    // setUser(user)
     transition(SKILLS)
   }
   function createNewProject(){
@@ -131,7 +133,7 @@ function App() {
         pickAUser = {pickAUser}
         />}
         {mode === REGISTER && <Register
-        // user = {state.user}
+        // users = {state.users}
         // project={state.project}
         // projects={state.projects}
         // pickAProject = {pickAProject}
@@ -139,11 +141,11 @@ function App() {
         pickSkills = {pickSkills}
         />}
         {mode === SKILLS && <Skills
-        // user = {state.user}
+        users = {state.users}
         // project={state.project}
         // projects={state.projects}
         // pickAProject = {pickAProject}
-        // pickAUser = {pickAUser}
+        pickAUser = {pickAUser}
         backToHome = {backToHome}
         />}
         {mode === CREATE && <CreateProject

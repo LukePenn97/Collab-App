@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const {sequelize, User, Skill, Users_Skills } = require('../models');
-
+const {sequelize, User, Skill, Users_Skills, Projects_Skills, Project } = require('../models');
+const {Op} = require("sequelize");
 
 //get user list
 router.get('/', (req, res) =>
 User.findAll({include: ["user_skills", "user_messages"]})
   .then(users => {
-    console.log("Users:", users);
+    // console.log("Users:", users);
     res.set('Access-Control-Allow-Origin','*');
     res.json(users);
   })
@@ -16,11 +16,61 @@ User.findAll({include: ["user_skills", "user_messages"]})
 router.get('/:id/skills', (req, res) =>
 Users_Skills.findAll({include: Skill, where: {userId: req.params.id}})
   .then(skills => {
-    console.log("Users:", skills.dataValues);
+    // console.log("Users:", skills.dataValues);
     return res.json(skills);
   })
   .catch(err => console.log("Error:"+ err))
 );
+
+router.get('/:id/match', async(req, res) => {
+  const UserId = req.params.id;
+  let mySkill = [];
+  //Promise.all(
+    const userSkills = await Users_Skills.findAll({
+      where: {UserId: UserId}
+    })
+    .then(async userSkills => {
+      // console.log(mySkill[0].dataValues, mySkill[1].dataValues)
+
+      const skills = userSkills.map(ele => ele.dataValues.SkillId)
+      // return mySkill}
+      // console.log("SKILLS IN MATCH:", skills)
+      const projectSkills = await Projects_Skills.findAll({
+        where: {SkillId: {[Op.or]: skills}},
+      })
+      .then(async projectSkills => {
+        const projectIds = projectSkills.map(ele => ele.dataValues.ProjectId)
+        const projects = await Project.findAll({
+          where: {id: {[Op.or]: projectIds}},
+        })
+        res.json(projects)
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+      return res.status(500).json(err);
+    });
+  //     .then( async (mySkill) =>{
+  //       console.log("my Skills", mySkill)
+  //       projects = await Projects_Skills.findAll({
+  //         where: {
+  //           SkillId:{
+  //             [Op.an]: [2, 4]
+  //           }
+  //         },
+  //         attributes: ['ProjectId']
+  //       })
+  //     }
+  //     ).then(
+  //        (data) => console.log(data)
+  //     ).catch((err) => {
+  //       console.log(err)
+  //       return res.status(500).json(err);
+  //     })
+  // )
+  // .then(() => res.sendStatus(200))
+  
+});
 
 //get user by ID
 router.get('/:id', (req, res) =>
@@ -42,7 +92,7 @@ router.get('/:id/skills', async(req, res) => {
           UserId: req.params.id
         }
       }).then(skills => {
-        console.log("SKILLS:",skills)
+        // console.log("SKILLS:",skills)
         return res.json(skills)
       })
   } catch (err) {
@@ -54,31 +104,13 @@ router.get('/:id/skills', async(req, res) => {
 
 //patch (update) user's skills.
 router.post('/:id/skills', async(req, res) => {
-  const { javascript, phyton, react, ruby, css } = req.body
+  const { skills } = req.body
+  // console.log("SKILLS:", skills)
   try {
-      const userSkill = await Skill.create({javascript, phyton, react, ruby, css})
-      const  skillId = await Users_Skills.create({userId: req.params.id, skillId: userSkill.id})
-      return res.json(userSkill, skillId)
-  } catch (err) {
-      console.log(err)
-      return res.status(500).json(err);
-  }
-
-});
-
-//patch (update) user's skills.
-router.post('/:id/skills', async(req, res) => {
-  const myItems = Object.values({ item1, item2, item3, item4, item5 } = req.body);
-  const myId = [];
-  try {
-    for(elem of myItems) {
-      skillId = await Skill.findOne({where: {
-        name: elem
-      }})
-      const thisId = await Users_Skills.create({userId: req.params.id, skillId})
-      myId.push(thisId);
+    for(SkillId of skills) {
+      await Users_Skills.create({UserId: req.params.id, SkillId})
     }
-    return res.json(myId)
+    return res.status(200).json(skills)
   } catch (err) {
       console.log(err)
       return res.status(500).json(err);

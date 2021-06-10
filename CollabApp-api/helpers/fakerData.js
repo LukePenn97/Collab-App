@@ -35,7 +35,7 @@ const fakerData = {
     }
   },
   goalData: () => {
-    
+
   },
   messageData: (maxUsers, maxProjects) => {
     return {

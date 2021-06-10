@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 const axios = require("axios").default;
 
 export default function useApplicationData() {
+
   const [state, setState] = useState({
     user: null,
     project: null,
@@ -39,6 +40,8 @@ export default function useApplicationData() {
   const setUsers = (users) => setState({ ...state, users });
 
   const setRoomName = (roomName) => setState({ ...state, roomName });
+
+
 
   return { state, setProject, setProjects, setUser, setUsers,setRoomName };
 }
