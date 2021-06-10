@@ -22,13 +22,14 @@ const options = [
 export default function Register(props) {
   const [skills, setSkills] = useState([])
 
-  const submitSkills = () => {
-    console.log("SKILLS:",skills)
+  const submitSkills = (props) => {
+    // console.log("SKILLS:",skills)
     const url = `http://localhost:5000/users/${props.user}/skills`
     return axios.post(url, {"skills": skills})
       .then((body) => {
-
+        // console.log("hiiii")
         props.pickAUser(props.user)
+        props.pickSkills()
       })
   }
 
@@ -62,7 +63,7 @@ export default function Register(props) {
             className="basic-multi-select"
             classNamePrefix="select"
           />
-          <button onClick={submitSkills}>Submit</button>
+          <button onClick={() =>submitSkills}>Submit</button>
       </div>
     
       {/* <Button onClick={()=>props.pickSkills}>Register</Button>
