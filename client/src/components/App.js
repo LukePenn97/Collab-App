@@ -5,6 +5,7 @@ import axios from 'axios';
 
 
 import Display from "./Display";
+import NavBar from "./NavBar";
 import MatchProject from "./MatchProject";
 import ProjectDetail from "./ProjectDetail";
 import Button from "./Button";
@@ -72,8 +73,7 @@ function App() {
     setRoomName(roomName)
     transition(CHAT)
   }
-  function registration(user){
-    
+  function registration(){
     transition(REGISTER)
   }
   function pickSkills(user){
@@ -89,11 +89,8 @@ function App() {
     <main>
       <section>
         <div>
-          <h2>navbar</h2>
-          <Button onClick={backToHome}>home</Button>
-          <Button onClick={registration}>Register</Button>
+          <NavBar backToHome={backToHome} registration={registration} createNewProject={createNewProject} onMatch={onMatch} setProjects={setProjects}/>
         </div>
-        <p>**--**--**--**--**--**--**--**--**--**--**--**--**-HELLO-**--**--**--**--**--**--**--**--**-HELLO-**--**--**--**--**--**--**--**--**--**--**</p>
       </section>
 
       <section>
@@ -151,7 +148,7 @@ function App() {
         pickSkills = {pickSkills}
         />}
         {mode === SKILLS && <Skills
-        users = {state.users}
+        user = {state.user}
         // project={state.project}
         // projects={state.projects}
         // pickAProject = {pickAProject}
