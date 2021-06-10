@@ -1,9 +1,11 @@
 // import React from "react";
 import React, { useState } from "react";
-import axios from 'axios'
-
+import axios from "axios";
 import Button from "../Button";
-// import ProjectList from "../ProjectList";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
+
 
 export default function Register(props) {
   const [firstName, setFirstName] = useState(props.firstName || "");
@@ -11,18 +13,21 @@ export default function Register(props) {
   const [email, setEmail] = useState(props.email || "");
   const [password, setPassword] = useState(props.email || "");
 
-
-
   const submitRegister = () => {
     // console.log("hiiiiii")
-    const url = `http://localhost:5000/register`
-    return axios.post(url, {"firstName": firstName, 'lastName': lastName, 'email':email ,'password':password})
-      .then((body) => {
-        // console.log("hiiii")
-        console.log(body)
-        // props.pickAUser(body.id)
-        props.pickSkills()
+    const url = `http://localhost:5000/register`;
+    return axios
+      .post(url, {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
       })
+      .then((body) => {
+        cookies.set("currentUser", body.data.id, { path: "/" });
+        // console.log(cookies.get("currentUser"));
+        props.pickSkills();
+      });
     // console.log(firstName,lastName,email,password)
     // props.pickSkills();
   };

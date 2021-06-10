@@ -67,7 +67,7 @@ function App() {
     transition(REGISTER)
   }
   function pickSkills(user){
-    setUser(user)
+    // setUser(user)
     transition(SKILLS)
   }
   function createNewProject(){
