@@ -1,10 +1,11 @@
 import React from "react";
 // import { useState, useEffect } from "react";
 // import "./App.css";
-
+import axios from 'axios';
 
 
 import Display from "./Display";
+import NavBar from "./NavBar";
 import MatchProject from "./MatchProject";
 import ProjectDetail from "./ProjectDetail";
 import Button from "./Button";
@@ -26,7 +27,7 @@ function App() {
     setProjects,
     setUser,
     setUsers,
-    setRoomName
+    setRoomName,
   } = useAppData();
 
 
@@ -42,10 +43,20 @@ function App() {
   const CREATE = "CREATE";
 
   const { mode, transition, back } = useVisualMode(DISPLAY);
-  
+
+  function getProjectsByUserSkills(id){
+    const url = `http://localhost:5000/users/${id}/match`
+    Promise.all([
+      axios.get(url)
+    ]).then((all) => {
+        console.log(all[0].data);
+        setProjects(all[0].data)
+        transition(MATCH);
+      })
+  }
 
   function onMatch() {
-    transition(MATCH);
+    getProjectsByUserSkills(2)
   }
   function backToHome() {
     transition(DISPLAY);
@@ -62,8 +73,7 @@ function App() {
     setRoomName(roomName)
     transition(CHAT)
   }
-  function registration(user){
-    
+  function registration(){
     transition(REGISTER)
   }
   function pickSkills(user){
@@ -73,17 +83,14 @@ function App() {
   function createNewProject(){
     transition(CREATE)
   }
-  
+
 
   return (
     <main>
       <section>
         <div>
-          <h2>navbar</h2>
-          <Button onClick={backToHome}>home</Button>
-          <Button onClick={registration}>Register</Button>
+          <NavBar backToHome={backToHome} registration={registration} createNewProject={createNewProject} onMatch={onMatch} setProjects={setProjects}/>
         </div>
-        <p>**--**--**--**--**--**--**--**--**--**--**--**--**-HELLO-**--**--**--**--**--**--**--**--**-HELLO-**--**--**--**--**--**--**--**--**--**--**</p>
       </section>
 
       <section>
@@ -102,7 +109,7 @@ function App() {
         user = {state.user}
         users = {state.users}
         project = {state.project}
-        projects={state.projects.slice(1)} 
+        projects={state.projects}
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
         />}
@@ -141,7 +148,7 @@ function App() {
         pickSkills = {pickSkills}
         />}
         {mode === SKILLS && <Skills
-        users = {state.users}
+        user = {state.user}
         // project={state.project}
         // projects={state.projects}
         // pickAProject = {pickAProject}

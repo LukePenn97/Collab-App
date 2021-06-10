@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { Project, Users_Projects } = require('../models');
-
+const { Project, Users_Projects, Projects_Skills } = require('../models');
+const {Op} = require("sequelize");
 //get project list
 router.get('/', (req, res) =>
 Project.findAll({ 
@@ -59,6 +59,29 @@ router.post('/', async(req, res) => {
         endDate
       })
       return res.json(project)
+  } catch (err) {
+      console.log(err)
+      return res.status(500).json(err);
+  }
+});
+
+router.post('/search', async(req, res) => {
+  const { keyword,
+    skills,
+    size,
+    public
+  } = req.body
+  const keywordLike = '%'+keyword;
+  try {
+    console.log("keywordLike:", keywordLike)
+    const projects = await Project.findAll({
+      include: ["project_skills", "project_users"],
+      where: {[Op.or]: [
+        {name: {[Op.substring]: keyword}},
+        {description: {[Op.substring]: keyword}},
+        ]},
+    })
+    res.json(projects)
   } catch (err) {
       console.log(err)
       return res.status(500).json(err);

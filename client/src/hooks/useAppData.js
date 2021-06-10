@@ -29,6 +29,8 @@ export default function useApplicationData() {
     });
   }, []);
 
+
+
   //update project state when user click on a project
   const setProject = (project) => setState({ ...state, project });
   //update user state when user click on a user
