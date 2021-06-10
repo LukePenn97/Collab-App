@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const {sequelize, User, Skill, Users_Skills } = require('../models');
+const {sequelize, User, Skill, Users_Skills, Projects_Skills, Sequelize, Project} = require('../models');
+const Op = Sequelize.Op;
 
 
 //get user list
@@ -41,7 +42,34 @@ router.get('/:id/skills', async(req, res) => {
   }
 
 });
-
+//Get user's match.
+router.get('/:id/match', async(req, res) => {
+  const UserId = req.params.id;
+  let mySkill = [];
+  //First query for finding the user's skils
+    const userSkills = await Users_Skills.findAll({
+      where: {UserId: UserId}
+    })
+    .then(async userSkills => {
+      const skills = userSkills.map(ele => ele.dataValues.SkillId)
+      console.log("SKILLS IN MATCH:", skills)
+      // Second query for finding the projects' ids associated with user's skill ids
+      const projectSkills = await Projects_Skills.findAll({
+        where: {SkillId: {[Op.or]: skills}},
+      }) // Third query for find the project listing using their ids
+      .then(async projectSkills => {
+        const projectIds = projectSkills.map(ele => ele.dataValues.ProjectId)
+        const projects = await Project.findAll({
+          where: {id: {[Op.or]: projectIds}},
+        })
+        res.json(projects)
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+      return res.status(500).json(err);
+    });
+  });
 
 //patch (update) user's skills.
 router.post('/:id/skills', async(req, res) => {

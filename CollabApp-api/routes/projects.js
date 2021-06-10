@@ -1,13 +1,12 @@
 const router = require("express").Router();
-const { Project, Users_Projects } = require('../models');
+const { Project, Users_Projects, Projects_Skills } = require('../models');
 
 //get project list
 router.get('/', (req, res) =>
-Project.findAll({ 
+Project.findAll({
   include: ["project_users", "project_skills", "project_messages"]})
   .then(projects => {
     console.log("Projects:", projects);
-    console.log("hiiiiiiiiii")
     res.set('Access-Control-Allow-Origin','*');
     res.json(projects);
   })
@@ -18,8 +17,8 @@ router.get('/:id', (req, res) =>
 Project.findByPk(req.params.id)
   .then(projects => {
     console.log("Projects:", projects.dataValues);
+    res.json(projects.dataValues);
     res.set('Access-Control-Allow-Origin','*');
-    res.sendStatus(200);
   })
   .catch(err => console.log("Error:"+ err)));
 
@@ -78,6 +77,26 @@ router.post('/:id/adduser', async(req, res) => {
       console.log(err)
       return res.status(500).json(err);
   }
+});
+
+
+//patch (update) project's skills.
+router.post('/:id/addskills', async(req, res) => {
+console.log("it's meeeee")
+  const myItems = req.body;
+  Promise.all(
+    myItems.map(async (elem) => {
+      await Projects_Skills.create({ProjectId: `${req.params.id}`, SkillId: `${elem}`});
+    })
+  )
+  .then((data) => {
+    console.log(data)
+    res.sendStatus(200)
+  })
+  .catch((err) => {
+      console.log(err)
+      return res.status(500).json(err);
+    });
 });
 
 //patch (update) project's attr.
