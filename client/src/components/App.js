@@ -16,7 +16,12 @@ import CreateProject from "./CreateProject";
 
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
-
+//TODO: edit profile component
+//TODO: find a group matching page
+//TODO: COOKIE
+//TODO: searching feature
+//TODO: REGISTER
+ 
 
 function App() {
   //set the initial state 
