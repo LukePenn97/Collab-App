@@ -18,6 +18,7 @@ export default function Profile(props) {
         -----------------
       </h2>
       <ProjectList
+        users ={props.users}
         project={props.project}
         projects={projectsToShow}
         pickAProject= {props.pickAProject}
