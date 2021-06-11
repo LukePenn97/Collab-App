@@ -2,6 +2,8 @@ import React from "react";
 // import { useState, useEffect } from "react";
 // import "./App.css";
 import axios from 'axios';
+import Cookies from "universal-cookie";
+
 
 
 import Display from "./Display";
@@ -18,6 +20,7 @@ import CreateProject from "./CreateProject";
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
 
+const cookies = new Cookies();
 
 function App() {
   //set the initial state 
@@ -56,7 +59,8 @@ function App() {
   }
 
   function onMatch() {
-    getProjectsByUserSkills(2)
+    const currentUser =  cookies.get("currentUser");
+    getProjectsByUserSkills(currentUser)
   }
   function backToHome() {
     transition(DISPLAY);
