@@ -1,10 +1,13 @@
 import React from "react";
 // import { useState, useEffect } from "react";
 // import "./App.css";
+import axios from 'axios';
+import Cookies from "universal-cookie";
 
 
 
 import Display from "./Display";
+import NavBar from "./NavBar";
 import MatchProject from "./MatchProject";
 import ProjectDetail from "./ProjectDetail";
 import Button from "./Button";
@@ -16,12 +19,8 @@ import CreateProject from "./CreateProject";
 
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
-//TODO: edit profile component
-//TODO: find a group matching page
-//TODO: COOKIE
-//TODO: searching feature
-//TODO: REGISTER
- 
+
+const cookies = new Cookies();
 
 function App() {
   //set the initial state 
@@ -32,7 +31,6 @@ function App() {
     setUser,
     setUsers,
     setRoomName,
-    setCurrentUser
   } = useAppData();
 
 
@@ -48,10 +46,21 @@ function App() {
   const CREATE = "CREATE";
 
   const { mode, transition, back } = useVisualMode(DISPLAY);
-  
+
+  function getProjectsByUserSkills(id){
+    const url = `http://localhost:5000/users/${id}/match`
+    Promise.all([
+      axios.get(url)
+    ]).then((all) => {
+        console.log(all[0].data);
+        setProjects(all[0].data)
+        transition(MATCH);
+      })
+  }
 
   function onMatch() {
-    transition(MATCH);
+    const currentUser =  cookies.get("currentUser");
+    getProjectsByUserSkills(currentUser)
   }
   function backToHome() {
     transition(DISPLAY);
@@ -71,23 +80,21 @@ function App() {
   function registration(){
     transition(REGISTER)
   }
-  function pickSkills(){
+  function pickSkills(user){
+    // setUser(user)
     transition(SKILLS)
   }
   function createNewProject(){
     transition(CREATE)
   }
-  
+
 
   return (
     <main>
       <section>
         <div>
-          <h2>navbar</h2>
-          <Button onClick={backToHome}>home</Button>
-          <Button onClick={registration}>Register</Button>
+          <NavBar backToHome={backToHome} registration={registration} createNewProject={createNewProject} onMatch={onMatch} setProjects={setProjects}/>
         </div>
-        <p>**--**--**--**--**--**--**--**--**--**--**--**--**-HELLO-**--**--**--**--**--**--**--**--**-HELLO-**--**--**--**--**--**--**--**--**--**--**</p>
       </section>
 
       <section>
@@ -108,7 +115,7 @@ function App() {
         users = {state.users}
         currentUser = {state.user}
         project = {state.project}
-        projects={state.projects.slice(1)} 
+        projects={state.projects}
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
         />}
@@ -142,7 +149,7 @@ function App() {
         pickAUser = {pickAUser}
         />}
         {mode === REGISTER && <Register
-        // user = {state.user}
+        // users = {state.users}
         // project={state.project}
         // projects={state.projects}
         // pickAProject = {pickAProject}
@@ -150,11 +157,11 @@ function App() {
         pickSkills = {pickSkills}
         />}
         {mode === SKILLS && <Skills
-        // user = {state.user}
+        user = {state.user}
         // project={state.project}
         // projects={state.projects}
         // pickAProject = {pickAProject}
-        // pickAUser = {pickAUser}
+        pickAUser = {pickAUser}
         backToHome = {backToHome}
         />}
         {mode === CREATE && <CreateProject

@@ -12,7 +12,8 @@ export default function ProjectListItem(props) {
  
   const projectLead = findUserById(props.projectLeadId, props.project_users);
   // console.log(projectLead)
-  
+  const skills = [];
+  props.project_skills.map(skill => skills.push(skill.name))
 
   return (
     <li>
@@ -21,6 +22,9 @@ export default function ProjectListItem(props) {
         {`${projectLead.firstName}  
         ${projectLead.lastName}`}
       </h3>
+      <h5>
+        {skills}
+      </h5>
       <p>{props.description}</p>
       <img
       src={props.imgUrl}
