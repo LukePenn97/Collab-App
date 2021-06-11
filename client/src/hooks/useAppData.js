@@ -9,7 +9,7 @@ export default function useApplicationData() {
     users: [],
     projects: [],
     roomName:"",
-    currentUser:1
+    matchProjects:[]
   });
   // fetch the initial data in database;
   useEffect(() => {
@@ -45,7 +45,9 @@ export default function useApplicationData() {
 
   const setRoomName = (roomName) => setState({ ...state, roomName });
 
+  const setMatchProjects = (matchProjects) => setState({ ...state, matchProjects });
 
 
-  return { state, setProject, setProjects, setUser, setUsers,setRoomName };
+
+  return { state, setProject, setProjects, setUser, setUsers,setRoomName, setMatchProjects };
 }

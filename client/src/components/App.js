@@ -31,6 +31,7 @@ function App() {
     setUser,
     setUsers,
     setRoomName,
+    setMatchProjects
   } = useAppData();
 
 
@@ -53,7 +54,7 @@ function App() {
       axios.get(url)
     ]).then((all) => {
         console.log(all[0].data);
-        setProjects(all[0].data)
+        setMatchProjects(all[0].data)
         transition(MATCH);
       })
   }
@@ -115,7 +116,7 @@ function App() {
         users = {state.users}
         currentUser = {state.user}
         project = {state.project}
-        projects={state.projects}
+        projects={state.matchProjects}
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
         />}
