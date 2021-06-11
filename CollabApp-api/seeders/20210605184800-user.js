@@ -3,7 +3,7 @@
 const fakerData = require('../helpers/fakerData');
 
 const users = [];
-while (users.length < 100) {
+while (users.length < 200) {
   users.push(fakerData.userData());
 }
 module.exports = {

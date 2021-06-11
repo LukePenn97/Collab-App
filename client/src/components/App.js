@@ -14,9 +14,13 @@ import Profile from "./Profile";
 import Register from "./Register";
 import Skills from "./Skills";
 import CreateProject from "./CreateProject";
+import SkillList from "./SkillList";
+import SearchBar from "./SearchBar";
+import { filterProjectsBySkills } from "../helpers/selectors";
 
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
+import StateManager from "react-select";
 
 
 function App() {
@@ -28,6 +32,8 @@ function App() {
     setUser,
     setUsers,
     setRoomName,
+    setSkills,
+    setMatchedProjects,
   } = useAppData();
 
 
@@ -50,8 +56,11 @@ function App() {
       axios.get(url)
     ]).then((all) => {
         console.log(all[0].data);
+
         setProjects(all[0].data)
-        transition(MATCH);
+        let filteredProjects = filterProjectsBySkills(state.skills, all[0].data)
+        setMatchedProjects(filteredProjects)
+        console.log("FILTERED:",filteredProjects)
       })
   }
 
@@ -64,6 +73,9 @@ function App() {
   function pickAProject(project){
     setProject(project)
     transition(DETAIL)
+  }
+  function pickProjects(projects){
+    setProjects(projects)
   }
   function pickAUser(user){
     setUser(user)
@@ -83,6 +95,20 @@ function App() {
   function createNewProject(){
     transition(CREATE)
   }
+  function skillFilter(skill) {
+    if (state.skills.includes(skill)) {
+      console.log(`${skill} exists in skills`)
+      let index = state.skills.indexOf(skill)
+      state.skills.splice(index, 1)
+    } else {
+      state.skills.push(skill)
+    }
+    console.log("state.projects before filter:", state.projects)
+    let filteredProjects = filterProjectsBySkills(state.skills, state.projects)
+    console.log(filteredProjects)
+    setMatchedProjects(filteredProjects)
+    console.log("Skills",state.skills)
+  }
 
 
   return (
@@ -92,19 +118,34 @@ function App() {
           <NavBar backToHome={backToHome} registration={registration} createNewProject={createNewProject} onMatch={onMatch} setProjects={setProjects}/>
         </div>
       </section>
+      <div class="container">
+        <SkillList
+            pickASkill={skillFilter}
+        />
+      </div>
+      <div class="container">
+        <SearchBar
 
+            setProjects={setProjects}
+            setMatchedProjects={setMatchedProjects}
+            filterProjectsBySkills={filterProjectsBySkills}
+            skills={()=>state.skills}
+            projects={state.projects}
+        />
+      </div>
       <section>
-        {mode === DISPLAY && <Display 
+        {mode === DISPLAY && 
+        <Display 
         user = {state.user}
         project = {state.project}
-        projects={state.projects} 
+        projects={state.matchedProjects} 
         users = {state.users}
         // roomName = {state.roomName}
         onMatch={onMatch} 
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
         createNewProject = {createNewProject}
-        />}
+        /> }
         {mode === MATCH && <MatchProject 
         user = {state.user}
         users = {state.users}

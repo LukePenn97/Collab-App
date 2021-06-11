@@ -1,0 +1,26 @@
+import React from "react";
+import SkillListItem from "./SkillListItem";
+
+export default function SkillList(props) {
+  // console.log("hi")
+  // console.log(props.projects)
+  const skills = [
+    { value: 1, label: 'Javascript', isFixed: true },
+    { value: 2, label: 'React', isFixed: true},
+    { value: 3, label: 'Ruby', isFixed: true },
+    { value: 4, label: 'SQL', isFixed: true },
+    { value: 5, label: 'Express', isFixed: true },
+  ];
+
+  const skillList = skills.map((skill) => {
+    return (
+      <SkillListItem
+        skill={skill.value}
+        skillName={skill.label}
+        pickASkill={props.pickASkill}
+      />
+    );
+  });
+
+  return <div className="row">{skillList}</div>;
+}

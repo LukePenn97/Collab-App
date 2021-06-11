@@ -9,6 +9,8 @@ export default function useApplicationData() {
     users: [],
     projects: [],
     roomName:"",
+    skills: [],
+    matchedProjects: []
   });
   // fetch the initial data in database;
   useEffect(() => {
@@ -21,6 +23,7 @@ export default function useApplicationData() {
       setState((prev) => ({
         ...prev,
         projects: all[0].data,
+        matchedProjects: all[0].data,
         users: all[1].data,
         // ,
         // interviewers: all[2].data, spots: all[0].data.spots
@@ -38,12 +41,14 @@ export default function useApplicationData() {
 
   //update projects state when user do a search
   const setProjects = (projects) => setState({ ...state, projects });
+  
+  const setMatchedProjects = (matchedProjects) => setState({ ...state, matchedProjects });
 
   const setUsers = (users) => setState({ ...state, users });
 
   const setRoomName = (roomName) => setState({ ...state, roomName });
+  
+  const setSkills = (skills) => setState({ ...state, skills });
 
-
-
-  return { state, setProject, setProjects, setUser, setUsers,setRoomName };
+  return { state, setProject, setProjects, setUser, setUsers, setRoomName, setSkills, setMatchedProjects};
 }

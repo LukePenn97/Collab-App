@@ -1,7 +1,5 @@
 import React, {useState} from "react";
-import Button from "../Button";
 import axios from 'axios'
-
 export default function NavBar(props) {
   
   const [keyword, setKeyword] = useState([])
@@ -44,14 +42,13 @@ export default function NavBar(props) {
             <li class="nav-item">
               <a class="nav-link" onClick={props.createNewProject}>Create A Project</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" onClick={props.registration}>Register</a>
-            </li>
-
           </ul>
           <div class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchbar" onChange={onKeywordChanged}></input>
-            <button class="btn btn-outline-success" onClick={submitKeyword}>Search</button>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" onClick={props.registration}>Register</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
