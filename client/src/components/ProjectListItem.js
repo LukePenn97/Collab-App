@@ -10,8 +10,9 @@ export default function ProjectListItem(props) {
   // })
   
  
-  const projectLead = findUserById(props.projectLeadId, props.project_users);
+  const projectLead = findUserById(props.projectLeadId, props.users);
   // console.log(projectLead)
+
   const skills = [];
   props.project_skills.map(skill => skills.push(skill.name))
 
