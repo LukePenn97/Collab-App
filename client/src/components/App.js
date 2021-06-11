@@ -2,6 +2,8 @@ import React from "react";
 // import { useState, useEffect } from "react";
 // import "./App.css";
 import axios from 'axios';
+import Cookies from "universal-cookie";
+
 
 
 import Display from "./Display";
@@ -22,6 +24,7 @@ import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
 import StateManager from "react-select";
 
+const cookies = new Cookies();
 
 function App() {
   //set the initial state 
@@ -65,7 +68,8 @@ function App() {
   }
 
   function onMatch() {
-    getProjectsByUserSkills(2)
+    const currentUser =  cookies.get("currentUser");
+    getProjectsByUserSkills(currentUser)
   }
   function backToHome() {
     transition(DISPLAY);
@@ -137,6 +141,7 @@ function App() {
         {mode === DISPLAY && 
         <Display 
         user = {state.user}
+        currentUser = {state.user}
         project = {state.project}
         projects={state.matchedProjects} 
         users = {state.users}
@@ -149,14 +154,16 @@ function App() {
         {mode === MATCH && <MatchProject 
         user = {state.user}
         users = {state.users}
+        currentUser = {state.user}
         project = {state.project}
-        projects={state.projects}
+        projects={state.matchProjects}
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
         />}
         {mode === DETAIL && <ProjectDetail
         user = {state.user} 
         users = {state.users}
+        currentUser = {state.user}
         project={state.project}
         projects={state.projects}  
         roomName = {state.roomName}
@@ -167,6 +174,7 @@ function App() {
         {mode === CHAT && <ChatRoom 
         user = {state.user}
         users = {state.users}
+        currentUser = {state.user}
         project={state.project}
         projects={state.projects}
         roomName = {state.roomName}
@@ -175,6 +183,7 @@ function App() {
         {mode === PROFILE && <Profile
         user = {state.user}
         users = {state.users}
+        currentUser = {state.user}
         project={state.project}
         projects={state.projects}
         pickAProject = {pickAProject}
