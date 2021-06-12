@@ -2,7 +2,7 @@
 
 const usersProjects = [];
 
-for (let i = 1; i <= 10; i++) {
+for (let i = 1; i <= 100; i++) {
   usersProjects.push({
     UserId: i,
     ProjectId: i,
@@ -11,7 +11,7 @@ for (let i = 1; i <= 10; i++) {
   })
 }
 
-for (let i = 11; i <= 100; i++) {
+for (let i = 101; i <= 200; i++) {
   usersProjects.push({
     UserId: i,
     ProjectId: Math.ceil(Math.random() * 10),

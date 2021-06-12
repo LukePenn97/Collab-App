@@ -3,7 +3,7 @@
 
 const ProjectSkills = []
 
-for (let i = 1; i <= 10; i++) {
+for (let i = 1; i <= 100; i++) {
   ProjectSkills.push({
     ProjectId: i,
     SkillId: Math.ceil(Math.random() * 5),

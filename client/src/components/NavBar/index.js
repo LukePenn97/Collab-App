@@ -1,38 +1,24 @@
-import React, { useState } from "react";
-import Button from "../Button";
-import axios from "axios";
-import Cookies from "universal-cookie";
+import React, {useState} from "react";
+import axios from 'axios'
+import {findUserById} from '../../helpers/selectors'
 
-const cookies = new Cookies();
+
 
 export default function NavBar(props) {
-  const [keyword, setKeyword] = useState([]);
+  let userSkills = []
+  if (props.userId) {
+    let userToShow;
+    userToShow = findUserById(props.userId, props.users)
+    for (const user of props.users) {
 
-  const submitKeyword = () => {
-    console.log("keyword:", keyword);
-    const url = `http://localhost:5000/projects/search`;
-    return axios.post(url, { keyword: keyword }).then((body) => {
-      // console.log("BODYODYODYODY:", body.data)
-      props.setProjects(body.data);
-    });
-  };
-
-  const onKeywordChanged = () => {
-    //console.log("e is:",e)
-    // if (!e[e.length -1]) {
-    //   return;
-    // }
-    const _keyword = document.getElementById("searchbar");
-    //console.log(_search.value)
-    setKeyword(_keyword.value);
-    //console.log(search)
-  };
-  const isLoggedIn = cookies.get("currentUser");
-
-  const logout = () => {
-    cookies.remove("currentUser");
-  };
-
+      if (user.id === Number(props.userId)) {
+        userToShow = user
+      }
+    }
+    if (userToShow) {
+      userSkills = userToShow.user_skills.map((skill)=>skill.id)
+    }
+  }
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -53,49 +39,18 @@ export default function NavBar(props) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" onClick={props.onMatch}>
-                Auto Match
-              </a>
+              <a class="nav-link" onClick={()=>props.autoMatch(userSkills)}>Auto Match</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" onClick={props.createNewProject}>
-                Create A Project
-              </a>
+              <a class="nav-link" onClick={props.createNewProject}>Create A Project</a>
             </li>
-
-            {isLoggedIn ? (
-              <li class="nav-item">
-                <a class="nav-link" onClick={() => logout()}>
-                  Log out
-                </a>
-              </li>
-            ) : (
-              <span >
-                <li>
-                  <a class="nav-link" onClick={props.registration}>
-                    Register
-                  </a>
-                </li>
-                <li>
-                  <a class="nav-link" onClick={props.registration}>
-                    Log in
-                  </a>
-                </li>
-              </span>
-            )}
           </ul>
           <div class="d-flex">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              id="searchbar"
-              onChange={onKeywordChanged}
-            ></input>
-            <button class="btn btn-outline-success" onClick={submitKeyword}>
-              Search
-            </button>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" onClick={props.registration}>Register</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

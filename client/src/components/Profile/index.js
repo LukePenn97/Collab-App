@@ -7,6 +7,7 @@ export default function Profile(props) {
   //find the data of the user by id
   const userToShow = findUserById(props.user, props.users);
 
+
   //find the projects created by the user
   const projectsToShow = findAllById(props.user, props.projects);
 
@@ -18,6 +19,7 @@ export default function Profile(props) {
         -----------------
       </h2>
       <ProjectList
+        users={props.users}
         project={props.project}
         projects={projectsToShow}
         pickAProject= {props.pickAProject}

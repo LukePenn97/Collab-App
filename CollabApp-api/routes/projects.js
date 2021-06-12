@@ -6,6 +6,7 @@ router.get('/', (req, res) =>
 Project.findAll({ 
   include: ["project_users", "project_skills", "project_messages"]})
   .then(projects => {
+
     // console.log("Projects:", projects);
     // console.log("hiiiiiiiiii")
     res.set('Access-Control-Allow-Origin','*');
@@ -67,9 +68,6 @@ router.post('/', async(req, res) => {
 
 router.post('/search', async(req, res) => {
   const { keyword,
-    skills,
-    size,
-    public
   } = req.body
   const keywordLike = '%'+keyword;
   try {
@@ -81,7 +79,9 @@ router.post('/search', async(req, res) => {
         {description: {[Op.substring]: keyword}},
         ]},
     })
-    res.json(projects)
+    .then(projects => {
+      res.json(projects)
+    })
   } catch (err) {
       console.log(err)
       return res.status(500).json(err);
