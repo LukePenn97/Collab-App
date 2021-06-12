@@ -3,7 +3,7 @@ const { Project, Users_Projects, Projects_Skills } = require('../models');
 const {Op} = require("sequelize");
 //get project list
 router.get('/', (req, res) =>
-Project.findAll({ 
+Project.findAll({
   include: ["project_users", "project_skills", "project_messages"]})
   .then(projects => {
 
@@ -39,18 +39,23 @@ Project.findByPk(req.params.id)
 // );
 
 
-//Post (create) new project
-router.post('/', async(req, res) => {
-  const { name,
+//Post route for createing new project and inserting the projects_skills table
+router.post('/new', async(req, res) => {
+  const {
+    projectLeadId,
+    name,
     description,
+    skills,
     url,
     imgUrl,
     deadline,
     startDate,
     endDate
-  } = req.body
-  try {
-      const project = await Project.create({
+  } = req.body.projects;
+  res.set('Access-Control-Allow-Origin','*');
+  Promise.all(
+      await Project.create({
+        projectLeadId,
         name,
         description,
         url,
@@ -59,11 +64,21 @@ router.post('/', async(req, res) => {
         startDate,
         endDate
       })
-      return res.json(project)
-  } catch (err) {
+      .then(data => {
+        res.set('Access-Control-Allow-Origin','*');
+        //console.log("project 1:",data.dataValues);
+        res.json(data.dataValues.id)
+        skills.map(async (elem) => {
+          await Projects_Skills.create({ProjectId: `${data.dataValues.id}`, SkillId: `${elem}`});
+        })
+      })
+  ).then((data) => {
+    res.sendStatus(200)
+  })
+    .catch (err => {
       console.log(err)
       return res.status(500).json(err);
-  }
+  })
 });
 
 router.post('/search', async(req, res) => {
