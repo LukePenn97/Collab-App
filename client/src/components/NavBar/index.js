@@ -2,10 +2,31 @@ import React, { useState } from "react";
 import Button from "../Button";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import {findUserById} from '../../helpers/selectors'
 
 const cookies = new Cookies();
 
+
+
+
+
+
+
 export default function NavBar(props) {
+  let userSkills = []
+  if (props.userId) {
+    let userToShow;
+    userToShow = findUserById(props.userId, props.users)
+    for (const user of props.users) {
+
+      if (user.id === Number(props.userId)) {
+        userToShow = user
+      }
+    }
+    if (userToShow) {
+      userSkills = userToShow.user_skills.map((skill)=>skill.id)
+    }
+  }
   const isLoggedIn = cookies.get("currentUser");
 
   const logout = () => {
@@ -31,13 +52,12 @@ export default function NavBar(props) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" onClick={props.filterProjectsBySkills}>Auto Match</a>
+            <a class="nav-link" onClick={()=>props.autoMatch(userSkills)}>Auto Match</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" onClick={props.createNewProject}>
-                Create A Project
-              </a>
+              <a class="nav-link" onClick={props.createNewProject}>Create A Project</a>
             </li>
+          
 
             {isLoggedIn ? (
               <li class="nav-item">
@@ -60,6 +80,8 @@ export default function NavBar(props) {
               </span>
             )}
           </ul>
+          
+              
           
         </div>
       </div>

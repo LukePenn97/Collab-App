@@ -27,27 +27,19 @@ export default function Register(props) {
 
   const currentUser = cookies.get("currentUser");
   const submitSkills = (props) => {
-    // console.log("SKILLS:",skills)
     const url = `http://localhost:5000/users/${currentUser}/skills`
     return axios.post(url, {"skills": skills})
       .then((body) => {
-        // console.log("hiiii")
-        // props.pickAUser(props.user)
         props.backToHome()
       })
   }
 
   const onSkillsChanged = (e) => {
-    //console.log("e is:",e)
-    // if (!e[e.length -1]) {
-    //   return;
-    // }
     const _skills = []
     for (const elem of e) {
       _skills.push(elem.value)
     }
-    //setSkills(_skills)
-    //console.log(_skills)
+    setSkills(_skills)
   }
 
   return (

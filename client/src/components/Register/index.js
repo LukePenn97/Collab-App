@@ -14,7 +14,7 @@ export default function Register(props) {
   const [password, setPassword] = useState(props.email || "");
 
   const submitRegister = () => {
-    // console.log("hiiiiii")
+
     const url = `http://localhost:5000/register`;
     return axios
       .post(url, {
@@ -25,11 +25,10 @@ export default function Register(props) {
       })
       .then((body) => {
         cookies.set("currentUser", body.data.id, { path: "/" });
-        // console.log(cookies.get("currentUser"));
+        props.setUsers([...props.users, body.data])
         props.pickSkills();
       });
-    // console.log(firstName,lastName,email,password)
-    // props.pickSkills();
+
   };
   return (
     <article>
