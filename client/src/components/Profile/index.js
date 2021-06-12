@@ -22,6 +22,7 @@ export default function Profile(props) {
         project={props.project}
         projects={projectsToShow}
         pickAProject= {props.pickAProject}
+        pickAUser = {props.pickAUser}
       />
       <div></div>
       <div>

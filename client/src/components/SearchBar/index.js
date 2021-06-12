@@ -1,13 +1,13 @@
 import React, {useState} from "react";
-import axios from 'axios'
+import axios from 'axios';
 
 export default function SearchBar(props) {
   
-  const [keyword, setKeyword] = useState([])
+  const [keyword, setKeyword] = useState([]);
 
   const submitKeyword = () => {
     let skills = props.skills
-    console.log("keyword:",keyword)
+    console.log("keyword:",keyword);
     const url = `http://localhost:5000/projects/search`
     return axios.post(url, {"keyword": keyword})
       .then((body) => {
@@ -19,15 +19,12 @@ export default function SearchBar(props) {
       })
   }
 
-  const onKeywordChanged = () => {
-    //console.log("e is:",e)
-    // if (!e[e.length -1]) {
-    //   return;
-    // }
-    const _keyword = document.getElementById("searchbar");
-    //console.log(_search.value)
-    setKeyword(_keyword.value)
-    //console.log(search)
+  const onKeywordChanged = (e) => {
+    const _keyword = e.target.value;
+    
+    setKeyword(_keyword)
+    
+  
   }
 
   return (

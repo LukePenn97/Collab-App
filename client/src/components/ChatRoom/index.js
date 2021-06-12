@@ -39,10 +39,18 @@ export default function ChatRoom(props) {
     return msg.name = sender.firstName +" "+ sender.lastName
   })
   
-  console.log("msg!!!!!!!!!!!!",messages)
+  const roomMember = props.project.project_users
+
+  
+
+  // console.log("msg!!!!!!!!!!!!",messages)
   return (
     <div className="chat-room-container">
       <h1 className="room-name">Room: {roomId}</h1>
+      <h3>Talk to:</h3>
+      {roomMember.map(member => (
+        <p>{member.firstName} {member.lastName}</p>
+      ))}
       <div className="messages-container">
         <ul className="messages-list">
           {messages.map((message, i) => (
