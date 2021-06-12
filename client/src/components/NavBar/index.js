@@ -2,8 +2,6 @@ import React, {useState} from "react";
 import axios from 'axios'
 import {findUserById} from '../../helpers/selectors'
 
-
-
 export default function NavBar(props) {
   let userSkills = []
   if (props.userId) {

@@ -27,8 +27,25 @@ const filterProjectsBySkills = (skills, projects) => {
   })
 }
 
+const findMentors = (users) => {
+  const mentors = []
+  for (const user of users) {
+    if (user.is_mentor) {
+      mentors.push(user)
+    }
+  }
+  return mentors;
+}
+
+const getUserSkillsArray = (user_skills) => {
+  const skills = []
+  for (const skill of user_skills) {
+    skills.push(skill.name)
+  }
+  return skills;
+}
 // const findMemberByProject = (project) =>{
 //   return 
 // }
 
-module.exports = { findUserById, findAllById, filterProjectsBySkills }
+module.exports = { findUserById, findAllById, filterProjectsBySkills, findMentors, getUserSkillsArray }

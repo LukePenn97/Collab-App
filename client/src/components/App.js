@@ -22,8 +22,6 @@ import { filterProjectsBySkills } from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
 
-import Cookies from "universal-cookie";
-
 const cookies = new Cookies();
 
 
