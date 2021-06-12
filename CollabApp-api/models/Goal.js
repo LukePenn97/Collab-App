@@ -9,15 +9,17 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate({ Project }) {
       // define association here
+      this.belongsTo(Project, {foreignKey: "ProjectId"});
     }
   };
   Goal.init({
-    projectId: DataTypes.INTEGER,
+    ProjectId: DataTypes.INTEGER,
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     startDate: DataTypes.DATE,
+    createdAt: DataTypes.DATE,
     completedAt: DataTypes.DATE,
     completedBy: DataTypes.INTEGER,
     deadline: DataTypes.DATE
@@ -28,3 +30,5 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Goal;
 };
+// sequelize-cli seed:generate 
+// npx sequelize-cli seed:generate --name demo-user

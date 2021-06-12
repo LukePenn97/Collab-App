@@ -4,7 +4,7 @@ const {Op} = require("sequelize");
 //get project list
 router.get('/', (req, res) =>
 Project.findAll({ 
-  include: ["project_users", "project_skills", "project_messages"]})
+  include: ["project_users", "project_skills", "project_messages","project_goals"]})
   .then(projects => {
 
     // console.log("Projects:", projects);
