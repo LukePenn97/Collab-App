@@ -10,7 +10,7 @@ import {
   } from '@rebass/forms'
 import Button from "../Button";
 
-// creat project;
+// creat project initiation;
   const cookies = new Cookies();
   const options = [
     { key: "skillId1", value: 1, label: 'Javascript', isFixed: true },
@@ -35,6 +35,11 @@ import Button from "../Button";
 export default function CreateProject(props) {
   const [project, setProject] = useState(initialValues);
     const currentUser = cookies.get("currentUser");
+
+    // Final submit handler
+    //(axios returns a complete project object with the id of database and ubdates the state)
+    //skills will be inserted into the projects_skills table through the backend route
+    //new project available through the state:project
     const submitProject = () => {
       setProject({
         ...project,
@@ -50,7 +55,7 @@ export default function CreateProject(props) {
           });
         })
       }
-
+      // Change handler for all inputs except skills
       const handleInputChange = (e) => {
         e.preventDefault()
         const { name, value } = e.target;
@@ -59,7 +64,7 @@ export default function CreateProject(props) {
           [name]: value,
         });
       };
-
+      // Change handler for selected skills
       const onSkillsChanged = (e) => {
         const _skills = []
         for (const elem of e) {
