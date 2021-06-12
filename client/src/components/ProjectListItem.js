@@ -22,6 +22,7 @@ export default function ProjectListItem(props) {
         ${projectLead.lastName}`}
       </h3>
       <p>{props.description}</p>
+      <p>{props.project_skills[0].name}</p>
       <img
       src={props.imgUrl}
       alt={props.name}

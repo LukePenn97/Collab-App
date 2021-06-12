@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 // import { useState, useEffect } from "react";
 // import "./App.css";
 import axios from 'axios';
@@ -15,7 +15,6 @@ import Register from "./Register";
 import Skills from "./Skills";
 import CreateProject from "./CreateProject";
 import SkillList from "./SkillList";
-import SearchBar from "./SearchBar";
 import { filterProjectsBySkills } from "../helpers/selectors";
 
 import useVisualMode from "../hooks/useVisualMode";
@@ -34,7 +33,9 @@ function App() {
     setRoomName,
     setSkills,
     setMatchedProjects,
+    setState
   } = useAppData();
+
 
 
 
@@ -50,23 +51,22 @@ function App() {
 
   const { mode, transition, back } = useVisualMode(DISPLAY);
 
-  function getProjectsByUserSkills(id){
-    const url = `http://localhost:5000/users/${id}/match`
-    Promise.all([
-      axios.get(url)
-    ]).then((all) => {
-        console.log(all[0].data);
+  const [keyword, setKeyword] = useState([])
 
-        setProjects(all[0].data)
-        let filteredProjects = filterProjectsBySkills(state.skills, all[0].data)
-        setMatchedProjects(filteredProjects)
-        console.log("FILTERED:",filteredProjects)
+  const submitKeyword = () => {
+    const url = `http://localhost:5000/projects/search`
+    return axios.post(url, {"keyword": keyword})
+      .then((body) => {
+        let filteredProjects = filterProjectsBySkills(state.skills, body.data)
+        setState(prev => ({...prev, projects: body.data, matchedProjects: filteredProjects}))
       })
   }
 
-  function onMatch() {
-    getProjectsByUserSkills(2)
+  const onKeywordChanged = () => {
+    const _keyword = document.getElementById("searchbar");
+    setKeyword(_keyword.value)
   }
+
   function backToHome() {
     transition(DISPLAY);
   }
@@ -96,42 +96,43 @@ function App() {
     transition(CREATE)
   }
   function skillFilter(skill) {
+    let newSkills;
     if (state.skills.includes(skill)) {
-      console.log(`${skill} exists in skills`)
       let index = state.skills.indexOf(skill)
-      state.skills.splice(index, 1)
-    } else {
-      state.skills.push(skill)
-    }
-    console.log("state.projects before filter:", state.projects)
-    let filteredProjects = filterProjectsBySkills(state.skills, state.projects)
-    console.log(filteredProjects)
-    setMatchedProjects(filteredProjects)
-    console.log("Skills",state.skills)
-  }
+      newSkills = state.skills
+      newSkills.splice(index, 1)
 
+    } else {
+      newSkills = [...state.skills, skill]
+
+    }
+
+
+    let filteredProjects = filterProjectsBySkills(newSkills, state.projects)
+    console.log("newSkills in skillFilter",newSkills)
+    console.log("filteredProjects in skillFilter",filteredProjects)
+    setState(prev=>({...prev, skills: newSkills, matchedProjects: filteredProjects}))
+  }
 
   return (
     <main>
       <section>
         <div>
-          <NavBar backToHome={backToHome} registration={registration} createNewProject={createNewProject} onMatch={onMatch} setProjects={setProjects}/>
+          <NavBar backToHome={backToHome} registration={registration} createNewProject={createNewProject} filterProjectsBySkills={filterProjectsBySkills}/>
         </div>
       </section>
       <div class="container">
+        {mode === DISPLAY &&
         <SkillList
             pickASkill={skillFilter}
-        />
+        />}
       </div>
       <div class="container">
-        <SearchBar
-
-            setProjects={setProjects}
-            setMatchedProjects={setMatchedProjects}
-            filterProjectsBySkills={filterProjectsBySkills}
-            skills={()=>state.skills}
-            projects={state.projects}
-        />
+        {mode === DISPLAY &&
+        <div>
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchbar" onChange={onKeywordChanged}></input>
+          <button class="btn btn-outline-success" onClick={submitKeyword}>Search</button>
+        </div>}
       </div>
       <section>
         {mode === DISPLAY && 
@@ -141,7 +142,6 @@ function App() {
         projects={state.matchedProjects} 
         users = {state.users}
         // roomName = {state.roomName}
-        onMatch={onMatch} 
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
         createNewProject = {createNewProject}

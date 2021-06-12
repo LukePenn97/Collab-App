@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import axios from 'axios'
 
+
 export default function SearchBar(props) {
   
   const [keyword, setKeyword] = useState([])
@@ -16,6 +17,7 @@ export default function SearchBar(props) {
         console.log("SKILLS:", props.skills())
         let filteredProjects = props.filterProjectsBySkills(props.skills(), body.data)
         props.setMatchedProjects(filteredProjects)
+        console.log("Projects in search:", props.projects)
       })
   }
 

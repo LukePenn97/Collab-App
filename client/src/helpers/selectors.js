@@ -9,7 +9,7 @@ const findAllById = (id, objArr) => {
 }
 
 const filterProjectsBySkills = (skills, projects) => {
-  console.log("skills in filter:", skills)
+  // console.log("skills in filter:", skills)
   if (skills.length < 1) {
     return projects
   }
