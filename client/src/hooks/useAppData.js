@@ -12,8 +12,12 @@ export default function useApplicationData() {
     skills: [],
     matchedProjects: []
   });
+
+
+
   // fetch the initial data in database;
   useEffect(() => {
+
     axios.defaults.baseURL = "http://localhost:5000";
     Promise.all([
       axios.get("/projects"),
@@ -31,21 +35,22 @@ export default function useApplicationData() {
 
 
   //update project state when user click on a project
-  const setProject = (project) => setState({ ...state, project });
+  const setProject = (project) => setState({ ...state, "project": project });
   //update user state when user click on a user
-  const setUser = (user) => setState({ ...state, user });
-  // const setCurrentUser = (currentUser) => setState({ ...state, currentUser });
+  const setUser = (user) => setState({ ...state, "user": user });
 
   //update projects state when user do a search
-  const setProjects = (projects) => setState({ ...state, projects });
+  const setProjects = (projects) => setState({ ...state, "projects": projects });
   
-  const setMatchedProjects = (matchedProjects) => setState({ ...state, matchedProjects });
+  const setMatchedProjects = (matchedProjects) => setState({ ...state, "matchedProjects": matchedProjects });
 
-  const setUsers = (users) => setState({ ...state, users });
+  const setUsers = (users) => setState({ ...state, "users": users });
 
-  const setRoomName = (roomName) => setState({ ...state, roomName });
+  const setRoomName = (roomName) => setState({ ...state, "roomName": roomName });
   
-  const setSkills = (skills) => setState({ ...state, skills });
+  const setSkills = (newSkills) => {
 
-  return { state, setProject, setProjects, setUser, setUsers, setRoomName, setSkills, setMatchedProjects};
+    setState({...state, skills: newSkills})
+  };
+  return { state, setState, setProject, setProjects, setUser, setUsers, setRoomName, setSkills, setMatchedProjects};
 }

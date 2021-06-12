@@ -46,7 +46,7 @@ export default function Register(props) {
     for (const elem of e) {
       _skills.push(elem.value)
     }
-    setSkills(_skills)
+    //setSkills(_skills)
     //console.log(_skills)
   }
 

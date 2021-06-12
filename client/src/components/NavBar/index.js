@@ -6,32 +6,6 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 export default function NavBar(props) {
-  const [keyword, setKeyword] = useState([]);
-
-  const submitKeyword = () => {
-    console.log("keyword:", keyword);
-    const url = `http://localhost:5000/projects/search`;
-    return axios.post(url, { keyword: keyword }).then((body) => {
-      // console.log("BODYODYODYODY:", body.data)
-      props.setProjects(body.data);
-    });
-  };
-
-  const onKeywordChanged = () => {
-    //console.log("e is:",e)
-    // if (!e[e.length -1]) {
-    //   return;
-    // }
-    const _keyword = document.getElementById("searchbar");
-    //console.log(_search.value)
-    setKeyword(_keyword.value);
-    //console.log(search)
-  };
-  const isLoggedIn = cookies.get("currentUser");
-
-  const logout = () => {
-    cookies.remove("currentUser");
-  };
 
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -53,9 +27,7 @@ export default function NavBar(props) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" onClick={props.onMatch}>
-                Auto Match
-              </a>
+              <a class="nav-link" onClick={props.filterProjectsBySkills}>Auto Match</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" onClick={props.createNewProject}>

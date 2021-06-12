@@ -4,7 +4,7 @@ import SkillListItem from "./SkillListItem";
 export default function SkillList(props) {
   // console.log("hi")
   // console.log(props.projects)
-  const skills = [
+  const skillsData = [
     { value: 1, label: 'Javascript', isFixed: true },
     { value: 2, label: 'React', isFixed: true},
     { value: 3, label: 'Ruby', isFixed: true },
@@ -12,7 +12,7 @@ export default function SkillList(props) {
     { value: 5, label: 'Express', isFixed: true },
   ];
 
-  const skillList = skills.map((skill) => {
+  const skillList = skillsData.map((skill) => {
     return (
       <SkillListItem
         skill={skill.value}
