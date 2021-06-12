@@ -1,6 +1,10 @@
 
 const findUserById = (userId, usersArr) =>{
-  return usersArr.find((ele) => ele.id === userId);
+  //console.log("in findUserById:", usersArr, userId)
+  return usersArr.find((ele) => {
+    
+    return ele.id === userId
+  });
 }
 
 //find all projects belongs to a given userId

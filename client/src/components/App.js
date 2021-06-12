@@ -19,7 +19,10 @@ import { filterProjectsBySkills } from "../helpers/selectors";
 
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
-import StateManager from "react-select";
+
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 
 function App() {
@@ -95,30 +98,33 @@ function App() {
   function createNewProject(){
     transition(CREATE)
   }
+
   function skillFilter(skill) {
     let newSkills;
     if (state.skills.includes(skill)) {
       let index = state.skills.indexOf(skill)
       newSkills = state.skills
       newSkills.splice(index, 1)
-
     } else {
       newSkills = [...state.skills, skill]
-
     }
-
-
     let filteredProjects = filterProjectsBySkills(newSkills, state.projects)
     console.log("newSkills in skillFilter",newSkills)
-    console.log("filteredProjects in skillFilter",filteredProjects)
+    //console.log("filteredProjects in skillFilter",filteredProjects)
     setState(prev=>({...prev, skills: newSkills, matchedProjects: filteredProjects}))
+  }
+
+  function autoMatch(skills) {
+    for (const skill of skills) {
+      skillFilter(skill);
+    }
   }
 
   return (
     <main>
       <section>
         <div>
-          <NavBar backToHome={backToHome} registration={registration} createNewProject={createNewProject} filterProjectsBySkills={filterProjectsBySkills}/>
+          <NavBar users={state.users} userId={cookies.get("currentUser")} backToHome={backToHome} registration={registration} createNewProject={createNewProject} autoMatch={autoMatch}/>
         </div>
       </section>
       <div class="container">
@@ -181,11 +187,12 @@ function App() {
         pickAUser = {pickAUser}
         />}
         {mode === REGISTER && <Register
-        // users = {state.users}
+        users = {state.users}
         // project={state.project}
         // projects={state.projects}
         // pickAProject = {pickAProject}
         // pickAUser = {pickAUser}
+        setUsers={setUsers}
         pickSkills = {pickSkills}
         />}
         {mode === SKILLS && <Skills
