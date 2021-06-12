@@ -37,7 +37,7 @@ Project.findByPk(req.params.id)
 // );
 
 
-//Post (create) new project
+//Post route for createing new project and inserting the projects_skills table
 router.post('/new', async(req, res) => {
   const {
     projectLeadId,
@@ -64,7 +64,7 @@ router.post('/new', async(req, res) => {
       })
       .then(data => {
         res.set('Access-Control-Allow-Origin','*');
-        console.log("project 1:",data.dataValues);
+        //console.log("project 1:",data.dataValues);
         res.json(data.dataValues.id)
         skills.map(async (elem) => {
           await Projects_Skills.create({ProjectId: `${data.dataValues.id}`, SkillId: `${elem}`});
