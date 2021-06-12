@@ -22,8 +22,8 @@ const options = [
 
 
 
-export default function Skills(props) {
-  const [skills, setSkills] = useState([])
+export default function Register(props) {
+  const [skills, setSkills] = useState([]);
 
   const currentUser = cookies.get("currentUser");
   const submitSkills = (props) => {

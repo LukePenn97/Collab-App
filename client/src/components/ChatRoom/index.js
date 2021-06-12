@@ -23,7 +23,7 @@ export default function ChatRoom(props) {
   const { messages, sendMessage } = useChat(roomId);
   // Creates a websocket and manages messaging
   const [newMessage, setNewMessage] = React.useState(""); // Message to be sent
-
+  
   const handleNewMessageChange = (event) => {
     setNewMessage(event.target.value);
     //   };
@@ -32,23 +32,38 @@ export default function ChatRoom(props) {
     sendMessage(newMessage);
     setNewMessage("");
   };
+  
+  
+  messages.map( msg => {
+    const sender = findUserById(parseInt(msg.senderId), props.users)
+    return msg.name = sender.firstName +" "+ sender.lastName
+  })
+  
+  const roomMember = props.project.project_users
 
+  
+
+  // console.log("msg!!!!!!!!!!!!",messages)
   return (
     <div className="chat-room-container">
       <h1 className="room-name">Room: {roomId}</h1>
+      <h3>Talk to:</h3>
+      {roomMember.map(member => (
+        <p>{member.firstName} {member.lastName}</p>
+      ))}
       <div className="messages-container">
-        <ol className="messages-list">
+        <ul className="messages-list">
           {messages.map((message, i) => (
             <li
               key={i}
               className={`message-item ${
                 message.ownedByCurrentUser ? "my-message" : "received-message"
               }`}
-            >
+            > {message.name}: 
               {message.body}
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
       <textarea
         value={newMessage}

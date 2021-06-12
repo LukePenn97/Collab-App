@@ -22,7 +22,7 @@ import { filterProjectsBySkills } from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
 
-import Cookies from "universal-cookie";
+
 
 const cookies = new Cookies();
 
@@ -73,7 +73,11 @@ function App() {
   }
 
   function backToHome() {
-    transition(DISPLAY);
+    // return  axios.get("http://localhost:5000/projects")
+    //   .then(body => {
+    //     setState(prev => ({...prev, matchedProjects: body.data} ))
+    //   })
+        transition(DISPLAY);
   }
   function pickAProject(project){
     setProject(project)
@@ -146,6 +150,7 @@ function App() {
         {mode === DISPLAY && 
         <Display 
         user = {state.user}
+        currentUser = {state.user}
         project = {state.project}
         projects={state.matchedProjects} 
         users = {state.users}
@@ -157,14 +162,16 @@ function App() {
         {mode === MATCH && <MatchProject 
         user = {state.user}
         users = {state.users}
+        currentUser = {state.user}
         project = {state.project}
-        projects={state.projects}
+        projects={state.matchProjects}
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
         />}
         {mode === DETAIL && <ProjectDetail
         user = {state.user} 
         users = {state.users}
+        currentUser = {state.user}
         project={state.project}
         projects={state.projects}  
         roomName = {state.roomName}
@@ -175,6 +182,7 @@ function App() {
         {mode === CHAT && <ChatRoom 
         user = {state.user}
         users = {state.users}
+        currentUser = {state.user}
         project={state.project}
         projects={state.projects}
         roomName = {state.roomName}
@@ -183,6 +191,7 @@ function App() {
         {mode === PROFILE && <Profile
         user = {state.user}
         users = {state.users}
+        currentUser = {state.user}
         project={state.project}
         projects={state.projects}
         pickAProject = {pickAProject}
