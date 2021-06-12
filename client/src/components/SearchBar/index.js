@@ -12,12 +12,12 @@ export default function SearchBar(props) {
     const url = `http://localhost:5000/projects/search`
     return axios.post(url, {"keyword": keyword})
       .then((body) => {
-        console.log("BODYODYODYODY:", body.data)
+        // console.log("BODYODYODYODY:", body.data)
         props.setProjects(body.data)
-        console.log("SKILLS:", props.skills())
+        // console.log("SKILLS:", props.skills())
         let filteredProjects = props.filterProjectsBySkills(props.skills(), body.data)
         props.setMatchedProjects(filteredProjects)
-        console.log("Projects in search:", props.projects)
+        // console.log("Projects in search:", props.projects)
       })
   }
 

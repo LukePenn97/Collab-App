@@ -6,7 +6,11 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 export default function NavBar(props) {
+  const isLoggedIn = cookies.get("currentUser");
 
+  const logout = () => {
+    cookies.remove("currentUser");
+  };
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -56,19 +60,7 @@ export default function NavBar(props) {
               </span>
             )}
           </ul>
-          <div class="d-flex">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              id="searchbar"
-              onChange={onKeywordChanged}
-            ></input>
-            <button class="btn btn-outline-success" onClick={submitKeyword}>
-              Search
-            </button>
-          </div>
+          
         </div>
       </div>
     </nav>
