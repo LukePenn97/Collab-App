@@ -38,17 +38,22 @@ Project.findByPk(req.params.id)
 
 
 //Post (create) new project
-router.post('/', async(req, res) => {
-  const { name,
+router.post('/new', async(req, res) => {
+  const {
+    projectLeadId,
+    name,
     description,
+    skills,
     url,
     imgUrl,
     deadline,
     startDate,
     endDate
-  } = req.body
-  try {
-      const project = await Project.create({
+  } = req.body.projects;
+  res.set('Access-Control-Allow-Origin','*');
+  Promise.all(
+      await Project.create({
+        projectLeadId,
         name,
         description,
         url,
@@ -57,11 +62,21 @@ router.post('/', async(req, res) => {
         startDate,
         endDate
       })
-      return res.json(project)
-  } catch (err) {
+      .then(data => {
+        res.set('Access-Control-Allow-Origin','*');
+        console.log("project 1:",data.dataValues);
+        res.json(data.dataValues.id)
+        skills.map(async (elem) => {
+          await Projects_Skills.create({ProjectId: `${data.dataValues.id}`, SkillId: `${elem}`});
+        })
+      })
+  ).then((data) => {
+    res.sendStatus(200)
+  })
+    .catch (err => {
       console.log(err)
       return res.status(500).json(err);
-  }
+  })
 });
 
 //add user to project
@@ -82,7 +97,6 @@ router.post('/:id/adduser', async(req, res) => {
 
 //patch (update) project's skills.
 router.post('/:id/addskills', async(req, res) => {
-console.log("it's meeeee")
   const myItems = req.body;
   Promise.all(
     myItems.map(async (elem) => {
