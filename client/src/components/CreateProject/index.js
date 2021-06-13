@@ -13,6 +13,7 @@ import Button from "../Button";
 
 // creat project initiation;
   const cookies = new Cookies();
+  const currentUser = cookies.get("currentUser");
   const options = [
     { key: "skillId1", value: 1, label: 'Javascript', isFixed: true },
     { key: "skillId2", value: 2, label: 'React', isFixed: true},
@@ -22,7 +23,7 @@ import Button from "../Button";
   ];
   const initialValues = {
     id: 0,
-    projectLeadId: 1,
+    projectLeadId: currentUser,
     name: "",
     description: "",
     skills: [],
@@ -35,17 +36,16 @@ import Button from "../Button";
 
 export default function CreateProject(props) {
   const [project, setProject] = useState(initialValues);
-    const currentUser = cookies.get("currentUser");
 
     // Final submit handler
     //(axios returns a complete project object with the id of database and ubdates the state)
     //skills will be inserted into the projects_skills table through the backend route
     //new project available through the state:project
     const submitProject = () => {
-      setProject({
-        ...project,
-        projectLeadId: currentUser
-      });
+      // setProject({
+      //   ...project,
+      //   projectLeadId: currentUser
+      // });
       const url = `http://localhost:5000/projects/new`
       return axios.post(url, {"projects": project})
         .then((data) => {
