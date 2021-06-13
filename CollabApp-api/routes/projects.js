@@ -7,8 +7,6 @@ Project.findAll({
   include: ["project_users", "project_skills", "project_messages"]})
   .then(projects => {
 
-    // console.log("Projects:", projects);
-    // console.log("hiiiiiiiiii")
     res.set('Access-Control-Allow-Origin','*');
     res.json(projects);
   })
@@ -66,7 +64,7 @@ router.post('/new', async(req, res) => {
       })
       .then(data => {
         res.set('Access-Control-Allow-Origin','*');
-        //console.log("project 1:",data.dataValues);
+        console.log("project 1:",data.dataValues);
         res.json(data.dataValues.id)
         skills.map(async (elem) => {
           await Projects_Skills.create({ProjectId: `${data.dataValues.id}`, SkillId: `${elem}`});

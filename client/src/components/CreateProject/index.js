@@ -1,6 +1,6 @@
-
 import React, {useState} from "react";
 import Select from 'react-select';
+import { Redirect } from 'react-router'
 import axios from 'axios';
 import Cookies from "universal-cookie";
 import {
@@ -9,7 +9,8 @@ import {
     Textarea,
     Checkbox,
   } from '@rebass/forms'
-import Button from "../Button";
+import StateManager from "react-select";
+
 
 // creat project initiation;
   const cookies = new Cookies();
@@ -23,7 +24,7 @@ import Button from "../Button";
   ];
   const initialValues = {
     id: 0,
-    projectLeadId: currentUser,
+    projectLeadId: Number(currentUser),
     name: "",
     description: "",
     skills: [],
@@ -35,33 +36,49 @@ import Button from "../Button";
   };
 
 export default function CreateProject(props) {
-  const [project, setProject] = useState(initialValues);
+  const [submitted, setSubmitted] = useState(false);
+  const [newProject, setNewProject] = useState(initialValues);
 
     // Final submit handler
     //(axios returns a complete project object with the id of database and ubdates the state)
     //skills will be inserted into the projects_skills table through the backend route
     //new project available through the state:project
-    const submitProject = () => {
-      // setProject({
-      //   ...project,
-      //   projectLeadId: currentUser
-      // });
+    const submitNewProject = () => {
+
       const url = `http://localhost:5000/projects/new`
-      return axios.post(url, {"projects": project})
+      return axios.post(url, {"projects": newProject})
         .then((data) => {
-          // props.pickAProject(data)
-          setProject({
-            ...project,
-            id: data.data
-          });
+          newProject.id = data.data;
+          const updateProject = props.projects.push(newProject);
+          props.setProjects(updateProject);
+          const myProject = props.projects.find(project => project.id === data.data);
+          //console.log(myProject, newProject);
+          props.pickAProject(myProject);
+          setSubmitted(true);
         })
+        .catch(err => console.log(err))
+      }
+      // if (submitted) {
+      //   return props.pickAProject(newProject)
+      //   return <Redirect push to={{
+      //     pathname: `/`,
+      //     // pathname: `/${newProject.id}/findUsers`,
+      //     // state: {data: newProject}
+      //   }}
+      //   />
+      // }
+      if (currentUser === "undefind") {
+        return <Redirect push to={{
+          pathname: `/register`,
+        }}
+        />
       }
       // Change handler for all inputs except skills
       const handleInputChange = (e) => {
         e.preventDefault()
         const { name, value } = e.target;
-        setProject({
-          ...project,
+        setNewProject({
+          ...newProject,
           [name]: value,
         });
       };
@@ -71,107 +88,105 @@ export default function CreateProject(props) {
         for (const elem of e) {
           _skills.push(elem.value)
         }
-        setProject(prev => ({
+        setNewProject(prev => ({
           ...prev,
           skills: _skills
         }))
       }
   return (
+
     <article>
 
     <h2>--------------------Create Project-----------------</h2>
-
-    <box
-    as='form'
-    py={3}>
-    <flex mx={-2} mb={3}>
+    <box as='form' py={3}>
+      <flex mx={-2} mb={3}>
         <box width={1/2} px={2}>
-        <label htmlFor='Title'>Name</label><br /><br />
-        <Input
+          <label htmlFor='Title'>Name</label><br /><br />
+          <Input
             id='title'
             type='text'
             name='name'
-            value={project.name}
+            value={newProject.name}
             placeholder='My Project'
             onChange={handleInputChange}
-        />
-        <br /><br />
-        <Label htmlFor='Description'>Description</Label><br />
-        <Textarea
+          />
+          <br /><br />
+          <Label htmlFor='Description'>Description</Label><br />
+          <Textarea
             id='description'
             type='text'
             name='description'
-            value={project.description}
+            value={newProject.description}
             placeholder='My Project description'
             onChange={handleInputChange}
             rows="4" cols="50"
-        /><br />
+          /><br />
         <box width={1/2} px={2}>
-        <label htmlFor='skills'><strong>Required Skills </strong></label>
-        <Select onChange={onSkillsChanged}
-          isMulti
+          <label htmlFor='skills'><strong>Required Skills </strong></label>
+          <Select onChange={onSkillsChanged}
+            isMulti
 
-          name="project.skills"
-          options={options}
-          className="basic-multi-select"
-          classNamePrefix="select"
-          >
-        {options.map((option) => (
-          <option key={option.key} value={option.value}>{option.label}</option>
-        ))}
-        </Select>
+            name="project.skills"
+            options={options}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            >
+          {options.map((option) => (
+            <option key={option.key} value={option.value}>{option.label}</option>
+          ))}
+          </Select>
         </box><br /><br />
-        <label htmlFor='Title'>URL</label><br /><br />
+        <label htmlFor='URL'>URL</label><br /><br />
         <Input
             id='URL'
             type='text'
             name='url'
-            value={project.url}
+            value={newProject.url}
             placeholder='My Project URL'
             onChange={handleInputChange}
         />
         <br />
-        <label htmlFor='Title'>Image URL</label><br /><br />
+        <label htmlFor='imageUrl'>Image URL</label><br /><br />
         <Input
             id='ImgURL'
             type='text'
             name='imgUrl'
-            value={project.umageUrl}
+            value={newProject.umageUrl}
             placeholder='My Project Image URL'
             onChange={handleInputChange}
         />
         <br />
-        <label htmlFor='Title'>Deadline</label><br /><br />
+        <label htmlFor='deadLine'>Deadline</label><br /><br />
         <Input
             id='Deadline'
             type='date'
             name='deadline'
-            value={project.deadline}
+            value={newProject.deadline}
             placeholder='My Project deadline'
             onChange={handleInputChange}
         />
         <br />
-        <label htmlFor='Title'>Start Date</label><br /><br />
+        <label htmlFor='startDate'>Start Date</label><br /><br />
         <Input
             id='startDate'
             type='date'
             name='startDate'
-            value={project.startDate}
+            value={newProject.startDate}
             placeholder='My Project Start Date'
             onChange={handleInputChange}
         />
         <br />
-        <label htmlFor='Title'>End Date</label><br /><br />
+        <label htmlFor='endDate'>End Date</label><br /><br />
         <Input
             id='endDate'
             type='date'
             name='endDate'
-            value={project.endDate}
+            value={newProject.endDate}
             placeholder='My Project End Date'
             onChange={handleInputChange}
         />
         <br /><br />
-        </box><br />
+        </box>
         </flex>
         <flex mx={-2} flexWrap='wrap'>
             <Label width={[1/2, 1/4]} p={2}>
@@ -183,10 +198,10 @@ export default function CreateProject(props) {
             </Label>
             <box px={2} ml='auto'><br /><br />
             <button
-               onClick={submitProject}>Register</button>
+              onClick={submitNewProject}>Register</button>
             </box>
         </flex>
-        </box>
+      </box>
     </article>
   )
 }
