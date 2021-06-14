@@ -2,7 +2,7 @@
 
 const userSkills = []
 
-for (let i = 1; i <= 200; i++) {
+for (let i = 1; i <= 250; i++) {
   userSkills.push({
     UserId: i,
     SkillId: Math.ceil(Math.random() * 5),
