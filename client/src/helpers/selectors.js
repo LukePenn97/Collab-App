@@ -27,25 +27,33 @@ const filterProjectsBySkills = (skills, projects) => {
   })
 }
 
-const findMentors = (users) => {
+const userHasSkill = (user, skills) => {
+  if (skills.length < 1) {
+    return true;
+  }
+  for (const skill of user.user_skills) {
+    if (skills.includes(skill.id)) {
+      console.log("Mentor",user.firstName,"has skill",skill.name)
+      return true;
+    }
+  }
+  console.log("Mentor",user.firstName,"does not have any of",skills)
+  return false;
+}
+
+const findMentors = (users, skills) => {
   const mentors = []
   for (const user of users) {
-    if (user.is_mentor) {
+    if (user.is_mentor && userHasSkill(user, skills)) {
       mentors.push(user)
     }
   }
   return mentors;
 }
 
-const getUserSkillsArray = (user_skills) => {
-  const skills = []
-  for (const skill of user_skills) {
-    skills.push(skill.name)
-  }
-  return skills;
-}
+
 // const findMemberByProject = (project) =>{
 //   return 
 // }
 
-module.exports = { findUserById, findAllById, filterProjectsBySkills, findMentors, getUserSkillsArray }
+module.exports = { findUserById, findAllById, filterProjectsBySkills, findMentors, userHasSkill }
