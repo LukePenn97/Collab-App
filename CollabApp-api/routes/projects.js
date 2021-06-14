@@ -43,7 +43,7 @@ router.post('/new', async(req, res) => {
     projectLeadId,
     name,
     description,
-    skills,
+    project_skills,
     url,
     imgUrl,
     deadline,
@@ -66,7 +66,7 @@ router.post('/new', async(req, res) => {
         res.set('Access-Control-Allow-Origin','*');
         console.log("project 1:",data.dataValues);
         res.json(data.dataValues.id)
-        skills.map(async (elem) => {
+        project_skills.map(async (elem) => {
           await Projects_Skills.create({ProjectId: `${data.dataValues.id}`, SkillId: `${elem}`});
         })
       })

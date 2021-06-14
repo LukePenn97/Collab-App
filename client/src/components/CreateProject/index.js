@@ -27,7 +27,9 @@ import StateManager from "react-select";
     projectLeadId: Number(currentUser),
     name: "",
     description: "",
-    skills: [],
+    project_skills: [],
+    project_users: [],
+    project_messages: [],
     url: "",
     imgUrl: "",
     deadline: "",
@@ -52,7 +54,7 @@ export default function CreateProject(props) {
           const updateProject = props.projects.push(newProject);
           props.setProjects(updateProject);
           const myProject = props.projects.find(project => project.id === data.data);
-          //console.log(myProject, newProject);
+          console.log(myProject, newProject);
           props.pickAProject(myProject);
           setSubmitted(true);
         })
@@ -90,7 +92,7 @@ export default function CreateProject(props) {
         }
         setNewProject(prev => ({
           ...prev,
-          skills: _skills
+          project_skills: _skills
         }))
       }
   return (
