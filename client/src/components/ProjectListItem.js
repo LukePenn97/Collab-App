@@ -56,7 +56,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: '0.75rem',
   },
   avatar: {
-    fontFamily: 'Ubuntu',
+    fontFamily: 'Ubuntu, sans-serif',
     fontSize: '0.875rem',
     backgroundColor: '#6d7efc',
   },
