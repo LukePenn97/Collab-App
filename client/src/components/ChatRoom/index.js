@@ -18,7 +18,7 @@ export default function ChatRoom(props) {
   //     </div>
   //   );
   // });
-
+//TODO: button to submit request to join in a group
   const { roomId } = props.roomName;
   const { messages, sendMessage } = useChat(roomId);
   // Creates a websocket and manages messaging

@@ -118,6 +118,7 @@ function App() {
     console.log("newSkills in skillFilter",newSkills)
     //console.log("filteredProjects in skillFilter",filteredProjects)
     setState(prev=>({...prev, skills: newSkills, matchedProjects: filteredProjects}))
+    transition(DISPLAY)
   }
 
   function autoMatch(skills) {
@@ -178,6 +179,9 @@ function App() {
         pickAProject = {pickAProject}
         chatToAGroup = {chatToAGroup}
         pickAUser = {pickAUser}
+        setState = {setState}
+        setProjects ={setProjects}
+        setProject ={setProject}
         />}
         {mode === CHAT && <ChatRoom 
         user = {state.user}
