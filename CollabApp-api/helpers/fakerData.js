@@ -34,9 +34,19 @@ const fakerData = {
       updatedAt: new Date()
     }
   },
-  goalData: () => {
-
+  goalData: (maxProjects) => {
+    return {
+      ProjectId: Math.ceil(Math.random() * maxProjects),
+      name: faker.git.commitMessage(),
+      description: faker.company.bs(),
+      startDate: faker.date.recent(),
+      createdAt: faker.date.recent(),
+      isComplete: false,
+      updatedAt: new Date(),
+      deadline: faker.date.recent()
+    }
   },
+
   messageData: (maxUsers, maxProjects) => {
     return {
       UserId: Math.ceil(Math.random() * maxUsers),

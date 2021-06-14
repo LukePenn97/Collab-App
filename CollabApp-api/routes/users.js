@@ -14,7 +14,7 @@ User.findAll({include: ["user_skills", "user_messages"]})
 
 //get user's skills by ID
 router.get('/:id/skills', (req, res) =>
-Users_Skills.findAll({include: Skill, where: {userId: req.params.id}})
+Users_Skills.findAll({ include: Skill, where: {UserId: req.params.id}})
   .then(skills => {
     // console.log("Users:", skills.dataValues);
     return res.json(skills);

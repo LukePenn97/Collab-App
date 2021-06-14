@@ -14,6 +14,7 @@ import Button from "./Button";
 import ChatRoom from "./ChatRoom";
 import Profile from "./Profile";
 import Register from "./Register";
+import Login from "./Login";
 import Skills from "./Skills";
 import CreateProject from "./CreateProject";
 import SkillList from "./SkillList";
@@ -28,7 +29,7 @@ const cookies = new Cookies();
 
 
 function App() {
-  //set the initial state 
+  //set the initial state
   const {
     state,
     setProject,
@@ -44,13 +45,14 @@ function App() {
 
 
 
-//modes to navigate the components 
+//modes to navigate the components
   const DISPLAY = "DISPLAY";
   const MATCH = "MATCH";
   const DETAIL = "DETAIL";
   const CHAT = "CHAT";
   const PROFILE = "PROFILE";
   const REGISTER = "REGISTER";
+  const LOGIN = "LOGIN";
   const SKILLS = "SKILLS";
   const CREATE = "CREATE";
 
@@ -73,11 +75,13 @@ function App() {
   }
 
   function backToHome() {
-    // return  axios.get("http://localhost:5000/projects")
-    //   .then(body => {
-    //     setState(prev => ({...prev, matchedProjects: body.data} ))
-    //   })
         transition(DISPLAY);
+  }
+  function reloadAllProjects(){
+    return  axios.get("http://localhost:5000/projects")
+      .then(body => {
+        setState(prev => ({...prev, matchedProjects: body.data} ))
+      })
   }
   function pickAProject(project){
     setProject(project)
@@ -96,6 +100,9 @@ function App() {
   }
   function registration(){
     transition(REGISTER)
+  }
+  function login(){
+    transition(LOGIN)
   }
   function pickSkills(user){
     // setUser(user)
@@ -118,6 +125,7 @@ function App() {
     console.log("newSkills in skillFilter",newSkills)
     //console.log("filteredProjects in skillFilter",filteredProjects)
     setState(prev=>({...prev, skills: newSkills, matchedProjects: filteredProjects}))
+    transition(DISPLAY)
   }
 
   function autoMatch(skills) {
@@ -130,7 +138,7 @@ function App() {
     <main>
       <section>
         <div>
-          <NavBar users={state.users} userId={cookies.get("currentUser")} backToHome={backToHome} registration={registration} createNewProject={createNewProject} autoMatch={autoMatch}/>
+          <NavBar users={state.users} userId={cookies.get("currentUser")} backToHome={backToHome} registration={registration} login={login} createNewProject={createNewProject} autoMatch={autoMatch}/>
         </div>
       </section>
       <div class="container">
@@ -147,19 +155,19 @@ function App() {
         </div>}
       </div>
       <section>
-        {mode === DISPLAY && 
-        <Display 
+        {mode === DISPLAY &&
+        <Display
         user = {state.user}
         currentUser = {state.user}
         project = {state.project}
-        projects={state.matchedProjects} 
+        projects={state.matchedProjects}
         users = {state.users}
         // roomName = {state.roomName}
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
         createNewProject = {createNewProject}
         /> }
-        {mode === MATCH && <MatchProject 
+        {mode === MATCH && <MatchProject
         user = {state.user}
         users = {state.users}
         currentUser = {state.user}
@@ -169,17 +177,20 @@ function App() {
         pickAUser = {pickAUser}
         />}
         {mode === DETAIL && <ProjectDetail
-        user = {state.user} 
+        user = {state.user}
         users = {state.users}
         currentUser = {state.user}
         project={state.project}
-        projects={state.projects}  
+        projects={state.projects}
         roomName = {state.roomName}
         pickAProject = {pickAProject}
         chatToAGroup = {chatToAGroup}
         pickAUser = {pickAUser}
+        setState = {setState}
+        setProjects ={setProjects}
+        setProject ={setProject}
         />}
-        {mode === CHAT && <ChatRoom 
+        {mode === CHAT && <ChatRoom
         user = {state.user}
         users = {state.users}
         currentUser = {state.user}
@@ -206,6 +217,15 @@ function App() {
         setUsers={setUsers}
         pickSkills = {pickSkills}
         />}
+        {mode === LOGIN && <Login
+        users = {state.users}
+        // project={state.project}
+        // projects={state.projects}
+        // pickAProject = {pickAProject}
+        // pickAUser = {pickAUser}
+        // setUsers={setUsers}
+        pickSkills = {pickSkills}
+        />}
         {mode === SKILLS && <Skills
         user = {state.user}
         // project={state.project}
@@ -216,9 +236,9 @@ function App() {
         />}
         {mode === CREATE && <CreateProject
         // user = {state.user}
-        // project={state.project}
-        // projects={state.projects}
-        // pickAProject = {pickAProject}
+        setProjects={setProjects}
+        projects={state.projects}
+        pickAProject = {pickAProject}
         // pickAUser = {pickAUser}
         />}
       </section>
