@@ -18,6 +18,7 @@ export default function ProjectList(props) {
         project_skills={project.project_skills}
         project_messages={project.project_messages}
         project_users={project.project_users}
+        project_goals={project.project_goals}
         pickAProject={props.pickAProject}
         pickAUser={props.pickAUser}
       />

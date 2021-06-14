@@ -41,6 +41,7 @@ const fakerData = {
       description: faker.company.bs(),
       startDate: faker.date.recent(),
       createdAt: faker.date.recent(),
+      isComplete: false,
       updatedAt: new Date(),
       deadline: faker.date.recent()
     }
