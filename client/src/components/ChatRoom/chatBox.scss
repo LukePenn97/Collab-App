@@ -19,7 +19,7 @@ $trans: 0.3s ease;
 
 // body {
 //   /* position: relative; */
-//   background-color: $orange;
+//   // background-color: $orange;
 // }
 
 .title {
@@ -29,13 +29,14 @@ $trans: 0.3s ease;
 }
 
 .wrapper {
-  height: 520px;
-  width: 320px;
+  height: 100%;
+  width: 520px;
   overflow: hidden;
   background-color: white;
   position: fixed;
-  top: 100px;
-  left: 50%;
+  top: 0px;
+  left: 25%;
+  bottom: 10%;
   transform: translateX(-50%);
   
   box-shadow:         0px 3px 3px 0px rgba(50, 50, 50, 0.5);
@@ -80,8 +81,8 @@ $trans: 0.3s ease;
     top: 0;
     z-index: $nav + 10;
 
-    background-color: $red;
-    border-bottom: 3px solid darken($red, 10%);;
+    background-color: $dingy;
+    border-bottom: 3px solid darken($dingy, 10%);;
     color: $white;
 
     -webkit-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.1);
@@ -132,6 +133,7 @@ $trans: 0.3s ease;
         height: $navHeight;
         margin-right: 50px;
         position: relative;
+        border-radius: 50%;
 
         // text-align: center;
         line-height: $navHeight;
@@ -141,6 +143,7 @@ $trans: 0.3s ease;
           position: relative;
           height: $navHeight;
           width: 100%;
+          border-radius: 50%;
 
           text-align: center;
           line-height: $navHeight;
@@ -251,7 +254,7 @@ $trans: 0.3s ease;
     font-weight: 300;
     position: relative;
     /* word-break: break-all; */
-    opacity: 0;
+    // opacity: 0;
     
     &:before {
       content: '';
