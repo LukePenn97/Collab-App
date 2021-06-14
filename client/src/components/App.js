@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 // import { useState, useEffect } from "react";
-// import "./App.css";
+import "./App.css";
 import axios from 'axios';
 import Cookies from "universal-cookie";
 
@@ -114,17 +114,11 @@ function App() {
     transition(DISPLAY)
   }
 
-  function autoMatch(skills) {
-    for (const skill of skills) {
-      skillFilter(skill);
-    }
-  }
-
   return (
     <main>
       <section>
         <div>
-          <NavBar users={state.users} userId={cookies.get("currentUser")} backToHome={backToHome} registration={registration} login={login} createNewProject={createNewProject} autoMatch={autoMatch}/>
+          <NavBar users={state.users} userId={cookies.get("currentUser")} backToHome={backToHome} registration={registration} login={login} createNewProject={createNewProject}/>
         </div>
       </section>
       <div className="container">
@@ -135,11 +129,13 @@ function App() {
             userId={cookies.get("currentUser")}
             skills={state.skills}
             projects={state.projects}
+            skillFilter={skillFilter}
         />}
       </div>
       <div className="container">
         {mode === DISPLAY &&
         <SkillList
+            skills={state.skills}
             pickASkill={skillFilter}
         />}
       </div>

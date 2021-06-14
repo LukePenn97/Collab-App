@@ -19,7 +19,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      name: "SQL",
+      name: "PostgresQL",
       createdAt: new Date(),
       updatedAt: new Date()
     },

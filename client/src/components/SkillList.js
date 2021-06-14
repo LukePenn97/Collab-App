@@ -8,7 +8,7 @@ export default function SkillList(props) {
     { value: 1, label: 'Javascript', isFixed: true },
     { value: 2, label: 'React', isFixed: true},
     { value: 3, label: 'Ruby', isFixed: true },
-    { value: 4, label: 'SQL', isFixed: true },
+    { value: 4, label: 'PostgreSQL', isFixed: true },
     { value: 5, label: 'Express', isFixed: true },
   ];
 
@@ -17,10 +17,11 @@ export default function SkillList(props) {
       <SkillListItem
         skill={skill.value}
         skillName={skill.label}
+        activeSkills={props.skills}
         pickASkill={props.pickASkill}
       />
     );
   });
 
-  return <div className="row">{skillList}</div>;
+  return <div className="col">{skillList}</div>;
 }
