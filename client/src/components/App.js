@@ -18,6 +18,8 @@ import Login from "./Login";
 import Skills from "./Skills";
 import CreateProject from "./CreateProject";
 import SkillList from "./SkillList";
+import SearchBar from "./SearchBar";
+import AutoMatch from "./AutoMatch";
 import { filterProjectsBySkills } from "../helpers/selectors";
 
 import useVisualMode from "../hooks/useVisualMode";
@@ -57,22 +59,6 @@ function App() {
   const CREATE = "CREATE";
 
   const { mode, transition, back } = useVisualMode(DISPLAY);
-
-  const [keyword, setKeyword] = useState([])
-
-  const submitKeyword = () => {
-    const url = `http://localhost:5000/projects/search`
-    return axios.post(url, {"keyword": keyword})
-      .then((body) => {
-        let filteredProjects = filterProjectsBySkills(state.skills, body.data)
-        setState(prev => ({...prev, projects: body.data, matchedProjects: filteredProjects}))
-      })
-  }
-
-  const onKeywordChanged = () => {
-    const _keyword = document.getElementById("searchbar");
-    setKeyword(_keyword.value)
-  }
 
   function backToHome() {
         transition(DISPLAY);
@@ -141,18 +127,29 @@ function App() {
           <NavBar users={state.users} userId={cookies.get("currentUser")} backToHome={backToHome} registration={registration} login={login} createNewProject={createNewProject} autoMatch={autoMatch}/>
         </div>
       </section>
-      <div class="container">
+      <div className="container">
+        {mode === DISPLAY &&
+        <AutoMatch
+            setState={setState}
+            users={state.users}
+            userId={cookies.get("currentUser")}
+            skills={state.skills}
+            projects={state.projects}
+        />}
+      </div>
+      <div className="container">
         {mode === DISPLAY &&
         <SkillList
             pickASkill={skillFilter}
         />}
       </div>
-      <div class="container">
+      <div className="container">
         {mode === DISPLAY &&
-        <div>
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchbar" onChange={onKeywordChanged}></input>
-          <button class="btn btn-outline-success" onClick={submitKeyword}>Search</button>
-        </div>}
+        <SearchBar
+          
+          skills={state.skills}
+          setState={setState}
+        />}
       </div>
       <section>
         {mode === DISPLAY &&
