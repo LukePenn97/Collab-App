@@ -71,7 +71,7 @@ export default function ProjectDetail(props) {
       <div className="App">
       <h3>Select Toppings</h3>
       <ul className="toppings-list">
-        {props.project.project_goals.map((goal, index) => {
+        {props.project.project_goals && props.project.project_goals.map((goal, index) => {
           return (
             <li key={index}>
               <div className="toppings-list-item">
