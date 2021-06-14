@@ -6,6 +6,8 @@ export default function ProjectList(props) {
   // console.log(props.projects)
 
   const projects = props.projects.map((project, index) => {
+
+    
     return (
       <ProjectListItem
         key={index}
