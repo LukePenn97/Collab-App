@@ -3,7 +3,7 @@ import Button from "../Button";
 import ProjectList from "../ProjectList";
 import useChat from "../../hooks/useChat";
 import { findUserById } from "../../helpers/selectors";
-
+import MentorRequest from "../MentorRequest";
 export default function ChatRoom(props) {
   // const messages = props.project.project_messages.map((msg, index) => {
   //   const user = findUserById(msg.UserId, props.users);
@@ -78,6 +78,9 @@ export default function ChatRoom(props) {
         <h2>{props.project.name}</h2>
         <h3 onClick={() => props.pickAUser(props)}>{props.project.lead}</h3>
         <p>{props.project.description}</p>
+        <MentorRequest
+          users={props.users}
+        />
       </div>
     </div>
   );

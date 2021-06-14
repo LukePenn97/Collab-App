@@ -3,8 +3,11 @@
 const fakerData = require('../helpers/fakerData');
 
 const users = [];
-while (users.length < 200) {
+while (users.length <= 200) {
   users.push(fakerData.userData());
+}
+while (users.length < 250) {
+  users.push({...fakerData.userData(), is_mentor: true});
 }
 module.exports = {
   up: (queryInterface, Sequelize) => {

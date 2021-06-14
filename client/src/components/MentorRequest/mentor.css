@@ -1,0 +1,11 @@
+.wrap{
+  /* visibility: hidden; */
+  display:flex;
+  flex-direction:column;
+  height: 500px;
+  width: 400px;
+}
+.box{
+   display: flex; 
+   flex-flow: column;
+}
