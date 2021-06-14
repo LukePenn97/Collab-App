@@ -44,32 +44,47 @@ router.get("/:id", (req, res) =>
 //   .catch(err => console.log("Error:"+ err))
 // );
 
-//Post (create) new project
-router.post("/", async (req, res) => {
+
+//Post route for createing new project and inserting the projects_skills table
+router.post('/new', async(req, res) => {
   const {
+    projectLeadId,
     name,
     description,
+    project_skills,
     url,
     imgUrl,
     deadline,
     startDate,
     endDate
-  } = req.body;
-  try {
-    const project = await Project.create({
-      name,
-      description,
-      url,
-      imgUrl,
-      deadline,
-      startDate,
-      endDate,
-    });
-    return res.json(project);
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json(err);
-  }
+  } = req.body.projects;
+  res.set('Access-Control-Allow-Origin','*');
+  Promise.all(
+      await Project.create({
+        projectLeadId,
+        name,
+        description,
+        url,
+        imgUrl,
+        deadline,
+        startDate,
+        endDate
+      })
+      .then(data => {
+        res.set('Access-Control-Allow-Origin','*');
+        console.log("project 1:",data.dataValues);
+        res.json(data.dataValues.id)
+        project_skills.map(async (elem) => {
+          await Projects_Skills.create({ProjectId: `${data.dataValues.id}`, SkillId: `${elem}`});
+        })
+      })
+  ).then((data) => {
+    res.sendStatus(200)
+  })
+    .catch (err => {
+      console.log(err)
+      return res.status(500).json(err);
+  })
 });
 
 router.post("/search", async (req, res) => {

@@ -57,7 +57,7 @@ export default function NavBar(props) {
             <li class="nav-item">
               <a class="nav-link" onClick={props.createNewProject}>Create A Project</a>
             </li>
-          
+
 
             {isLoggedIn ? (
               <li class="nav-item">
@@ -73,16 +73,16 @@ export default function NavBar(props) {
                   </a>
                 </li>
                 <li>
-                  <a class="nav-link" onClick={props.registration}>
-                    Log in
+                  <a class="nav-link" onClick={props.login}>
+                    Log In
                   </a>
                 </li>
               </span>
             )}
           </ul>
-          
-              
-          
+
+
+
         </div>
       </div>
     </nav>

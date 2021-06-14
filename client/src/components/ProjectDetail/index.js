@@ -8,48 +8,25 @@ import './index.css'
 
 export default function ProjectDetail(props) {
   const projectLead = findUserById(props.project.projectLeadId, props.users);
-  // console.log("lead",projectLead)
   const goalToChange = props.project.project_goals;
   console.log("projectInState",goalToChange)
-  // console.log("projectstate!!!", props.project)
   
-  // const [checkedState, setCheckedState] = useState(
-    //   new Array(goalToChange.length).fill(goalToChange.map(goal => goal.completedAt) ? true : false)
-    // );
-    
-    // const [total, setTotal] = useState(0);
     
     const handleOnChange = (position,goal) => {
-      // const updatedCheckedState = checkedState.map((item, index) =>
-      //   index === position ? !item : item
-      // );
       
-      // setCheckedState(updatedCheckedState);
       const changedGoalItem = {...goal, completedAt: goal.completedAt? null : new Date()}
-      // console.log("item",changedGoalItem)
-      // const changedGoal = goalToChange.map((goal,index) => 
-      //    || goal);
-      // console.log(position)
-      // console.log("beforeChange",goalToChange)
+      
     goalToChange[position] = changedGoalItem;
      const changeProject = {...props.project, project_goals:goalToChange}
-     
-     
-     //  const projectToChange = changeProject;
      const projectToChange = props.project;
      const projectsToChange = props.projects;
-     
-     
      
      axios.patch(`http://localhost:5000/projects/${props.project.id}/${goal.id}`);
      console.log("change",changeProject.project_goals);
      console.log("state",props.project)
      console.log("projects",props.projects)
      
-    props.setState(prev => ({...prev, project:projectToChange, projects: projectsToChange}))
-    // console.log("projectstate", props.project)
-    // props.setProjects(prev => ({...prev}) )
-    
+    props.setState(prev => ({...prev, project:projectToChange, projects: projectsToChange}));
   };
 
 
@@ -78,7 +55,7 @@ export default function ProjectDetail(props) {
       <h1>---------------Project Detail page----------------</h1>
       <h2>{props.project.name}</h2>
       <h3 onClick={() => props.pickAUser(props.project.projectLeadId)}>
-        {`${projectLead.firstName}  
+        {`${projectLead.firstName}
         ${projectLead.lastName}`}
       </h3>
       <p>{props.project.description} </p>
@@ -136,7 +113,7 @@ export default function ProjectDetail(props) {
 {
   /* <h2 onClick={() => props.pickAProject(props)}>{props.name}</h2>
       <h3 onClick={() => props.pickAUser(props.user)}>
-        {`${projectLead.firstName}  
+        {`${projectLead.firstName}
         ${projectLead.lastName}`}
       </h3> */
 }
