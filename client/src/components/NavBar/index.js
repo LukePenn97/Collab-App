@@ -1,6 +1,16 @@
-import React, {useState} from "react";
-import axios from 'axios'
+import React, { useState } from "react";
+import Button from "../Button";
+import axios from "axios";
+import Cookies from "universal-cookie";
 import {findUserById} from '../../helpers/selectors'
+
+const cookies = new Cookies();
+
+
+
+
+
+
 
 export default function NavBar(props) {
   let userSkills = []
@@ -17,6 +27,11 @@ export default function NavBar(props) {
       userSkills = userToShow.user_skills.map((skill)=>skill.id)
     }
   }
+  const isLoggedIn = cookies.get("currentUser");
+
+  const logout = () => {
+    cookies.remove("currentUser");
+  };
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -37,19 +52,37 @@ export default function NavBar(props) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" onClick={()=>props.autoMatch(userSkills)}>Auto Match</a>
+            <a class="nav-link" onClick={()=>props.autoMatch(userSkills)}>Auto Match</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" onClick={props.createNewProject}>Create A Project</a>
             </li>
-          </ul>
-          <div class="d-flex">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          
+
+            {isLoggedIn ? (
               <li class="nav-item">
-                <a class="nav-link" onClick={props.registration}>Register</a>
+                <a class="nav-link" onClick={() => logout()}>
+                  Log out
+                </a>
               </li>
-            </ul>
-          </div>
+            ) : (
+              <span >
+                <li>
+                  <a class="nav-link" onClick={props.registration}>
+                    Register
+                  </a>
+                </li>
+                <li>
+                  <a class="nav-link" onClick={props.registration}>
+                    Log in
+                  </a>
+                </li>
+              </span>
+            )}
+          </ul>
+          
+              
+          
         </div>
       </div>
     </nav>

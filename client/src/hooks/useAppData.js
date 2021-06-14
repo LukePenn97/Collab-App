@@ -28,7 +28,6 @@ export default function useApplicationData() {
         projects: all[0].data,
         matchedProjects: all[0].data,
         users: all[1].data,
-
       }));
     });
   }, []);
