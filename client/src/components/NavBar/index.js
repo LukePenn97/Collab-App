@@ -23,7 +23,7 @@ export default function NavBar(props) {
         userToShow = user
       }
     }
-    if (userToShow) {
+    if (userToShow && userToShow.user_skills) {
       userSkills = userToShow.user_skills.map((skill)=>skill.id)
     }
   }
