@@ -73,11 +73,13 @@ function App() {
   }
 
   function backToHome() {
-    // return  axios.get("http://localhost:5000/projects")
-    //   .then(body => {
-    //     setState(prev => ({...prev, matchedProjects: body.data} ))
-    //   })
         transition(DISPLAY);
+  }
+  function reloadAllProjects(){
+    return  axios.get("http://localhost:5000/projects")
+      .then(body => {
+        setState(prev => ({...prev, matchedProjects: body.data} ))
+      })
   }
   function pickAProject(project){
     setProject(project)
