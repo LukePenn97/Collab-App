@@ -2,52 +2,53 @@ import React, { useState } from "react";
 import Button from "../Button";
 import { findUserById } from "../../helpers/selectors";
 import axios from "axios";
-import { Container } from './Container';
-import './index.css'
+// import { Container } from './Container';
+// import './index.css'
 
 
 export default function ProjectDetail(props) {
   const projectLead = findUserById(props.project.projectLeadId, props.users);
-  const goalToChange = props.project.project_goals;
-  console.log("projectInState",goalToChange)
+
+  // const goalToChange = props.project.project_goals;
+  // console.log("projectInState",goalToChange)
   
     
-    const handleOnChange = (position,goal) => {
+  //   const handleOnChange = (position,goal) => {
       
-      const changedGoalItem = {...goal, completedAt: goal.completedAt? null : new Date()}
+  //     const changedGoalItem = {...goal, completedAt: goal.completedAt? null : new Date()}
       
-    goalToChange[position] = changedGoalItem;
-     const changeProject = {...props.project, project_goals:goalToChange}
-     const projectToChange = props.project;
-     const projectsToChange = props.projects;
+  //   goalToChange[position] = changedGoalItem;
+  //    const changeProject = {...props.project, project_goals:goalToChange}
+  //    const projectToChange = props.project;
+  //    const projectsToChange = props.projects;
      
-     axios.patch(`http://localhost:5000/projects/${props.project.id}/${goal.id}`);
-     console.log("change",changeProject.project_goals);
-     console.log("state",props.project)
-     console.log("projects",props.projects)
+  //    axios.patch(`http://localhost:5000/projects/${props.project.id}/${goal.id}`);
+  //    console.log("change",changeProject.project_goals);
+  //    console.log("state",props.project)
+  //    console.log("projects",props.projects)
      
-    props.setState(prev => ({...prev, project:projectToChange, projects: projectsToChange}));
-  };
+  //   props.setState(prev => ({...prev, project:projectToChange, projects: projectsToChange}));
+  // };
 
 
-  const triggerText = 'Add Goal';
-  const onSubmit = (event) => {
-    event.preventDefault(event);
-    // console.log(event.target.name.value);
-    // console.log(event.target.email.value);
-  return  axios.post(`http://localhost:5000/projects/${props.project.id}/addGoal`,{
-      name:event.target.name.value,
-      description:event.target.description.value,
-      startDate:event.target.startDate.value,
-      deadline:event.target.deadline.value,
-    }).then((body) => {
-      const goalsBeforeUpdate = props.project.project_goals;
-      goalsBeforeUpdate.push(body.data);
-      const projectWithNewGoal = {...props.project, project_goals: goalsBeforeUpdate};
-      const projectsWithNewGoal = props.projects;
-      props.setState(prev => ({...prev,project:projectWithNewGoal,projects:projectsWithNewGoal}));
-    })
-  };
+  // const triggerText = 'Add Goal';
+  // const onSubmit = (event) => {
+  //   event.preventDefault(event);
+  //   // console.log(event.target.name.value);
+  //   // console.log(event.target.email.value);
+  // return  axios.post(`http://localhost:5000/projects/${props.project.id}/addGoal`,{
+  //     name:event.target.name.value,
+  //     description:event.target.description.value,
+  //     startDate:event.target.startDate.value,
+  //     deadline:event.target.deadline.value,
+  //   }).then((body) => {
+  //     const goalsBeforeUpdate = props.project.project_goals;
+  //     goalsBeforeUpdate.push(body.data);
+  //     const projectWithNewGoal = {...props.project, project_goals: goalsBeforeUpdate};
+  //     const projectsWithNewGoal = props.projects;
+  //     props.setState(prev => ({...prev,project:projectWithNewGoal,projects:projectsWithNewGoal}));
+  //   })
+  // };
  
 
   return (
@@ -64,7 +65,7 @@ export default function ProjectDetail(props) {
       alt={props.project.name}
     />
       <Button onClick={()=>props.chatToAGroup(props.project.id)}>chatRoom</Button>
-      <div>
+      {/* <div>
       <h2>-------------------------Goals-----------------------</h2>
 
       </div>
@@ -103,7 +104,7 @@ export default function ProjectDetail(props) {
         <div>
         <Container triggerText={triggerText} onSubmit={onSubmit} />
         </div>
-    </div>
+    </div> */}
   
 
 
