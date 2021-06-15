@@ -195,6 +195,7 @@ function App() {
         projects={state.projects}
         roomName = {state.roomName}
         pickAUser = {pickAUser}
+        setState = {setState}
         />}
         {mode === PROFILE && <Profile
         user = {state.user}
