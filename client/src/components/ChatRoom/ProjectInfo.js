@@ -125,13 +125,14 @@ const ProjectInfo = (props) => {
                             checked={goal.completedAt}
                             onChange={() => handleOnChange(index, goal)}
                           />
-                          <label htmlFor={`custom-checkbox-${index}`}>
+                          {/* <label htmlFor={`custom-checkbox-${index}`}> */}
                             <Typography variant="body1" gutterBottom className={"MuiTypography--subheading"}>
                               {goal.name}
                             </Typography>
-                          </label>
-                        </div>
-                        <div className="right-section">{goal.description}</div>
+                          {/* </label> */}
+                        <Typography variant="body1" gutterBottom className={"MuiTypography--subheading"}>
+                          {goal.description}
+                        </Typography>
                         <Typography variant="body1" gutterBottom className={"MuiTypography--subheading"}>
                           deadline: {goal.deadline}
                         </Typography>
@@ -142,9 +143,10 @@ const ProjectInfo = (props) => {
                             completed at: {JSON.stringify(goal.completedAt)}
                           </Typography>
     
-                          ) : null}
+    ) : null}
                         </div>
                       </div>
+    </div>
                     </div>
                   );
                 })}
@@ -185,7 +187,7 @@ ProjectInfo.getTheme = (muiBaseTheme) => ({
         },
         "& .MuiTypography--subheading": {
           lineHeight: 1.8,
-          
+          marginLeft:muiBaseTheme.spacing.unit
         },
         "& .MuiAvatar-root": {
           display: "inline-block",

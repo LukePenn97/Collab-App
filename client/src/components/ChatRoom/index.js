@@ -59,8 +59,7 @@ export default function ChatRoom(props) {
         <div className="nav" id="nav">
           <div className="default-nav">
             <div className="main-nav">
-              {/* <h1 className="room-name">Room: {roomId}</h1>
-                            <h3>Talk to:</h3> */}
+
               {roomMember.map((member) => (
                 <div className="toggle">
                   <img src={member.photo} className="main-nav-item"></img>
