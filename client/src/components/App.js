@@ -248,15 +248,26 @@ function App(props) {
             />
           )}
           {mode === PROFILE && (
-            <Profile
-              user={state.user}
-              users={state.users}
-              currentUser={state.user}
-              project={state.project}
-              projects={state.projects}
-              pickAProject={pickAProject}
-              pickAUser={pickAUser}
-            />
+            <JssProvider generateClassName={generateClassName}>
+              <MuiThemeProvider
+                theme={createMuiTheme({
+                  typography: {
+                    useNextVariants: true,
+                  },
+                  overrides: Profile.getTheme(muiBaseTheme),
+                })}
+              >
+                <Profile
+                  user={state.user}
+                  users={state.users}
+                  currentUser={state.user}
+                  project={state.project}
+                  projects={state.projects}
+                  pickAProject={pickAProject}
+                  pickAUser={pickAUser}
+                />
+              </MuiThemeProvider>
+            </JssProvider>
           )}
           {mode === REGISTER && (
             <Register
