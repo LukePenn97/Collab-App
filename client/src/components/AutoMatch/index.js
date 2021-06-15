@@ -18,6 +18,6 @@ export default function AutoMatch(props) {
   }
 
   return (
-    <button style={{width: "200px", height: "75px", margin: "25px"}}className="btn btn-outline-success" onClick={()=>autoMatch(currentUserSkills)}>AutoMatch</button>
+    <button style={{width: "200px", height: "75px", margin: "25px"}}className="btn btn-success" onClick={()=>autoMatch(currentUserSkills)}>AutoMatch</button>
   )
 }

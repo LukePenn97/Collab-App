@@ -21,8 +21,7 @@ const useStyles = makeStyles(() => ({
     height: '100%',
     transition: '0.3s',
     position: 'relative',
-    margin: 0,
-    padding: 0,
+
     '&:before': {
       transition: '0.2s',
       position: 'absolute',
@@ -180,7 +179,7 @@ export default function ProjectListItem(props) {
       <NoSsr>
         <GoogleFontLoader fonts={[{ font: 'Ubuntu', weights: [800, 700] }]} />
       </NoSsr>
-      <Grid container spacing={4}>
+      <Grid container spacing={4} justify="center" alignItems="center">
         <Grid item xs={8}>
           <CustomCard
             thumbnail={props.imgUrl}
