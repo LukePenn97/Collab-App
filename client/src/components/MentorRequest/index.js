@@ -61,24 +61,27 @@ export default function MentorRequest(props) {
       )
   }))
   return (
-    <>
+    <div>
     <Button variant="info" onClick={handleShow}>
       View Available Mentors
     </Button>
 
-    <Modal show={show} onHide={handleClose}>
-      <Modal.Header >
-        <Modal.Title>Modal title</Modal.Title>
+    <Modal className="mentormodal" show={show} onHide={handleClose}>
+      <Modal.Header>
+        <Modal.Title>Make A Mentor Request!</Modal.Title>
         
       </Modal.Header>
 
-      <Modal.Body>
-      <p>Choose the skills you need:</p>
-      <SkillList
-
-        pickASkill={handleMentorSkills}
-      />
-      <br></br>
+      <Modal.Body style={{display: "flex"}}>
+        <div>
+          <p>Choose the skills you need:</p>
+          <SkillList
+            allSkills={props.allSkills}
+            skills={skills}
+            pickASkill={handleMentorSkills}
+          />
+          <br></br>
+        </div>
         <div>
           <div className="form-group">
             <label for="description">Write a description of your problem</label>
@@ -99,7 +102,7 @@ export default function MentorRequest(props) {
       </Modal.Footer>
     </Modal>
 
-    </>
+    </div>
 
   );
 }

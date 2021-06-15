@@ -1,6 +1,6 @@
 import React from "react";
 import { findUserById } from "../helpers/selectors"
-// const classnames = require('classnames');
+import Tooltip from '@material-ui/core/Tooltip';
 
 import GoogleFontLoader from 'react-google-font-loader';
 import NoSsr from '@material-ui/core/NoSsr';
@@ -14,12 +14,14 @@ import { Column, Row, Item } from '@mui-treasury/components/flex';
 import { Info, InfoSubtitle, InfoTitle } from '@mui-treasury/components/info';
 import { useApexInfoStyles } from '@mui-treasury/styles/info/apex';
 import { useGraphicBtnStyles } from '@mui-treasury/styles/button/graphic';
+import SkillList from "./SkillList";
 
 const useStyles = makeStyles(() => ({
   root: {
     height: '100%',
     transition: '0.3s',
     position: 'relative',
+
     '&:before': {
       transition: '0.2s',
       position: 'absolute',
@@ -76,6 +78,7 @@ const CustomCard = ({
   subtitle,
   description,
   users,
+  project_skills,
   joined = false,
 }) => {
   const styles = useStyles();
@@ -83,13 +86,23 @@ const CustomCard = ({
   return (
     <div className={styles.root}>
       <Column className={styles.card}>
+        
         <Row p={2} gap={2}>
+          
           <Avatar className={styles.logo} variant={'rounded'} src={thumbnail} />
           <Info position={'middle'} useStyles={useApexInfoStyles}>
-            <InfoTitle><h2>{title}</h2></InfoTitle>
-            <InfoSubtitle onClick={subtitle}><h5 color="purple[500]"> Created by: {creator}</h5></InfoSubtitle>
+            <InfoTitle><a style={{fontSize: 40, color: "black"}}>{title}</a></InfoTitle>
+            <InfoSubtitle onClick={subtitle} style={{fontSize: 25, color: "black"}}>Created by: <a style={{fontSize: 25, color: "black"}}>{creator}</a></InfoSubtitle>
           </Info>
+          <Item position={'right'}>
+                <SkillList
+                  allSkills={project_skills}
+                  skills={[]}
+                  pickASkill={()=>{}}
+                />
+          </Item>
         </Row>
+        
         <Box
           pb={1}
           px={2}
@@ -112,43 +125,53 @@ const CustomCard = ({
           </Item>
           <Item position={'middle-right'}>
             <Button
-              className={styles.join}
-              classes={btnStyles}
-              variant={'contained'}
+              // className={styles.join}
+              // classes={btnStyles}
+              variant={'outlined'}
               color={'primary'}
               disableRipple
+              disableElevation
             >
               {joined ? 'Leave group' : 'Join group'}
             </Button>
           </Item>
           <Item position={'middle-right'}>
             <Button
-              className={styles.join}
-              classes={btnStyles}
-              variant={'contained'}
+              // className={styles.join}
+              // classes={btnStyles}
+              variant={'outlined'}
               color={'primary'}
               disableRipple
               onClick={titleAction}
+              disableElevation
               >
                 Learn More
             </Button>
           </Item>
+          
         </Row>
       </Column>
     </div>
   );
 };
 export default function ProjectListItem(props) {
-  // const itemClass = classnames("day-list__item", {
-  //   "day-list__item--selected": props.selected, "day-list__item--full": props.spots === 0
-  // })
-
-
+ 
   const projectLead = findUserById(props.projectLeadId, props.users);
-  // console.log(projectLead)
 
   const skills = [];
   props.project_skills.map(skill => skills.push(skill.name))
+  const icons = props.project_skills.map(skill => {
+    return (
+      // <Box display="flex">
+      <Tooltip title={skill.name} placement="top">
+        <i 
+        style={{fontSize: 40}} 
+        className={skill.iconClass}
+        >
+        </i>
+      </Tooltip>
+    )
+  })
 
 
   return (
@@ -156,8 +179,8 @@ export default function ProjectListItem(props) {
       <NoSsr>
         <GoogleFontLoader fonts={[{ font: 'Ubuntu', weights: [800, 700] }]} />
       </NoSsr>
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={10} lg={4}>
+      <Grid container spacing={4} justify="center" alignItems="center">
+        <Grid item xs={8}>
           <CustomCard
             thumbnail={props.imgUrl}
             title={props.name}
@@ -166,6 +189,7 @@ export default function ProjectListItem(props) {
             subtitle={() => props.pickAUser(props.projectLeadId)}
             description={props.description}
             users={props.project_users}
+            project_skills={props.project_skills}
           />
         </Grid>
       </Grid>
