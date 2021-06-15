@@ -17,10 +17,10 @@ $trans: 0.3s ease;
   box-sizing: border-box;
 }
 
-// body {
-//   /* position: relative; */
-//   // background-color: $orange;
-// }
+body {
+  // position: fixed; 
+  // background-color: $orange;
+}
 
 .title {
   color: $white;
@@ -55,7 +55,7 @@ $trans: 0.3s ease;
       width: 0 !important
     }
     
-    .content {
+    .chatContent {
       padding: ($navHeight - ($navHeight/1.5)) / 2;
       position: relative;
       margin-bottom: $navHeight/2;

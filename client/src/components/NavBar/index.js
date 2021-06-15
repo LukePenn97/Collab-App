@@ -31,7 +31,7 @@ export default function NavBar(props) {
     cookies.remove("currentUser");
   };
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" style={{"background-color":" #e3f2fd"}}>
       <div class="container-fluid">
         <a class="navbar-brand" onClick={props.backToHome}>
           CollabApp
