@@ -5,13 +5,13 @@ import "devicon/devicon.min.css"
 
 export default function SkillListItem(props) {
   let isActive = props.activeSkills.includes(props.skill)
-  const style = isActive ? { border: '1px solid #021a40' } : {};
+  const style = isActive ? { padding: "3px", border: '2px solid green', borderRadius: "5px" } : {margin: "5px"};
   //console.log(`devicon-${props.skillName.toLowerCase()}-original`);
   return (
       <Box display="flex">
         <Tooltip title={props.skillName} placement="top">
           <i 
-          style={{margin: "3px", fontSize: 40, ...style}} 
+          style={{fontSize: 40, ...style}} 
           className={props.iconClass}
           onClick={() => {props.pickASkill([props.skill], false)}}>
           </i>

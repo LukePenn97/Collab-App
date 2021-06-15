@@ -7,6 +7,7 @@ import Avatar from '@material-ui/core/Avatar'
 
 import Display from "./Display";
 import NavBar from "./NavBar";
+import Header from "./Header";
 
 import MatchProject from "./MatchProject";
 import ProjectDetail from "./ProjectDetail";
@@ -132,7 +133,10 @@ function App(props) {
       <div>
         <NavBar users={state.users} userId={cookies.get("currentUser")} backToHome={backToHome} registration={registration} login={login} createNewProject={createNewProject}/>
       </div>
-      <section id="mainsection" >
+      <div>
+        <Header/>
+      </div>
+      
         {mode === DISPLAY &&
         <div id="sidebar">
           <h4>Filter By Skills</h4>
@@ -143,7 +147,7 @@ function App(props) {
           /></div>
         </div>
         }
-
+      <section id="mainsection" >
       <section id="content">
         <div style={{display: "flex"}}>
         <div className="container">
