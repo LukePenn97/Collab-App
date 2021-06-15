@@ -25,7 +25,7 @@ const fakerData = {
       projects.push({
         projectLeadId: i,
         name: faker.company.catchPhraseAdjective() + " " + faker.company.catchPhraseNoun(),
-        description: faker.company.catchPhrase(),
+        description: faker.company.catchPhrase() + ", " + faker.company.catchPhrase() + ", " + faker.company.catchPhrase() + ".",
         imgUrl: faker.image.abstract(400, 200, true),
         deadline: faker.date.soon(),
         startDate: faker.date.recent(),

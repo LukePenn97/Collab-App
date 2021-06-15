@@ -125,6 +125,8 @@ export default function ChatRoom(props) {
         <h3 onClick={() => props.pickAUser(props)}>{props.project.lead}</h3>
         <p>{props.project.description}</p>
         <MentorRequest
+          allSkills={props.allSkills}
+          skills={props.skills}
           users={props.users}
         />
       </div>

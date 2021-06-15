@@ -21,7 +21,7 @@ import SkillList from "./SkillList";
 import SearchBar from "./SearchBar";
 import AutoMatch from "./AutoMatch";
 import { filterProjectsBySkills } from "../helpers/selectors";
-import StickyBox from "react-sticky-box";
+
 
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
@@ -157,15 +157,16 @@ function App(props) {
               skillFilter={skillFilter}
           />}
         </div>
-        <div className="container">
-          {mode === DISPLAY &&
-          <SearchBar
+          <div className="container">
+            {mode === DISPLAY &&
+            <SearchBar
+              
+              skills={state.skills}
+              setState={setState}
+            />}
+          </div>
+        </div>
             
-            skills={state.skills}
-            setState={setState}
-          />}
-        </div>
-        </div>
         {mode === DISPLAY &&
         <Display
         user = {state.user}
@@ -173,6 +174,7 @@ function App(props) {
         project = {state.project}
         projects={state.matchedProjects}
         users = {state.users}
+        // pickASkill={skillFilter}
         // roomName = {state.roomName}
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
@@ -210,6 +212,8 @@ function App(props) {
         projects={state.projects}
         roomName = {state.roomName}
         pickAUser = {pickAUser}
+        allSkills={state.allSkills}
+        skills={state.skills}
         />}
         {mode === PROFILE && <Profile
         user = {state.user}
@@ -243,6 +247,7 @@ function App(props) {
         // project={state.project}
         // projects={state.projects}
         // pickAProject = {pickAProject}
+        allSkills={state.allSkills}
         pickAUser = {pickAUser}
         backToHome = {backToHome}
         />}
@@ -258,7 +263,6 @@ function App(props) {
       <section>
       </section>
       </section>
-        <h1>footer</h1>
     </main>
     
   );

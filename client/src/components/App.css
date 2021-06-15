@@ -3,6 +3,11 @@ main {
 }
 #content {
   margin-left: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid green
 }
 #mainsection {
   display: flex;
