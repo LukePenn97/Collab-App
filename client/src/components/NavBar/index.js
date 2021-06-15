@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Button from "../Button";
-import axios from "axios";
 import Cookies from "universal-cookie";
 import {findUserById} from '../../helpers/selectors'
 
@@ -51,9 +49,7 @@ export default function NavBar(props) {
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-            <a class="nav-link" onClick={()=>props.autoMatch(userSkills)}>Auto Match</a>
-            </li>
+            
             <li class="nav-item">
               <a class="nav-link" onClick={props.createNewProject}>Create A Project</a>
             </li>
@@ -66,7 +62,7 @@ export default function NavBar(props) {
                 </a>
               </li>
             ) : (
-              <span >
+              <div style={{display: "flex"}}>
                 <li>
                   <a class="nav-link" onClick={props.registration}>
                     Register
@@ -77,7 +73,7 @@ export default function NavBar(props) {
                     Log In
                   </a>
                 </li>
-              </span>
+              </div>
             )}
           </ul>
 

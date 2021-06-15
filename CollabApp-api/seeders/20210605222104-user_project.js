@@ -1,8 +1,8 @@
 'use strict';
-
+const { MAXUSERS, MAXPROJECTS } = require("../helpers/constants");
 const usersProjects = [];
 
-for (let i = 1; i <= 100; i++) {
+for (let i = 1; i <= MAXPROJECTS; i++) {
   usersProjects.push({
     UserId: i,
     ProjectId: i,
@@ -11,7 +11,7 @@ for (let i = 1; i <= 100; i++) {
   })
 }
 
-for (let i = 101; i <= 200; i++) {
+for (let i = MAXPROJECTS + 1; i <= MAXUSERS; i++) {
   usersProjects.push({
     UserId: i,
     ProjectId: Math.ceil(Math.random() * 10),

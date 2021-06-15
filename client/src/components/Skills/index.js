@@ -11,18 +11,26 @@ const cookies = new Cookies();
  * Required keys are "name" and "value" but you can have and use any number of key/value pairs.
  */
 
-const options = [
-  { value: 1, label: 'Javascript', isFixed: true },
-  { value: 2, label: 'React', isFixed: true},
-  { value: 3, label: 'Ruby', isFixed: true },
-  { value: 4, label: 'SQL', isFixed: true },
-  { value: 5, label: 'Express', isFixed: true },
-];
+
+
+// [
+//   { value: 1, label: 'Javascript', isFixed: true },
+//   { value: 2, label: 'React', isFixed: true},
+//   { value: 3, label: 'Ruby', isFixed: true },
+//   { value: 4, label: 'SQL', isFixed: true },
+//   { value: 5, label: 'Express', isFixed: true },
+// ];
 
 
 
 
 export default function Register(props) {
+  //console.log(props.allSkills)
+  const options = props.allSkills.map((skill)=>{
+    //console.log(skill)
+    return {value: skill.id, label: skill.name, isFixed: true}
+  })
+
   const [skills, setSkills] = useState([]);
 
   const currentUser = cookies.get("currentUser");
@@ -43,7 +51,7 @@ export default function Register(props) {
   }
 
   return (
-    <article>
+    <article style={{marginBottom: "300px"}}>
 
       <h2>--------------------Skills-----------------</h2>
       

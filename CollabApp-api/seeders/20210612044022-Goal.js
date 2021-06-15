@@ -1,11 +1,11 @@
 'use strict';
-
+const { MAXGOALS } = require("../helpers/constants");
 const fakerData = require('../helpers/fakerData');
 
 const goals = [];
 
-for (let i = 1; i <= 200; i++) {
-  goals.push(fakerData.goalData(100));
+for (let i = 1; i <= MAXGOALS; i++) {
+  goals.push(fakerData.goalData());
 }
 
 module.exports = {

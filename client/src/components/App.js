@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 // import { useState, useEffect } from "react";
-// import "./App.css";
+import "./App.css";
 import axios from 'axios';
 import Cookies from "universal-cookie";
-
-
+import Avatar from '@material-ui/core/Avatar'
 
 import Display from "./Display";
 import NavBar from "./NavBar";
+
 import MatchProject from "./MatchProject";
 import ProjectDetail from "./ProjectDetail";
 import Button from "./Button";
@@ -22,6 +22,7 @@ import SearchBar from "./SearchBar";
 import AutoMatch from "./AutoMatch";
 import { filterProjectsBySkills } from "../helpers/selectors";
 
+
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
 
@@ -30,7 +31,7 @@ import useAppData from "../hooks/useAppData";
 const cookies = new Cookies();
 
 
-function App() {
+function App(props) {
   //set the initial state
   const {
     state,
@@ -59,7 +60,11 @@ function App() {
   const CREATE = "CREATE";
 
   const { mode, transition, back } = useVisualMode(DISPLAY);
-
+  if (props.mode === "REGISTER") {
+    console.log("HELOOOOOO")
+    props.mode = ""
+    registration()
+  }
   function backToHome() {
         transition(DISPLAY);
   }
@@ -98,14 +103,21 @@ function App() {
     transition(CREATE)
   }
 
-  function skillFilter(skill) {
+  function skillFilter(skills, autoMatch) {
     let newSkills;
-    if (state.skills.includes(skill)) {
-      let index = state.skills.indexOf(skill)
-      newSkills = state.skills
-      newSkills.splice(index, 1)
+    if (autoMatch) {
+      newSkills = [];
     } else {
-      newSkills = [...state.skills, skill]
+      newSkills = state.skills;
+    }
+    for (const skill of skills) {
+      if (newSkills.includes(skill)) {
+        let index = newSkills.indexOf(skill)
+        newSkills.splice(index, 1)
+        console.log("Skill to be removed:", skill)
+      } else {
+        newSkills = [...newSkills, skill]
+      }
     }
     let filteredProjects = filterProjectsBySkills(newSkills, state.projects)
     console.log("newSkills in skillFilter",newSkills)
@@ -114,44 +126,47 @@ function App() {
     transition(DISPLAY)
   }
 
-  function autoMatch(skills) {
-    for (const skill of skills) {
-      skillFilter(skill);
-    }
-  }
-
   return (
+    
     <main>
-      <section>
-        <div>
-          <NavBar users={state.users} userId={cookies.get("currentUser")} backToHome={backToHome} registration={registration} login={login} createNewProject={createNewProject} autoMatch={autoMatch}/>
-        </div>
-      </section>
-      <div className="container">
+      <div>
+        <NavBar users={state.users} userId={cookies.get("currentUser")} backToHome={backToHome} registration={registration} login={login} createNewProject={createNewProject}/>
+      </div>
+      <section id="mainsection" >
         {mode === DISPLAY &&
-        <AutoMatch
-            setState={setState}
-            users={state.users}
-            userId={cookies.get("currentUser")}
+        <div id="sidebar">
+          <h4>Filter By Skills</h4>
+          <div><SkillList
+            allSkills={state.allSkills}
             skills={state.skills}
-            projects={state.projects}
-        />}
-      </div>
-      <div className="container">
-        {mode === DISPLAY &&
-        <SkillList
             pickASkill={skillFilter}
-        />}
-      </div>
-      <div className="container">
-        {mode === DISPLAY &&
-        <SearchBar
-          
-          skills={state.skills}
-          setState={setState}
-        />}
-      </div>
-      <section>
+          /></div>
+        </div>
+        }
+
+      <section id="content">
+        <div style={{display: "flex"}}>
+        <div className="container">
+          {mode === DISPLAY &&
+          <AutoMatch
+              setState={setState}
+              users={state.users}
+              userId={cookies.get("currentUser")}
+              skills={state.skills}
+              projects={state.projects}
+              skillFilter={skillFilter}
+          />}
+        </div>
+          <div className="container">
+            {mode === DISPLAY &&
+            <SearchBar
+              
+              skills={state.skills}
+              setState={setState}
+            />}
+          </div>
+        </div>
+            
         {mode === DISPLAY &&
         <Display
         user = {state.user}
@@ -159,11 +174,13 @@ function App() {
         project = {state.project}
         projects={state.matchedProjects}
         users = {state.users}
+        // pickASkill={skillFilter}
         // roomName = {state.roomName}
         pickAProject = {pickAProject}
         pickAUser = {pickAUser}
         createNewProject = {createNewProject}
         /> }
+        
         {mode === MATCH && <MatchProject
         user = {state.user}
         users = {state.users}
@@ -195,7 +212,8 @@ function App() {
         projects={state.projects}
         roomName = {state.roomName}
         pickAUser = {pickAUser}
-        setState = {setState}
+        allSkills={state.allSkills}
+        skills={state.skills}
         />}
         {mode === PROFILE && <Profile
         user = {state.user}
@@ -229,6 +247,7 @@ function App() {
         // project={state.project}
         // projects={state.projects}
         // pickAProject = {pickAProject}
+        allSkills={state.allSkills}
         pickAUser = {pickAUser}
         backToHome = {backToHome}
         />}
@@ -242,9 +261,10 @@ function App() {
       </section>
 
       <section>
-        <h1>footer</h1>
+      </section>
       </section>
     </main>
+    
   );
 }
 
