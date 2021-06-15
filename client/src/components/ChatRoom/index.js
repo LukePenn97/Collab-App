@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../Button";
 import ProjectList from "../ProjectList";
+import ProjectInfo from "./ProjectInfo";
 import useChat from "../../hooks/useChat";
 import { findUserById } from "../../helpers/selectors";
 import MentorRequest from "../MentorRequest";
@@ -12,22 +13,21 @@ import "./chatBox.scss";
 import "./index.scss";
 import Cookies from "universal-cookie";
 
+//card
+import JssProvider from "react-jss/lib/JssProvider";
+import { createGenerateClassName } from "@material-ui/core/styles";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+
+const muiBaseTheme = createMuiTheme();
+
+const generateClassName = createGenerateClassName({
+  dangerouslyUseGlobalCSS: true
+});
+
 const cookies = new Cookies();
 
 export default function ChatRoom(props) {
-  // const messages = props.project.project_messages.map((msg, index) => {
-  //   const user = findUserById(msg.UserId, props.users);
-
-  //   return (
-  //     <div>
-  //       <img src={user.photo} alt={user.firstName} />
-  //       <h5>
-  //         {user.firstName} {user.lastName} :
-  //       </h5>
-  //       <p>{msg.message}</p>
-  //     </div>
-  //   );
-  // });
+  
   //TODO: button to submit request to join in a group
   const { roomId } = props.roomName;
   const { messages, sendMessage } = useChat(roomId);
@@ -52,65 +52,63 @@ export default function ChatRoom(props) {
   const currentUser = cookies.get("currentUser");
   const roomTalkers = [...roomMember];
   roomTalkers.push(props.users.find((ele) => ele.id === parseInt(currentUser)));
-  // console.log("hiiiiiii",roomTalkers);
+  
 
-  //logic for goals
-  const goalToChange = props.project.project_goals;
-  // console.log("projectInState", goalToChange);
+  // //logic for goals
+  // const goalToChange = props.project.project_goals;
+  // // console.log("projectInState", goalToChange);
 
-  const handleOnChange = (position, goal) => {
-    const changedGoalItem = {
-      ...goal,
-      completedAt: goal.completedAt ? null : new Date(),
-    };
+  // const handleOnChange = (position, goal) => {
+  //   const changedGoalItem = {
+  //     ...goal,
+  //     completedAt: goal.completedAt ? null : new Date(),
+  //   };
 
-    goalToChange[position] = changedGoalItem;
-    const changeProject = { ...props.project, project_goals: goalToChange };
-    const projectToChange = props.project;
-    const projectsToChange = props.projects;
+  //   goalToChange[position] = changedGoalItem;
+  //   const changeProject = { ...props.project, project_goals: goalToChange };
+  //   const projectToChange = props.project;
+  //   const projectsToChange = props.projects;
 
-    axios.patch(
-      `http://localhost:5000/projects/${props.project.id}/${goal.id}`
-    );
-    console.log("change", changeProject.project_goals);
-    console.log("state", props.project);
-    console.log("projects", props.projects);
+  //   axios.patch(
+  //     `http://localhost:5000/projects/${props.project.id}/${goal.id}`
+  //   );
+  //   console.log("change", changeProject.project_goals);
+  //   console.log("state", props.project);
+  //   console.log("projects", props.projects);
 
-    props.setState((prev) => ({
-      ...prev,
-      project: projectToChange,
-      projects: projectsToChange,
-    }));
-  };
+  //   props.setState((prev) => ({
+  //     ...prev,
+  //     project: projectToChange,
+  //     projects: projectsToChange,
+  //   }));
+  // };
 
-  //logic for pop up form
-  const triggerText = "Add Goal";
-  const onSubmit = (event) => {
-    event.preventDefault(event);
-    // console.log(event.target.name.value);
-    // console.log(event.target.email.value);
-    return axios
-      .post(`http://localhost:5000/projects/${props.project.id}/addGoal`, {
-        name: event.target.name.value,
-        description: event.target.description.value,
-        startDate: event.target.startDate.value,
-        deadline: event.target.deadline.value,
-      })
-      .then((body) => {
-        const goalsBeforeUpdate = props.project.project_goals;
-        goalsBeforeUpdate.push(body.data);
-        const projectWithNewGoal = {
-          ...props.project,
-          project_goals: goalsBeforeUpdate,
-        };
-        const projectsWithNewGoal = props.projects;
-        props.setState((prev) => ({
-          ...prev,
-          project: projectWithNewGoal,
-          projects: projectsWithNewGoal,
-        }));
-      });
-  };
+  // //logic for pop up form
+  // const triggerText = "Add Goal";
+  // const onSubmit = (event) => {
+  //   event.preventDefault(event);
+  //   return axios
+  //     .post(`http://localhost:5000/projects/${props.project.id}/addGoal`, {
+  //       name: event.target.name.value,
+  //       description: event.target.description.value,
+  //       startDate: event.target.startDate.value,
+  //       deadline: event.target.deadline.value,
+  //     })
+  //     .then((body) => {
+  //       const goalsBeforeUpdate = props.project.project_goals;
+  //       goalsBeforeUpdate.push(body.data);
+  //       const projectWithNewGoal = {
+  //         ...props.project,
+  //         project_goals: goalsBeforeUpdate,
+  //       };
+  //       const projectsWithNewGoal = props.projects;
+  //       props.setState((prev) => ({
+  //         ...prev,
+  //         project: projectWithNewGoal,
+  //         projects: projectsWithNewGoal,
+  //       }));
+  //     });
+  // };
 
   // console.log("msg!!!!!!!!!!!!",messages)
   return (
@@ -170,7 +168,24 @@ export default function ChatRoom(props) {
       </section>
 
 <div className="sideBar">
-      <div className="projectInfo">
+<JssProvider generateClassName={generateClassName}>
+      <MuiThemeProvider
+        theme={createMuiTheme({
+          typography: {
+            useNextVariants: true
+          },
+          // overrides: Component.getTheme(muiBaseTheme)
+        })}
+      >
+        <p>{props.project.description}</p>
+        <MentorRequest users={props.users} />
+        <ProjectInfo 
+         users={props.users}
+         project={props.project}
+         projects={props.projects}
+        
+        />
+      {/* <div className="projectInfo">
         <h2>{props.project.name}</h2>
         <h3 onClick={() => props.pickAUser(props)}>{props.project.lead}</h3>
         <p>{props.project.description}</p>
@@ -217,7 +232,9 @@ export default function ChatRoom(props) {
         <div>
           <Container triggerText={triggerText} onSubmit={onSubmit} />
         </div>
-      </div>
+      </div> */}
+      </MuiThemeProvider>
+    </JssProvider>
       </div>
     </div>
   );
