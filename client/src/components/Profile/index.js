@@ -14,6 +14,7 @@ import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Icon from "@material-ui/core/Icon";
+import Divider from "@material-ui/core/Divider";
 
 const Profile = (props) => {
   //find the data of the user by id
@@ -41,22 +42,21 @@ const Profile = (props) => {
     <CardContent className={"MuiCardContent-root"}>
       <Typography
         className={"MuiTypography--heading"}
-        variant={"h6"}
+        variant={"h5"}
         gutterBottom
       >
         {`${userToShow.firstName} ${userToShow.lastName}`}
       </Typography>
       <Typography className={"MuiTypography--subheading"} variant={"caption"}>
-        Snow storm coming in Sommaroy island, Arctic Norway. This is something
-        that you definitely wanna see in your life.
+
       </Typography>
     </CardContent>
     <CardActions className={"MuiCardActions-root"}>
-      {/* <Typography variant={"caption"}>
+      <Typography variant={"caption"}>
         <Link block href={"javascript:;"} underline={"none"}>
-          March 8, 2016
+         {}
         </Link>
-      </Typography> */}
+      </Typography>
       <div>
         <IconButton>
           <Icon>share</Icon>
@@ -66,6 +66,7 @@ const Profile = (props) => {
         </IconButton>
       </div>
     </CardActions>
+    <Divider className={"MuiDivider-root"} light />
       <ProjectList
         users={props.users}
         project={props.project}
@@ -90,6 +91,9 @@ Profile.getTheme = muiBaseTheme => ({
         "&:hover": {
           transform: "translateY(-3px)",
           boxShadow: "0 4px 20px 0 rgba(0,0,0,0.12)"
+        },
+        "& .MuiDivider-root": {
+          margin: `${muiBaseTheme.spacing.unit * 5}px 0`,
         },
         "& .MuiCardMedia-root": {
           paddingTop: "56.25%",
