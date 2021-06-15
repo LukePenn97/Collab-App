@@ -67,7 +67,7 @@ export default function MentorRequest(props) {
     </Button>
 
     <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
+      <Modal.Header >
         <Modal.Title>Modal title</Modal.Title>
         
       </Modal.Header>
