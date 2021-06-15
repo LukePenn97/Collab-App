@@ -7,6 +7,7 @@ import Avatar from "@material-ui/core/Avatar";
 
 import Display from "./Display";
 import NavBar from "./NavBar";
+import Header from "./Header";
 
 import MatchProject from "./MatchProject";
 import ProjectDetail from "./ProjectDetail";
@@ -146,7 +147,9 @@ function App(props) {
           createNewProject={createNewProject}
         />
       </div>
-      <section id="mainsection">
+      <div>
+        <Header/>
+      </div>
         {mode === DISPLAY && (
           <div id="sidebar">
             <h4>Filter By Skills</h4>
@@ -159,39 +162,30 @@ function App(props) {
             </div>
           </div>
         )}
-
+        <section id="mainsection">
         <section id="content">
+        {mode === DISPLAY && (
           <div className="match-search" style={{ display: "flex" }}>
             <div className="container">
-              <JssProvider generateClassName={generateClassName}>
-                <MuiThemeProvider
-                  theme={createMuiTheme({
-                    typography: {
-                      useNextVariants: true,
-                    },
-                    overrides: AutoMatch.getTheme(muiBaseTheme),
-                  })}
-                >
-                  {mode === DISPLAY && (
-                    <AutoMatch
-                      setState={setState}
-                      users={state.users}
-                      userId={cookies.get("currentUser")}
-                      skills={state.skills}
-                      projects={state.projects}
-                      skillFilter={skillFilter}
-                    />
-                  )}
-                </MuiThemeProvider>
-              </JssProvider>
+                    <div >
+                      <AutoMatch
+                        setState={setState}
+                        users={state.users}
+                        userId={cookies.get("currentUser")}
+                        skills={state.skills}
+                        projects={state.projects}
+                        skillFilter={skillFilter}
+                      />
+                    </div>
+              </div>
             </div>
-            <div className="container">
-              {mode === DISPLAY && (
-                <SearchBar skills={state.skills} setState={setState} />
-              )}
-            </div>
-          </div>
+            )}
+          {mode === DISPLAY && (
+            <SearchBar skills={state.skills} setState={setState} />
+          )}
+          <div style={{height: "30px"}}>
 
+          </div>
           {mode === DISPLAY && (
             <Display
               user={state.user}
@@ -301,8 +295,6 @@ function App(props) {
             />
           )}
         </section>
-
-        <section></section>
       </section>
     </main>
   );
