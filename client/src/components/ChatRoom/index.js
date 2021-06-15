@@ -7,17 +7,12 @@ import MentorRequest from "../MentorRequest";
 import axios from "axios";
 import { Container } from "./Container";
 
-
 import "./goal.css";
 import "./chatBox.scss";
 import "./index.scss";
 import Cookies from "universal-cookie";
 
-
 const cookies = new Cookies();
-
-
-
 
 export default function ChatRoom(props) {
   // const messages = props.project.project_messages.map((msg, index) => {
@@ -116,129 +111,115 @@ export default function ChatRoom(props) {
         }));
       });
   };
-  
 
   // console.log("msg!!!!!!!!!!!!",messages)
   return (
-    <div>
-                  <section className="wrapper">
-                    <div className="nav" id="nav">
-                      <div className="default-nav">
-                        <div className="main-nav">
-                          {/* <h1 className="room-name">Room: {roomId}</h1>
+    <div className="main-box">
+      <section className="wrapper chatBox">
+        <div className="nav" id="nav">
+          <div className="default-nav">
+            <div className="main-nav">
+              {/* <h1 className="room-name">Room: {roomId}</h1>
                             <h3>Talk to:</h3> */}
-                          {roomMember.map((member) => (
-                            <div className="toggle">
-                              <img
-                                src={member.photo}
-                                className="main-nav-item"
-                              ></img>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="inner" id="inner">
-                      <div className="content" id="content">
-                        {messages.map((message, i) => (
-                          <div
-                            key={i}
-                            className={`message-wrapper ${
-                              message.senderId === currentUser ? "me" : "them"
-                            }`}
-                          >
-                            <div className="circle-wrapper animated bounceIn">
-                              <img
-                                className="circle-wrapper"
-                                src={
-                                  roomTalkers.find(
-                                    (ele) =>
-                                      ele.id === parseInt(message.senderId)
-                                  ).photo
-                                }
-                              ></img>
-                            </div>
-                            <div className="text-wrapper animated fadeIn">
-                              {message.body}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="bottom">
-                      <textarea
-                        value={newMessage}
-                        onChange={handleNewMessageChange}
-                        placeholder="Write message..."
-                        className="new-message-input-field input"
-                      />
-                      <button
-                        onClick={handleSendMessage}
-                        className="send-message-button send"
-                      ></button>
-                    </div>
-                  </section>
-                
-              
-  
-             
-              ----------------------------
-              <div className="projectInfo">
-                <h2>{props.project.name}</h2>
-                <h3 onClick={() => props.pickAUser(props)}>
-                  {props.project.lead}
-                </h3>
-                <p>{props.project.description}</p>
-                <MentorRequest users={props.users} />
-              </div>
-              <div>
-                <h2>-------------------------Goals-----------------------</h2>
-              </div>
-              <div className="App">
-                <ul className="toppings-list">
-                  {props.project.project_goals &&
-                    props.project.project_goals.map((goal, index) => {
-                      return (
-                        <li key={index}>
-                          <div className="toppings-list-item">
-                            <div className="left-section">
-                              <input
-                                type="checkbox"
-                                id={`custom-checkbox-${index}`}
-                                name={goal.name}
-                                value={goal.name}
-                                checked={goal.completedAt}
-                                onChange={() => handleOnChange(index, goal)}
-                              />
-                              <label htmlFor={`custom-checkbox-${index}`}>
-                                {goal.name}
-                              </label>
-                            </div>
-                            <div className="right-section">
-                              {goal.description}
-                            </div>
-                            <div>deadline: {goal.deadline} </div>
-                            <div>
-                              {goal.completedAt ? (
-                                <div>
-                                  <span>completed at: </span>
-                                  <p>{JSON.stringify(goal.completedAt)}</p>
-                                </div>
-                              ) : null}
-                            </div>
-                          </div>
-                        </li>
-                      );
-                    })}
-                </ul>
-                <div>
-                  <Container triggerText={triggerText} onSubmit={onSubmit} />
+              {roomMember.map((member) => (
+                <div className="toggle">
+                  <img src={member.photo} className="main-nav-item"></img>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="inner" id="inner">
+          <div className="content" id="content">
+            {messages.map((message, i) => (
+              <div
+                key={i}
+                className={`message-wrapper ${
+                  message.senderId === currentUser ? "me" : "them"
+                }`}
+              >
+                <div className="circle-wrapper animated bounceIn">
+                  <img
+                    className="circle-wrapper"
+                    src={
+                      roomTalkers.find(
+                        (ele) => ele.id === parseInt(message.senderId)
+                      ).photo
+                    }
+                  ></img>
+                </div>
+                <div className="text-wrapper animated fadeIn">
+                  {message.body}
                 </div>
               </div>
-            
-            </div>
-          
-   
+            ))}
+          </div>
+        </div>
+        <div className="bottom">
+          <textarea
+            value={newMessage}
+            onChange={handleNewMessageChange}
+            placeholder="Write message..."
+            className="new-message-input-field input"
+          />
+          <button
+            onClick={handleSendMessage}
+            className="send-message-button send"
+          ></button>
+        </div>
+      </section>
+
+<div className="sideBar">
+      <div className="projectInfo">
+        <h2>{props.project.name}</h2>
+        <h3 onClick={() => props.pickAUser(props)}>{props.project.lead}</h3>
+        <p>{props.project.description}</p>
+        <MentorRequest users={props.users} />
+      </div>
+      <div>
+      
+      </div>
+      <div className="App">
+        <ul className="toppings-list">
+          {props.project.project_goals &&
+            props.project.project_goals.map((goal, index) => {
+              return (
+                <li key={index}>
+                  <div className="toppings-list-item">
+                    <div className="left-section">
+                      <input
+                        type="checkbox"
+                        id={`custom-checkbox-${index}`}
+                        name={goal.name}
+                        value={goal.name}
+                        checked={goal.completedAt}
+                        onChange={() => handleOnChange(index, goal)}
+                      />
+                      <label htmlFor={`custom-checkbox-${index}`}>
+                        {goal.name}
+                      </label>
+                    </div>
+                    <div className="right-section">{goal.description}</div>
+                    <div>deadline: {goal.deadline} </div>
+                    <div>
+                      {goal.completedAt ? (
+                        <div>
+                          <span>completed at: </span>
+                          <p>{JSON.stringify(goal.completedAt)}</p>
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+        </ul>
+        <div>
+          <Container triggerText={triggerText} onSubmit={onSubmit} />
+        </div>
+      </div>
+      </div>
+    </div>
   );
 }
 
