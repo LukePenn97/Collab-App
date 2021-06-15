@@ -164,37 +164,28 @@ function App(props) {
         )}
         <section id="mainsection">
         <section id="content">
+        {mode === DISPLAY && (
           <div className="match-search" style={{ display: "flex" }}>
             <div className="container">
-              <JssProvider generateClassName={generateClassName}>
-                <MuiThemeProvider
-                  theme={createMuiTheme({
-                    typography: {
-                      useNextVariants: true,
-                    },
-                    overrides: AutoMatch.getTheme(muiBaseTheme),
-                  })}
-                >
-                  {mode === DISPLAY && (
-                    <AutoMatch
-                      setState={setState}
-                      users={state.users}
-                      userId={cookies.get("currentUser")}
-                      skills={state.skills}
-                      projects={state.projects}
-                      skillFilter={skillFilter}
-                    />
-                  )}
-                </MuiThemeProvider>
-              </JssProvider>
+                    <div >
+                      <AutoMatch
+                        setState={setState}
+                        users={state.users}
+                        userId={cookies.get("currentUser")}
+                        skills={state.skills}
+                        projects={state.projects}
+                        skillFilter={skillFilter}
+                      />
+                    </div>
+              </div>
             </div>
-            <div className="container">
-              {mode === DISPLAY && (
-                <SearchBar skills={state.skills} setState={setState} />
-              )}
-            </div>
-          </div>
+            )}
+          {mode === DISPLAY && (
+            <SearchBar skills={state.skills} setState={setState} />
+          )}
+          <div style={{height: "30px"}}>
 
+          </div>
           {mode === DISPLAY && (
             <Display
               user={state.user}
@@ -304,8 +295,6 @@ function App(props) {
             />
           )}
         </section>
-
-        <section></section>
       </section>
     </main>
   );
