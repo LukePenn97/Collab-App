@@ -1,0 +1,19 @@
+.main-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  // position:static;
+
+  .chatBox {
+    background-color: red;
+  }
+
+  .sideBar {
+    width: 40%;
+    left: 50%;
+    // background-color: skyblue;
+    .projectInfo {
+      // background-color: royalblue;
+    }
+  }
+}
