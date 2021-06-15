@@ -69,7 +69,7 @@ export default function ChatRoom(props) {
           </div>
         </div>
         <div className="inner" id="inner">
-          <div className="content" id="content">
+          <div className="chatContent" id="chatContent">
             {messages.map((message, i) => (
               <div
                 key={i}
