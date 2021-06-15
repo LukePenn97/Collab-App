@@ -41,6 +41,8 @@ const ProjectInfo = (props) => {
     }));
   };
 
+ const projectLead = findUserById(props.project.projectLeadId,props.users);
+
   //logic for pop up form
   const triggerText = "Add";
   const onSubmit = (event) => {
@@ -85,13 +87,13 @@ const ProjectInfo = (props) => {
             >
               {props.project.name}
             </Typography>
-            {/* <Typography
+            <Typography
               className={"MuiTypography--heading"}
-              variant={"h5"}
-              onClick={() => props.pickAUser(props)}
+              variant={"h6"}
+              onClick={() => props.pickAUser(props.project.projectLeadId)}
             >
-              {props.users.find(ele=>ele.id === props.project.projectLeadId).firstName}
-            </Typography> */}
+              {projectLead.firstName+" "+projectLead.lastName}
+            </Typography>
 
             <Typography className={"MuiTypography--subheading"} variant={"h6"}>
               {props.project.description}
@@ -102,6 +104,7 @@ const ProjectInfo = (props) => {
                 className={"MuiAvatar-root"}
                 key={user.id}
                 src={user.photo}
+                onClick={() => props.pickAUser(user.id)}
               />
             ))}
           </div>
@@ -124,6 +127,7 @@ const ProjectInfo = (props) => {
                             value={goal.name}
                             checked={goal.completedAt}
                             onChange={() => handleOnChange(index, goal)}
+                            className={""}
                           />
                           {/* <label htmlFor={`custom-checkbox-${index}`}> */}
                             <Typography variant="body1" gutterBottom className={"MuiTypography--subheading"}>

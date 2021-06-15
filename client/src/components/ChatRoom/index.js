@@ -125,6 +125,7 @@ export default function ChatRoom(props) {
          project={props.project}
          projects={props.projects}
          setState={props.setState}
+         pickAUser={props.pickAUser}
         />
       </MuiThemeProvider>
     </JssProvider>
