@@ -2,6 +2,7 @@ main {
   overflow: auto;
 }
 #content {
+  margin-top:50px;
   margin-left: 200px;
   display: flex;
   flex-direction: column;
@@ -15,6 +16,7 @@ main {
   display:inline-block;
   position: absolute;
   margin: 35px;
+  margin-top: 60px;
   /* height: 75vh;
   overflow: scroll; */
 }
@@ -43,4 +45,8 @@ main {
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+.match-search{
+  display:flex;
 }
