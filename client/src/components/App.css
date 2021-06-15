@@ -1,4 +1,19 @@
-
+main {
+  overflow: auto;
+}
+#content {
+  margin-left: 200px;
+}
+#mainsection {
+  display: flex;
+}
+#sidebar {
+  display:inline-block;
+  position: absolute;
+  margin: 35px;
+  /* height: 75vh;
+  overflow: scroll; */
+}
 /* Tooltip container */
 .tooltip {
   position: relative;

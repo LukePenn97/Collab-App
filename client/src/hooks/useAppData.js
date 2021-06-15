@@ -10,7 +10,8 @@ export default function useApplicationData() {
     projects: [],
     roomName:"",
     skills: [],
-    matchedProjects: []
+    matchedProjects: [],
+    allSkills: []
   });
 
 
@@ -22,12 +23,14 @@ export default function useApplicationData() {
     Promise.all([
       axios.get("/projects"),
       axios.get("/users"),
+      axios.get("/projects/skills"),
     ]).then((all) => {
       setState((prev) => ({
         ...prev,
         projects: all[0].data,
         matchedProjects: all[0].data,
         users: all[1].data,
+        allSkills: all[2].data
       }));
     });
   }, []);
@@ -45,12 +48,13 @@ export default function useApplicationData() {
   const setMatchedProjects = (matchedProjects) => setState({ ...state, "matchedProjects": matchedProjects });
 
   const setUsers = (users) => setState({ ...state, "users": users });
-
+  
   const setRoomName = (roomName) => setState({ ...state, "roomName": roomName });
   
   const setSkills = (newSkills) => {
-
+    
     setState({...state, skills: newSkills})
   };
+  
   return { state, setState, setProject, setProjects, setUser, setUsers, setRoomName, setSkills, setMatchedProjects};
 }

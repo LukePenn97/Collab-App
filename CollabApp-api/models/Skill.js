@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Skill.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    iconClass: DataTypes.STRING
   }, {
     sequelize,
     tableName: 'skills',

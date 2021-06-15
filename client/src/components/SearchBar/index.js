@@ -22,7 +22,7 @@ export default function SearchBar(props) {
   }
 
   return (
-    <div>
+    <div style={{display: "flex", marginTop: "45px", width: "30vw"}}>
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchbar" onChange={(word)=>onKeywordChanged(word)}></input>
       <button class="btn btn-outline-success" onClick={submitKeyword}>Search</button>
     </div>

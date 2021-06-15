@@ -1,20 +1,16 @@
 import React from "react";
 import SkillListItem from "./SkillListItem";
-
+import Box from '@material-ui/core/Box';
 export default function SkillList(props) {
-  // console.log("hi")
-  // console.log(props.projects)
-  const skillsData = [
-    { value: 1, label: 'Javascript', isFixed: true },
-    { value: 2, label: 'React', isFixed: true},
-    { value: 3, label: 'Ruby', isFixed: true },
-    { value: 4, label: 'PostgreSQL', isFixed: true },
-    { value: 5, label: 'Express', isFixed: true },
-  ];
+
+  const skillsData = props.allSkills.map((skill)=>{
+    return {value: skill.id, label: skill.name, iconClass: skill.iconClass, isFixed: true}
+  })
 
   const skillList = skillsData.map((skill) => {
     return (
       <SkillListItem
+        iconClass={skill.iconClass}
         skill={skill.value}
         skillName={skill.label}
         activeSkills={props.skills}
@@ -23,5 +19,5 @@ export default function SkillList(props) {
     );
   });
 
-  return <div className="col">{skillList}</div>;
+  return <Box width="150px" display="flex" flexWrap="wrap">{skillList}</Box>;
 }

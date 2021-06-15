@@ -1,42 +1,44 @@
 const faker = require('faker');
-
-const randomFirstName = faker.name.firstName();
-const randomLastName = faker.name.lastName();
-const randomEmail = faker.internet.email();
-const randomAvatar = faker.internet.avatar();
-const randomRecentDate = faker.date.recent();
-const randomSoonDate = faker.date.soon();
-const randomSentence = faker.lorem.sentence();
-const randomJobDescriptor = faker.name.jobDescriptor();
+const {MAXPROJECTS, MAXUSERS, MAXMENTORS} = require('./constants')
 
 const fakerData = {
   userData: () => {
-    return  {
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      email: faker.internet.email(),
-      password: "password",
-      photo: faker.internet.avatar(),
-      bio: faker.lorem.sentence(),
-      createdAt: new Date(),
-      updatedAt: new Date()
+    const users = [];
+    for (let i = 1; i <= MAXUSERS + MAXMENTORS; i++) {
+      users.push({
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        email: faker.internet.email(),
+        password: "password",
+        photo: faker.internet.avatar(),
+        bio: faker.lorem.sentence(),
+        is_mentor: (i < MAXUSERS) ? false : true,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      })
     }
+    return users;
   },
-  projectData: (LeadId) => {
-    return  {
-      projectLeadId: LeadId,
-      name: faker.company.catchPhraseAdjective() + " " + faker.company.catchPhraseNoun(),
-      description: faker.company.catchPhrase(),
-      imgUrl: faker.image.abstract(400, 200, true),
-      deadline: faker.date.soon(),
-      startDate: faker.date.recent(),
-      createdAt: new Date(),
-      updatedAt: new Date()
+  projectData: () => {
+    const projects = [];
+    for (let i = 1; i <= MAXPROJECTS; i++) {
+      projects.push({
+        projectLeadId: i,
+        name: faker.company.catchPhraseAdjective() + " " + faker.company.catchPhraseNoun(),
+        description: faker.company.catchPhrase(),
+        imgUrl: faker.image.abstract(400, 200, true),
+        deadline: faker.date.soon(),
+        startDate: faker.date.recent(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      })
     }
+
+    return projects; 
   },
-  goalData: (maxProjects) => {
+  goalData: () => {
     return {
-      ProjectId: Math.ceil(Math.random() * maxProjects),
+      ProjectId: Math.ceil(Math.random() * MAXPROJECTS),
       name: faker.git.commitMessage(),
       description: faker.company.bs(),
       startDate: faker.date.recent(),
@@ -47,10 +49,10 @@ const fakerData = {
     }
   },
 
-  messageData: (maxUsers, maxProjects) => {
+  messageData: () => {
     return {
-      UserId: Math.ceil(Math.random() * maxUsers),
-      ProjectId: Math.ceil(Math.random() * maxProjects),
+      UserId: Math.ceil(Math.random() * MAXUSERS),
+      ProjectId: Math.ceil(Math.random() * MAXPROJECTS),
       message: faker.hacker.phrase(),
       datePosted: faker.date.recent(),
       createdAt: new Date(),

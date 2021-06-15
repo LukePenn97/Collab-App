@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "@rebass/forms": "^4.0.6",
     "@rebass/preset": "^4.0.5",
     "@testing-library/jest-dom": "^5.13.0",
@@ -20,6 +21,7 @@
     "react-responsive-carousel": "^3.2.18",
     "react-scripts": "4.0.3",
     "react-select": "^4.3.1",
+    "react-sticky-box": "^0.9.3",
     "rebass": "^4.0.7",
     "socket.io": "^4.1.2",
     "socket.io-client": "^4.1.2",

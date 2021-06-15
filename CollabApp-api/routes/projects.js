@@ -1,6 +1,16 @@
 const router = require("express").Router();
-const { Project, Users_Projects, Projects_Skills, Goal } = require("../models");
+const { Project, Users_Projects, Projects_Skills, Goal, Skill } = require("../models");
 const { Op } = require("sequelize");
+
+
+router.get("/skills", (req, res) => {
+  Skill.findAll()
+    .then(skills => {
+      res.set("Access-Control-Allow-Origin", "*");
+      res.json(skills);
+    })
+    .catch((err) => console.log("Error:" + err))
+})
 //get project list
 router.get("/", (req, res) =>
   Project.findAll({

@@ -1,19 +1,21 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Tooltip from '@material-ui/core/Tooltip';
-// import "components/DayListItem.scss";
-
-// const classnames = require('classnames');
+import Box from '@material-ui/core/Box';
+import "devicon/devicon.min.css"
 
 export default function SkillListItem(props) {
   let isActive = props.activeSkills.includes(props.skill)
-
   const style = isActive ? { border: '1px solid #021a40' } : {};
-
+  //console.log(`devicon-${props.skillName.toLowerCase()}-original`);
   return (
-    <Tooltip title={props.skillName} placement="top">
-      <img style={style} onClick={() => {
-        props.pickASkill(props.skill)
-        }} width="50" height="50" src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${props.skillName.toLowerCase()}/${props.skillName.toLowerCase()}-original.svg`}/>
-    </Tooltip>
+      <Box display="flex">
+        <Tooltip title={props.skillName} placement="top">
+          <i 
+          style={{margin: "3px", fontSize: 40, ...style}} 
+          className={props.iconClass}
+          onClick={() => {props.pickASkill([props.skill], false)}}>
+          </i>
+        </Tooltip>
+      </Box>
   );
 }

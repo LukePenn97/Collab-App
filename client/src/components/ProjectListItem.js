@@ -1,20 +1,25 @@
 import React from "react";
 import { findUserById } from "../helpers/selectors"
-// import "components/DayListItem.scss";
-
-// const classnames = require('classnames');
+import Tooltip from '@material-ui/core/Tooltip';
 
 export default function ProjectListItem(props) {
-  // const itemClass = classnames("day-list__item", {
-  //   "day-list__item--selected": props.selected, "day-list__item--full": props.spots === 0
-  // })
-  
  
   const projectLead = findUserById(props.projectLeadId, props.users);
-  // console.log(projectLead)
 
   const skills = [];
   props.project_skills.map(skill => skills.push(skill.name))
+  const icons = props.project_skills.map(skill => {
+    return (
+      // <Box display="flex">
+      <Tooltip title={skill.name} placement="top">
+        <i 
+        style={{fontSize: 40}} 
+        className={skill.iconClass}
+        >
+        </i>
+      </Tooltip>
+    )
+  })
 
   return (
     <li>
@@ -23,9 +28,9 @@ export default function ProjectListItem(props) {
         {`${projectLead.firstName}  
         ${projectLead.lastName}`}
       </h3>
-      <h5>
-        {skills}
-      </h5>
+      <div>
+        {icons}
+      </div>
       <p>{props.description}</p>
       <p>{props.project_skills[0].name}</p>
       <img
