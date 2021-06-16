@@ -10,7 +10,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
-import GitHubIcon from '@material-ui/icons/GitHub';
+import Grid from "@material-ui/core/Grid";
+import GitHubIcon from "@material-ui/icons/GitHub";
 
 const ProjectInfo = (props) => {
   //logic for goals
@@ -42,7 +43,7 @@ const ProjectInfo = (props) => {
     }));
   };
 
- const projectLead = findUserById(props.project.projectLeadId,props.users);
+  const projectLead = findUserById(props.project.projectLeadId, props.users);
 
   //logic for pop up form
   const triggerText = "Add";
@@ -77,8 +78,8 @@ const ProjectInfo = (props) => {
         <CardMedia
           className={"MuiCardMedia-root"}
           image={props.project.imgUrl}
-          />
-          {console.log(props.project.imgUrl)}
+        />
+        {console.log(props.project.imgUrl)}
         <CardContent className={"MuiCardContent-root"}>
           <div className="projectInfo">
             <Typography
@@ -88,13 +89,15 @@ const ProjectInfo = (props) => {
             >
               {props.project.name}
             </Typography>
-            <div><GitHubIcon/></div>
+            <div>
+              <GitHubIcon />
+            </div>
             <Typography
               className={"MuiTypography--heading"}
               variant={"h6"}
               onClick={() => props.pickAUser(props.project.projectLeadId)}
             >
-              {projectLead.firstName+" "+projectLead.lastName}
+              {projectLead.firstName + " " + projectLead.lastName}
             </Typography>
 
             <Typography className={"MuiTypography--subheading"} variant={"h6"}>
@@ -113,46 +116,77 @@ const ProjectInfo = (props) => {
 
           <div className="App">
             <div className="toppings-list">
-            <Typography className={"MuiTypography--subheading"} variant={"h6"}>
-            Project Goals:
-            </Typography>
+
+              <Grid justify="center">
+              <Typography
+                className={"MuiTypography--subheading"}
+                variant={"h6"}
+              >
+                Project Goals:
+              </Typography>
+              </Grid>
               {props.project.project_goals &&
                 props.project.project_goals.map((goal, index) => {
                   return (
-                    <div key={index} className = "MuiEngagementCard--01">
+                    <div key={index} className="MuiEngagementCard--01">
                       <div className="toppings-list-item">
                         <div className="left-section">
-                          <Checkbox
-                            inputProps={{ "aria-label": "primary checkbox" }}
-                            id={`custom-checkbox-${index}`}
-                            name={goal.name}
-                            value={goal.name}
-                            checked={goal.completedAt}
-                            onChange={() => handleOnChange(index, goal)}
-                            className={""}
-                          />
-                          {/* <label htmlFor={`custom-checkbox-${index}`}> */}
-                            <Typography variant="body1" gutterBottom className={"MuiTypography--subheading"}>
-                              {goal.name}
-                            </Typography>
-                          {/* </label> */}
-                        <Typography variant="body1" gutterBottom className={"MuiTypography--subheading"}>
-                          {goal.description}
-                        </Typography>
-                        <Typography variant="body1" gutterBottom className={"MuiTypography--subheading"}>
-                          deadline: {goal.deadline}
-                        </Typography>
+                          <Grid container justify="center" >
+                            <Grid item xs={2}>
+                              <Checkbox
+                                inputProps={{
+                                  "aria-label": "primary checkbox",
+                                }}
+                                id={`custom-checkbox-${index}`}
+                                name={goal.name}
+                                value={goal.name}
+                                checked={goal.completedAt}
+                                onChange={() => handleOnChange(index, goal)}
+                                className={""}
+                              />
+                            </Grid>
 
-                        <div>
-                          {goal.completedAt ? (
-                            <Typography variant="body1" gutterBottom className={"MuiTypography--subheading"}>
-                            completed at: {JSON.stringify(goal.completedAt)}
-                          </Typography>
-    
-    ) : null}
+                            <Grid item xs={9}>
+                              <Typography
+                                variant="body1"
+                                gutterBottom
+                                className={"MuiTypography--subheading"}
+                              >
+                                {goal.name}
+                              </Typography>
+                              {/* </label> */}
+                              <Typography
+                                variant="body1"
+                                gutterBottom
+                                className={"MuiTypography--subheading"}
+                              >
+                                {goal.description}
+                              </Typography>
+                              <Typography
+                                variant="body1"
+                                gutterBottom
+                                className={"MuiTypography--subheading"}
+                              >
+                                Deadline: {goal.deadline}
+                              </Typography>
+                              {goal.completedAt ? (
+                                <Typography
+                                  variant="body1"
+                                  gutterBottom
+                                  className={"MuiTypography--subheading"}
+                                >
+                                  Completed at:{" "}
+                                  {JSON.stringify(goal.completedAt)}
+                                </Typography>
+                              ) : 
+                              (
+                                null
+                                // <Grid item></Grid>
+                              )}
+                            </Grid>
+                          </Grid>
                         </div>
                       </div>
-    </div>
                     </div>
                   );
                 })}
@@ -165,7 +199,7 @@ const ProjectInfo = (props) => {
       </Card>
     </section>
   );
-}
+};
 
 ProjectInfo.getTheme = (muiBaseTheme) => ({
   MuiCard: {
@@ -193,7 +227,7 @@ ProjectInfo.getTheme = (muiBaseTheme) => ({
         },
         "& .MuiTypography--subheading": {
           lineHeight: 1.8,
-          marginLeft:muiBaseTheme.spacing.unit
+          marginLeft: muiBaseTheme.spacing.unit,
         },
         "& .MuiAvatar-root": {
           display: "inline-block",
