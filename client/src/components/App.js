@@ -52,6 +52,7 @@ function App(props) {
     setSkills,
     setMatchedProjects,
     setState,
+    setShowSkills
   } = useAppData();
 
   //modes to navigate the components
@@ -162,23 +163,6 @@ function App(props) {
         <Header/>
       </div>
       )}
-      {mode !== DISPLAY && (
-      <div style={{height: "100px"}}>
-        
-      </div>
-      )}
-        {mode === DISPLAY && (
-          <div id="sidebar">
-            <h4>Filter By Skills</h4>
-            <div>
-              <SkillList
-                allSkills={state.allSkills}
-                skills={state.skills}
-                pickASkill={skillFilter}
-              />
-            </div>
-          </div>
-        )}
         <section id="mainsection">
         <section id="content">
         {mode === DISPLAY && !cookies.get("currentUser") && (
@@ -186,28 +170,57 @@ function App(props) {
 
           </div>
         )}
-        {mode === DISPLAY && cookies.get("currentUser") && (
-          <div className="match-search" style={{ display: "flex" }}>
-            <div className="container">
-                    <div>
-                      <AutoMatch
-                        setState={setState}
-                        users={state.users}
-                        userId={cookies.get("currentUser")}
-                        skills={state.skills}
-                        projects={state.projects}
-                        skillFilter={skillFilter}
-                      />
-                    </div>
-              </div>
-            </div>
-            )}
-          {mode === DISPLAY && (
+        {mode === DISPLAY && (
+          <div style={{marginBottom: "20px"}}>
             <SearchBar skills={state.skills} setState={setState} />
-          )}
-          <div style={{height: "30px"}}>
-
           </div>
+        )}
+        {mode === DISPLAY && (
+          
+            <div className="match-search" style={{ display: "flex", marginLeft: "20px" }}>
+              {cookies.get("currentUser") &&
+              <div style={{marginRight: "40px"}}>
+                <AutoMatch
+                  setState={setState}
+                  users={state.users}
+                  userId={cookies.get("currentUser")}
+                  skills={state.skills}
+                  projects={state.projects}
+                  skillFilter={skillFilter}
+                />
+              </div>}
+              
+              <div>
+
+                <div style={{marginBottom: "10px", marginRight: "20px"}}>
+                  <button className="btn-ultra-voilet" onClick={()=>{
+                    console.log("showSkills:", state.showSkills)
+                    setShowSkills(!state.showSkills)
+                    }}>
+                    Filter By Skills
+                  </button>
+                  </div>
+                  
+                  
+                </div>
+              </div>
+              
+           
+            )}
+          
+          <div style={{height: "10px"}}></div>
+          {mode === DISPLAY && state.showSkills ? 
+            <div style={{width: "75vw"}}>
+                <SkillList
+                  allSkills={state.allSkills}
+                  skills={state.skills}
+                  pickASkill={skillFilter}
+                />
+              </div>
+            :
+              <div></div>
+            }
+          <div style={{height: "20px"}}></div>
           {mode === DISPLAY && (
             <Display
               user={state.user}

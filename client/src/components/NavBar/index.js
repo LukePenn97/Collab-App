@@ -27,9 +27,9 @@ export default function NavBar(props) {
   };
   // <nav className="navbar navbar-light navbar-expand-lg fixed-top" style={{background: "rgba(184, 222, 233, 0.2)"}}>
   return (
-    <nav className="navbar navbar-light navbar-expand-lg fixed-top" style={{background: "rgba(184, 222, 233, 0.2)"}}>
+    <nav className="navbar navbar-light navbar-expand-lg fixed-top" style={{backgroundImage: "linear-gradient(to right, #FF855C, #F5853F)"}}>
       <div className="container-fluid">
-        <a className="navbar-brand" onClick={props.backToHome}>
+        <a style={{color: "white"}} className="navbar-brand" onClick={props.backToHome}>
           CollabApp
         </a>
       </div>
@@ -42,10 +42,10 @@ export default function NavBar(props) {
           
           
           <li className="nav-item">
-            <a className="nav-link text-nowrap" onClick={props.createNewProject}>Create A Project</a>
+            <a style={{color: "white"}} className="nav-link text-nowrap" onClick={props.createNewProject}>Create A Project</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link text-nowrap" onClick={() => {
+            <a style={{color: "white"}} className="nav-link text-nowrap" onClick={() => {
                 cookies.remove("currentUser");
                 window.location.reload();
                 }}>
@@ -66,12 +66,12 @@ export default function NavBar(props) {
           <ul class="navbar-nav ml-auto">
           <div style={{display: "flex"}}>
             <li>
-              <a className="nav-link text-nowrap" onClick={props.register}>
+              <a style={{color: "white"}} className="nav-link text-nowrap" onClick={props.register}>
                 Register
               </a>
             </li>
             <li>
-              <a className="nav-link text-nowrap" onClick={()=>{
+              <a style={{color: "white"}} className="nav-link text-nowrap" onClick={()=>{
                   cookies.set("currentUser", 1, { path: "/" })
                   window.location.reload()
                 }}>

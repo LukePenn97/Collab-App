@@ -19,5 +19,5 @@ export default function SkillList(props) {
     );
   });
 
-  return <Box width="170px" display="flex" flexWrap="wrap">{skillList}</Box>;
+  return <Box display="flex" flexWrap="wrap" justifyContent="center">{skillList}</Box>;
 }
