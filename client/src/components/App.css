@@ -29,6 +29,19 @@ main {
 .skillIcon:hover {
   background: #F8F8F1;
 }
+
+.navbutton:hover {
+  background: #c55733;
+  cursor: pointer;
+  border-radius: 10px;
+
+}
+.navbutton {
+  padding: 5px;
+  transition: 0.3s;
+  font-size: 26px;
+}
+
 .btn-ultra-voilet {
   background: #141E30;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
