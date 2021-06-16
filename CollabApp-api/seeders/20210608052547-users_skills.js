@@ -1,4 +1,5 @@
 'use strict';
+
 const { SKILLS, MAXSKILLSPERUSER, MAXUSERS, MAXMENTORS } = require("../helpers/constants");
 const userSkills = []
 
