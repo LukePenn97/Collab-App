@@ -45,7 +45,7 @@ main {
 .btn-ultra-voilet {
   background: #141E30;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
-  background: #B9DFC8;
+  background: #8ecae6;
   color: black;
   border: 3px solid #eee;
   border-radius: 10px;
@@ -55,7 +55,7 @@ main {
   transition: 0.3s;
 }
 .btn-ultra-voilet:hover {
-  background: #55917F;
+  background: #023047;
   color: white
 }
 
