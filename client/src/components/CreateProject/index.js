@@ -1,14 +1,24 @@
-import React, {useState} from "react";
-import Select from 'react-select';
+//import React from 'react';
+import React, {useState} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import {
+  TextField,
+  FormLabel,
+  Input,
+  Checkbox,
+  Typography,
+  Button,
+  CssBaseline,
+  MenuItem,
+  FormGroup,
+  FormControl,
+  FormControlLabel,
+} from '@material-ui/core';
 import axios from 'axios';
 import Cookies from "universal-cookie";
-import {
-    Label,
-    Input,
-    Textarea,
-    Checkbox,
-  } from '@rebass/forms'
-import StateManager from "react-select";
+import MultiChipSelect from "./multiChipSelect";
 
 
 // creat project initiation;
@@ -21,6 +31,8 @@ import StateManager from "react-select";
     { key: "skillId4", value: 4, label: 'SQL', isFixed: true },
     { key: "skillId5", value: 5, label: 'Express', isFixed: true },
   ];
+ const  allItems = options.map(s => ({ name: s.label, id: s.value }));
+
   const initialValues = {
     id: 0,
     projectLeadId: Number(currentUser),
@@ -36,9 +48,94 @@ import StateManager from "react-select";
     endDate: ""
   };
 
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: theme.spacing(2),
+      padding: 10,
+      margin: 'auto',
+      maxWidth: '900px',
+
+      '& .MuiTextField-root': {
+        margin: theme.spacing(1),
+        width: '600px'
+      },
+      '& .MuiButtonBase-root': {
+        margin: theme.spacing(2),
+      },
+    },
+
+    // paper: {
+    //   backgroundColor: theme.palette.background.paper,
+    //   border: '2px solid #000',
+    //   boxShadow: theme.shadows[5],
+    //   padding: theme.spacing(2, 4, 3),
+    // },
+
+    Heading: {
+      margin: '0px',
+      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+      fontWeight: '500',
+      fontSize: '29px',
+      lineHeight: '1.2',
+      letterSpacing: '-0.24px',
+      color: 'rgb(23, 43, 77)'
+    }
+  }));
+
+
 export default function CreateProject(props) {
-  const [submitted, setSubmitted] = useState(false);
+  const classes = useStyles();
   const [newProject, setNewProject] = useState(initialValues);
+  // const [items, setItems] = useState(allItems);
+  // const [selectedItem, setSelectedItem] = useState([]);
+
+  const [state, setState] = useState({
+    initItems: allItems,
+    items: allItems,
+    selectedItem:[],
+    mySkills:[]
+  });
+
+  const setItems = items => setState({ ...state, items });
+  const setSelectedItem = selectedItem => setState((prev) => {
+    return {...prev, selectedItem};
+  });
+  const setMySkills = mySkills => setState((prev) => {
+    return {...prev, mySkills};
+  });
+  const handleChange = selectedItem => {
+    if (state.selectedItem.includes(selectedItem)) {
+      removeSelectedItem(selectedItem);
+    } else {
+      addSelectedItem(selectedItem);
+    }
+  };
+
+  const addSelectedItem = item => {
+    let elm = state.initItems.find(i => i.name === item);
+    setState((prev) => ({
+      inputValue: "",
+      ...prev,
+      selectedItem: [...state.selectedItem, item],
+      items: state.items.filter(i => i.name !== item),
+      mySkills: [...state.mySkills, elm.id]
+    }));
+  }
+
+  const removeSelectedItem = item => {
+    let elm = state.initItems.find(i => i.name === item);
+    setState((prev) => ({
+      inputValue: "",
+      ...prev,
+      selectedItem: state.selectedItem.filter(i => i !== item),
+      items: [...state.items, { name: item, id: elm.id }],
+      mySkills: state.mySkills.filter(i => i !== elm.id)
+    }));
+  };
 
     // Final submit handler
     //(axios returns a complete project object with the id of database and ubdates the state)
@@ -55,20 +152,10 @@ export default function CreateProject(props) {
           const myProject = props.projects.find(project => project.id === data.data);
           console.log(myProject, newProject);
           props.pickAProject(myProject);
-          setSubmitted(true);
         })
         .catch(err => console.log(err))
       }
-      // if (submitted) {
-      //   return props.pickAProject(newProject)
-      //   return <Redirect push to={{
-      //     pathname: `/`,
-      //     // pathname: `/${newProject.id}/findUsers`,
-      //     // state: {data: newProject}
-      //   }}
-      //   />
-      // }
-      
+
       // Change handler for all inputs except skills
       const handleInputChange = (e) => {
         e.preventDefault()
@@ -78,81 +165,91 @@ export default function CreateProject(props) {
           [name]: value,
         });
       };
+
       // Change handler for selected skills
       const onSkillsChanged = (e) => {
-        const _skills = []
-        for (const elem of e) {
-          _skills.push(elem.value)
-        }
+       // e.preventDefault()
+        console.log(e);
         setNewProject(prev => ({
           ...prev,
-          project_skills: _skills
+          project_skills: state.mySkills
         }))
       }
   return (
 
-    <article>
-
-    <h2>--------------------Create Project-----------------</h2>
-    <box as='form' py={3}>
-      <flex mx={-2} mb={3}>
-        <box width={1/2} px={2}>
-          <label htmlFor='Title'>Name</label><br /><br />
-          <Input
+    <form className={classes.root} noValidate onSubmit={submitNewProject}>
+    <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
+      <CssBaseline />
+      <Typography variant="h4" align="center" component="h1" gutterBottom>
+      🏁🏁 New Project Form 🏁🏁
+      </Typography>
+      <Typography variant="h6" align="center" component="h2" gutterBottom>
+        (All fields are required)
+      </Typography>
+    </div>
+    <div>
+          <TextField
             id='title'
+            label="Title"
+            variant="outlined"
             type='text'
             name='name'
             value={newProject.name}
-            placeholder='My Project'
             onChange={handleInputChange}
           />
-          <br /><br />
-          <Label htmlFor='Description'>Description</Label><br />
-          <Textarea
+      </div>
+      <div>
+          <TextField
             id='description'
+            label='Description'
             type='text'
             name='description'
+            variant="outlined"
             value={newProject.description}
-            placeholder='My Project description'
             onChange={handleInputChange}
-            rows="4" cols="50"
+            multiline
+            rowsMax={4}
           /><br />
-        <box width={1/2} px={2}>
-          <label htmlFor='skills'><strong>Required Skills </strong></label>
-          <Select onChange={onSkillsChanged}
-            isMulti
-
-            name="project.skills"
-            options={options}
-            className="basic-multi-select"
-            classNamePrefix="select"
-            >
-          {options.map((option) => (
-            <option key={option.key} value={option.value}>{option.label}</option>
-          ))}
-          </Select>
-        </box><br /><br />
-        <label htmlFor='URL'>URL</label><br /><br />
-        <Input
+      </div>
+      <div>
+      <FormGroup>
+        <FormControl>
+          <FormLabel>Find the skill needed for your project</FormLabel>
+          <MultiChipSelect
+            onInputValueChange={(e) => onSkillsChanged(e)}
+            inputValue={state.inputValue}
+            availableItems={state.items}
+            selectedItem={state.selectedItem}
+            onChange={(chip) => addSelectedItem(chip)}
+            onRemoveItem={removeSelectedItem}
+          />
+        </FormControl>
+      </FormGroup>
+       </div>
+       <div>
+          <TextField
             id='URL'
+            label="URL"
+            variant="outlined"
             type='text'
             name='url'
             value={newProject.url}
-            placeholder='My Project URL'
             onChange={handleInputChange}
-        />
-        <br />
-        <label htmlFor='imageUrl'>Image URL</label><br /><br />
-        <Input
-            id='ImgURL'
+          />
+      </div>
+      <div>
+          <TextField
+            id='imgURL'
+            label="Image URL"
+            variant="outlined"
             type='text'
             name='imgUrl'
-            value={newProject.umageUrl}
-            placeholder='My Project Image URL'
+            value={newProject.imageUrl}
             onChange={handleInputChange}
-        />
+          />
+        </div>
         <br />
-        <label htmlFor='deadLine'>Deadline</label><br /><br />
+        <FormLabel htmlFor='deadLine'>Deadline</FormLabel><br /><br />
         <Input
             id='Deadline'
             type='date'
@@ -162,7 +259,7 @@ export default function CreateProject(props) {
             onChange={handleInputChange}
         />
         <br />
-        <label htmlFor='startDate'>Start Date</label><br /><br />
+        <FormLabel htmlFor='startDate'>Start Date</FormLabel><br /><br />
         <Input
             id='startDate'
             type='date'
@@ -172,7 +269,7 @@ export default function CreateProject(props) {
             onChange={handleInputChange}
         />
         <br />
-        <label htmlFor='endDate'>End Date</label><br /><br />
+        <FormLabel htmlFor='endDate'>End Date</FormLabel><br /><br />
         <Input
             id='endDate'
             type='date'
@@ -181,23 +278,17 @@ export default function CreateProject(props) {
             placeholder='My Project End Date'
             onChange={handleInputChange}
         />
-        <br /><br />
-        </box>
-        </flex>
-        <flex mx={-2} flexWrap='wrap'>
-            <Label width={[1/2, 1/4]} p={2}>
+        <br />
+            <FormLabel width={[1/2, 1/4]} p={2}>
             <Checkbox
                 id='remember'
                 name='remember'
             />
             Remember Me
-            </Label>
-            <box px={2} ml='auto'><br /><br />
-            <button
-              onClick={submitNewProject}>Register</button>
-            </box>
-        </flex>
-      </box>
-    </article>
+            </FormLabel>
+            <Button variant="secondary" color="primary"
+             onClick={submitNewProject}>Register</Button>
+     </form>
+
   )
 }
