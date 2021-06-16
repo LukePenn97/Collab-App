@@ -11,7 +11,8 @@ export default function useApplicationData() {
     roomName:"",
     skills: [],
     matchedProjects: [],
-    allSkills: []
+    allSkills: [],
+    showSkills: false
   });
 
 
@@ -49,6 +50,8 @@ export default function useApplicationData() {
 
   const setUsers = (users) => setState({ ...state, "users": users });
   
+  const setShowSkills = (showSkills) => setState({ ...state, "showSkills": showSkills });
+
   const setRoomName = (roomName) => setState({ ...state, "roomName": roomName });
   
   const setSkills = (newSkills) => {
@@ -56,5 +59,5 @@ export default function useApplicationData() {
     setState({...state, skills: newSkills})
   };
   
-  return { state, setState, setProject, setProjects, setUser, setUsers, setRoomName, setSkills, setMatchedProjects};
+  return { state, setState, setProject, setProjects, setUser, setUsers, setRoomName, setSkills, setMatchedProjects, setShowSkills};
 }
