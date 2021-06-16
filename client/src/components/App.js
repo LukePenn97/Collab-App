@@ -21,7 +21,7 @@ import CreateProject from "./CreateProject";
 import SkillList from "./SkillList";
 import SearchBar from "./SearchBar";
 import AutoMatch from "./AutoMatch";
-import { filterProjectsBySkills } from "../helpers/selectors";
+import { filterProjectsBySkills, findUserById } from "../helpers/selectors";
 
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
@@ -65,6 +65,10 @@ function App(props) {
   const SKILLS = "SKILLS";
   const CREATE = "CREATE";
 
+  const currentUserId = cookies.get("currentUser");
+  console.log("cookie",typeof currentUserId)
+  // const currentUser = findUserById(parseInt(currentUserId), state.users);
+  // console.log(currentUser);
   const { mode, transition, back } = useVisualMode(DISPLAY);
   if (props.mode === "REGISTER") {
     console.log("HELOOOOOO");
@@ -109,6 +113,9 @@ function App(props) {
   function createNewProject() {
     transition(CREATE);
   }
+  function myProfile(){
+    pickAUser(parseInt(currentUserId));
+  }
 
   function skillFilter(skills, autoMatch) {
     let newSkills;
@@ -147,6 +154,7 @@ function App(props) {
           registration={registration}
           login={login}
           createNewProject={createNewProject}
+          myProfile={myProfile}
         />
       </div>
       {mode === DISPLAY && (
@@ -227,6 +235,15 @@ function App(props) {
             />
           )}
           {mode === DETAIL && (
+            <JssProvider generateClassName={generateClassName}>
+            <MuiThemeProvider
+              theme={createMuiTheme({
+                typography: {
+                  useNextVariants: true,
+                },
+                overrides: ProjectDetail.getTheme(muiBaseTheme),
+              })}
+            >
             <ProjectDetail
               user={state.user}
               users={state.users}
@@ -241,6 +258,9 @@ function App(props) {
               setProjects={setProjects}
               setProject={setProject}
             />
+              
+            </MuiThemeProvider>
+          </JssProvider>
           )}
           {mode === CHAT && (
             <ChatRoom
@@ -257,15 +277,26 @@ function App(props) {
             />
           )}
           {mode === PROFILE && (
-            <Profile
-              user={state.user}
-              users={state.users}
-              currentUser={state.user}
-              project={state.project}
-              projects={state.projects}
-              pickAProject={pickAProject}
-              pickAUser={pickAUser}
-            />
+            <JssProvider generateClassName={generateClassName}>
+              <MuiThemeProvider
+                theme={createMuiTheme({
+                  typography: {
+                    useNextVariants: true,
+                  },
+                  overrides: Profile.getTheme(muiBaseTheme),
+                })}
+              >
+                <Profile
+                  user={state.user}
+                  users={state.users}
+                  currentUser={state.user}
+                  project={state.project}
+                  projects={state.projects}
+                  pickAProject={pickAProject}
+                  pickAUser={pickAUser}
+                />
+              </MuiThemeProvider>
+            </JssProvider>
           )}
           {mode === REGISTER && (
             <Register
