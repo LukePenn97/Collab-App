@@ -108,7 +108,7 @@ export default function ChatRoom(props) {
           ></button>
         </div>
       </section>
-      <div style={{position: "fixed", display: "block", marginTop: "650px", left: "350px" }}>
+      <div style={{position: "fixed", display: "block", marginTop: "200px", left: "350px"}}>
         <MentorRequest
         users={props.users}
         allSkills={props.allSkills}

@@ -10,6 +10,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 const ProjectInfo = (props) => {
   //logic for goals
@@ -87,6 +88,7 @@ const ProjectInfo = (props) => {
             >
               {props.project.name}
             </Typography>
+            <div><GitHubIcon/></div>
             <Typography
               className={"MuiTypography--heading"}
               variant={"h6"}
