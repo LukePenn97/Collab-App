@@ -127,6 +127,7 @@ const CustomCard = ({
             <Button
               // className={styles.join}
               // classes={btnStyles}
+              onClick={()=>{alert("Hello")}}
               variant={'outlined'}
               color={'primary'}
               disableRipple
@@ -179,7 +180,7 @@ export default function ProjectListItem(props) {
       <NoSsr>
         <GoogleFontLoader fonts={[{ font: 'Roboto', weights: [800, 700] }]} />
       </NoSsr>
-      <Grid container spacing={4} justify="center" alignItems="center">
+      <Grid container spacing={10} justify="center" alignItems="center">
         <Grid item xs={12}>
           <CustomCard
             thumbnail={props.imgUrl}
