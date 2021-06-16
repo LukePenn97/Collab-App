@@ -9,6 +9,9 @@ import Avatar from '@material-ui/core/Avatar';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import Grid from '@material-ui/core/Grid';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
 import { Info, InfoSubtitle, InfoTitle } from '@mui-treasury/components/info';
@@ -80,6 +83,7 @@ const CustomCard = ({
   users,
   project_skills,
   joined = false,
+  sendJoinRequest
 }) => {
   const styles = useStyles();
   const btnStyles = useGraphicBtnStyles();
@@ -127,7 +131,7 @@ const CustomCard = ({
             <Button
               // className={styles.join}
               // classes={btnStyles}
-              onClick={()=>{alert("Hello")}}
+              onClick={()=>{sendJoinRequest(creator)}}
               variant={'outlined'}
               color={'primary'}
               disableRipple
@@ -135,6 +139,9 @@ const CustomCard = ({
             >
               {joined ? 'Leave group' : 'Join group'}
             </Button>
+          </Item>
+          <Item position={'middle-right'}>
+            
           </Item>
           <Item position={'middle-right'}>
             <Button
@@ -156,6 +163,20 @@ const CustomCard = ({
   );
 };
 export default function ProjectListItem(props) {
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
  
   const projectLead = findUserById(props.projectLeadId, props.users);
 
@@ -176,6 +197,7 @@ export default function ProjectListItem(props) {
 
 
   return (
+    
     <>
       <NoSsr>
         <GoogleFontLoader fonts={[{ font: 'Roboto', weights: [800, 700] }]} />
@@ -183,6 +205,7 @@ export default function ProjectListItem(props) {
       <Grid container spacing={10} justify="center" alignItems="center">
         <Grid item xs={12}>
           <CustomCard
+            sendJoinRequest={handleClick}
             thumbnail={props.imgUrl}
             title={props.name}
             titleAction={() => props.pickAProject(props)}
@@ -194,6 +217,28 @@ export default function ProjectListItem(props) {
           />
         </Grid>
       </Grid>
+      <div>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          message={`Your request has been sent to ${projectLead.firstName} ${projectLead.lastName}`}
+          action={
+            <React.Fragment>
+              <Button color="secondary" size="small" onClick={handleClose}>
+                UNDO
+              </Button>
+              <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </React.Fragment>
+          }
+        />
+      </div>
     </>
   );
 };
