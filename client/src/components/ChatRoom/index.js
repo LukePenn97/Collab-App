@@ -108,9 +108,14 @@ export default function ChatRoom(props) {
           ></button>
         </div>
       </section>
+      <div style={{position: "fixed", display: "block", marginTop: "650px", left: "350px" }}>
+        <MentorRequest
+        users={props.users}
+        allSkills={props.allSkills}
+        />
+      </div>
 
-<div className="sideBar">
-  <Grid className="mentor" ><MentorRequest users={props.users} /></Grid>
+
   
 <JssProvider generateClassName={generateClassName}>
       <MuiThemeProvider
@@ -122,6 +127,7 @@ export default function ChatRoom(props) {
         })}
       >
        
+       
         <ProjectInfo 
          users={props.users}
          project={props.project}
@@ -132,7 +138,9 @@ export default function ChatRoom(props) {
       </MuiThemeProvider>
     </JssProvider>
       </div>
-    </div>
+      
+    // </div>
+    
   );
 }
 

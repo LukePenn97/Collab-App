@@ -181,10 +181,15 @@ function App(props) {
         )}
         <section id="mainsection">
         <section id="content">
+        {mode === DISPLAY && !cookies.get("currentUser") && (
+          <div>
+
+          </div>
+        )}
         {mode === DISPLAY && cookies.get("currentUser") && (
           <div className="match-search" style={{ display: "flex" }}>
             <div className="container">
-                    <div >
+                    <div>
                       <AutoMatch
                         setState={setState}
                         users={state.users}

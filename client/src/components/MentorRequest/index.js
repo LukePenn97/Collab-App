@@ -20,6 +20,21 @@ export default function MentorRequest(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const options = props.allSkills.map((skill)=>{
+    //console.log(skill)
+    return {value: skill.id, label: skill.name, isFixed: true}
+  })
+
+  const onSkillsChanged = (e) => {
+    const _skills = []
+    console.log(e)
+    for (const elem of e) {
+      _skills.push(elem.value)
+    }
+    setSkills(_skills)
+    setMentors(findMentors(props.users, _skills));
+  }
+
   const sendMentorRequest = () => {
 
   }
@@ -46,7 +61,7 @@ export default function MentorRequest(props) {
       <div onClick={()=>console.log("mentor:", mentor)}>
           <img src={mentor.photo} />
           <p className="legend">
-            {mentor.firstName} {mentor.lastName}<br></br>{mentor.user_skills[0].name}
+            {mentor.firstName} {mentor.lastName}<br></br>{mentor.user_skills.map((skill) => skill.name + " ")}
           </p>
       </div>
     
@@ -66,20 +81,30 @@ export default function MentorRequest(props) {
       View Available Mentors
     </Button>
 
-    <Modal className="mentormodal" show={show} onHide={handleClose}>
+    <Modal dialogClassName="mentormodal" show={show} onHide={handleClose}>
       <Modal.Header>
         <Modal.Title>Make A Mentor Request!</Modal.Title>
         
       </Modal.Header>
 
-      <Modal.Body style={{display: "flex"}}>
+      <Modal.Body style={{display: "flex", flexFlow: "column wrap", alignItems: "center"}}>
         <div>
           <p>Choose the skills you need:</p>
-          <SkillList
+          <Select
+            // defaultValue={[colourOptions[2], colourOptions[3]]}
+            onChange={onSkillsChanged}
+            isMulti
+
+            name="skills"
+            options={options}
+            className="basic-multi-select"
+            classNamePrefix="select"
+          />
+          {/* <SkillList
             allSkills={props.allSkills}
             skills={skills}
             pickASkill={handleMentorSkills}
-          />
+          /> */}
           <br></br>
         </div>
         <div>
