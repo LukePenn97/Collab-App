@@ -3,6 +3,7 @@ import React from "react";
 import ProjectList from "../ProjectList";
 import { findUserById, findAllById } from "../../helpers/selectors";
 import "./profile.scss";
+import Cookies from "universal-cookie";
 
 //material-ui
 import Avatar from "@material-ui/core/Avatar";
@@ -15,72 +16,109 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Icon from "@material-ui/core/Icon";
 import Divider from "@material-ui/core/Divider";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import StarIcon from '@material-ui/icons/Star';
+import { makeStyles } from '@material-ui/core/styles';
+import EditIcon from '@material-ui/icons/Edit';
 
+
+const cookies = new Cookies();
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
 const Profile = (props) => {
   //find the data of the user by id
-  const userToShow = findUserById(props.user, props.users);
-
-
-  //find the projects created by the user
   const projectsToShow = findAllById(props.user, props.projects);
 
+  const currentUser = cookies.get("currentUser");
+  const userToShow = findUserById(props.user, props.users);
+  let isMe;
+  if (userToShow) {
+     isMe = (userToShow.id === currentUser);
+  };
+
+  //find the projects created by the user
+
+  const classes = useStyles();
   return (
     <article className="profile">
       <Card className={"MuiPostCard--01"}>
-    <CardMedia
-      className={"MuiCardMedia-root"}
-      image={
-        "https://images.unsplash.com/photo-1517147177326-b37599372b73?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2229&q=80"
-      }
-    >
-      
-      <Avatar
-        className={"MuiAvatar-root"}
-        src={userToShow.photo}
-      />
-    </CardMedia>
-    <CardContent className={"MuiCardContent-root"}>
-      <Typography
-        className={"MuiTypography--heading"}
-        variant={"h5"}
-        gutterBottom
-      >
-        {`${userToShow.firstName} ${userToShow.lastName}`}
-      </Typography>
-      <Typography className={"MuiTypography--subheading"} variant={"caption"}>
+        <CardMedia
+          className={"MuiCardMedia-root"}
+          image={
+            "https://images.unsplash.com/photo-1517147177326-b37599372b73?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2229&q=80"
+          }
+        >
+          <Avatar className={"MuiAvatar-root"} src={userToShow.photo} />
+        </CardMedia>
+        <CardContent className={"MuiCardContent-root"}>
+          <Typography
+            className={"MuiTypography--heading"}
+            variant={"h5"}
+            gutterBottom
+          >
+            {`${userToShow.firstName} ${userToShow.lastName}`}
+          </Typography>
+          <Typography
+            className={"MuiTypography--subheading"}
+            variant={"caption"}
+          ></Typography>
+          {userToShow.user_skills && userToShow.user_skills.map( skill => (
+          <List component="nav" className={classes.root} aria-label="contacts">
+            <ListItem button>
+              <ListItemIcon>
+                <StarIcon />
+              </ListItemIcon>
+              <ListItemText primary={skill.name} />
+            </ListItem>
+          </List>
+          ))}
+          {isMe? (
+            <ListItemIcon>
+              <EditIcon/>
+          </ListItemIcon>
+          ) : (
+            null
+            )}
+            
 
-      </Typography>
-    </CardContent>
-    <CardActions className={"MuiCardActions-root"}>
-      <Typography variant={"caption"}>
-        <Link block href={"javascript:;"} underline={"none"}>
-         {}
-        </Link>
-      </Typography>
-      <div>
-        <IconButton>
-          <Icon>share</Icon>
-        </IconButton>
-        <IconButton>
-          <Icon>favorite_border_rounded</Icon>
-        </IconButton>
-      </div>
-    </CardActions>
-    <Divider className={"MuiDivider-root"} light />
-      <ProjectList
-        users={props.users}
-        project={props.project}
-        projects={projectsToShow}
-        pickAProject= {props.pickAProject}
-        pickAUser = {props.pickAUser}
-      />
-  </Card>
+        </CardContent>
+        <CardActions className={"MuiCardActions-root"}>
+          <Typography variant={"caption"}>
+            <Link block href={"javascript:;"} underline={"none"}>
+              {}
+            </Link>
+          </Typography>
+          <div>
+            <IconButton>
+              <Icon>share</Icon>
+            </IconButton>
+            <IconButton>
+              <Icon>favorite_border_rounded</Icon>
+            </IconButton>
+          </div>
+        </CardActions>
+        <Divider className={"MuiDivider-root"} light />
+        <ProjectList
+          users={props.users}
+          project={props.project}
+          projects={projectsToShow}
+          pickAProject={props.pickAProject}
+          pickAUser={props.pickAUser}
+        />
+      </Card>
     </article>
-      
-      
   );
-}
-Profile.getTheme = muiBaseTheme => ({
+};
+Profile.getTheme = (muiBaseTheme) => ({
   MuiCard: {
     root: {
       "&.MuiPostCard--01": {
@@ -90,7 +128,7 @@ Profile.getTheme = muiBaseTheme => ({
         boxShadow: "0 0 20px 0 rgba(0,0,0,0.12)",
         "&:hover": {
           transform: "translateY(-3px)",
-          boxShadow: "0 4px 20px 0 rgba(0,0,0,0.12)"
+          boxShadow: "0 4px 20px 0 rgba(0,0,0,0.12)",
         },
         "& .MuiDivider-root": {
           margin: `${muiBaseTheme.spacing.unit * 5}px 0`,
@@ -112,19 +150,19 @@ Profile.getTheme = muiBaseTheme => ({
               position: "absolute",
               right: -16,
               content: '" "',
-              borderLeft: `16px solid ${muiBaseTheme.palette.secondary.main}`
+              borderLeft: `16px solid ${muiBaseTheme.palette.secondary.main}`,
             },
             "&:before": {
               top: 0,
-              borderBottom: "12px solid transparent"
+              borderBottom: "12px solid transparent",
             },
             "&:after": {
               bottom: 0,
-              borderTop: "12px solid transparent"
+              borderTop: "12px solid transparent",
             },
             "& .MuiTypography-root": {
-              fontWeight: "bold"
-            }
+              fontWeight: "bold",
+            },
           },
           "& .MuiAvatar-root": {
             position: "absolute",
@@ -133,7 +171,7 @@ Profile.getTheme = muiBaseTheme => ({
             transform: "translateY(20%)",
             width: 120,
             height: 120,
-            zIndex: 1
+            zIndex: 1,
           },
           "&:after": {
             content: '" "',
@@ -142,37 +180,35 @@ Profile.getTheme = muiBaseTheme => ({
             bottom: 0,
             width: "100%",
             borderBottom: "32px solid #ffffff",
-            borderLeft: "400px solid transparent"
-          }
+            borderLeft: "400px solid transparent",
+          },
         },
         "& .MuiCardContent-root": {
           textAlign: "left",
-          padding: muiBaseTheme.spacing.unit * 3
+          padding: muiBaseTheme.spacing.unit * 3,
         },
         "& .MuiTypography--heading": {
-          fontWeight: "bold"
+          fontWeight: "bold",
         },
         "& .MuiTypography--subheading": {
-          lineHeight: 1.8
+          lineHeight: 1.8,
         },
         "& .MuiCardActions-root": {
-          padding: `0 ${muiBaseTheme.spacing.unit * 3}px ${muiBaseTheme.spacing
-            .unit * 3}px`,
+          padding: `0 ${muiBaseTheme.spacing.unit * 3}px ${
+            muiBaseTheme.spacing.unit * 3
+          }px`,
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center"
-        }
-      }
-    }
-  }
+          alignItems: "center",
+        },
+      },
+    },
+  },
 });
 Profile.displayName = "Card";
 Profile.metadata = {
   name: "Post Card",
-  description: "Personal Post"
+  description: "Personal Post",
 };
-
-
-
 
 export default Profile;

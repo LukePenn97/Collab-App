@@ -65,6 +65,7 @@ function App(props) {
   const SKILLS = "SKILLS";
   const CREATE = "CREATE";
 
+  const currentUser = cookies.get("currentUser");
   const { mode, transition, back } = useVisualMode(DISPLAY);
   if (props.mode === "REGISTER") {
     console.log("HELOOOOOO");
@@ -107,6 +108,10 @@ function App(props) {
   function createNewProject() {
     transition(CREATE);
   }
+  function myProfile(currentUser){
+    pickAUser(currentUser)
+    transition(PROFILE)
+  }
 
   function skillFilter(skills, autoMatch) {
     let newSkills;
@@ -145,6 +150,7 @@ function App(props) {
           registration={registration}
           login={login}
           createNewProject={createNewProject}
+          pickAUser={pickAUser}
         />
       </div>
       <div>

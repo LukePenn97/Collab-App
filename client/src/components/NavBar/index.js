@@ -75,6 +75,11 @@ export default function NavBar(props) {
                 </li>
               </div>
             )}
+            {/* <li>
+                  <a class="nav-link" onClick={props.pickAUser(props)}>
+                    Profile
+                  </a>
+                </li> */}
           </ul>
 
 
