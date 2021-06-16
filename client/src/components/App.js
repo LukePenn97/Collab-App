@@ -96,9 +96,11 @@ function App(props) {
     transition(CHAT);
   }
   function registration() {
+
     transition(REGISTER);
   }
   function login() {
+    
     transition(LOGIN);
   }
   function pickSkills(user) {
@@ -153,9 +155,16 @@ function App(props) {
           pickAUser={pickAUser}
         />
       </div>
+      {mode === DISPLAY && (
       <div>
         <Header/>
       </div>
+      )}
+      {mode !== DISPLAY && (
+      <div style={{height: "100px"}}>
+        
+      </div>
+      )}
         {mode === DISPLAY && (
           <div id="sidebar">
             <h4>Filter By Skills</h4>
@@ -170,7 +179,7 @@ function App(props) {
         )}
         <section id="mainsection">
         <section id="content">
-        {mode === DISPLAY && (
+        {mode === DISPLAY && cookies.get("currentUser") && (
           <div className="match-search" style={{ display: "flex" }}>
             <div className="container">
                     <div >
@@ -245,6 +254,7 @@ function App(props) {
               pickAUser={pickAUser}
               allSkills={state.allSkills}
               skills={state.skills}
+              setState={setState}
             />
           )}
           {mode === PROFILE && (
