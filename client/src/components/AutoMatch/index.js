@@ -33,7 +33,7 @@ export default function AutoMatch(props){
   }
 
   return (
-    <Button onClick={()=>autoMatch(currentUserSkills)}>AutoMatch</Button>
+    <button className="btn-ultra-voilet" onClick={()=>autoMatch(currentUserSkills)}>AutoMatch</button>
     
   )
 }

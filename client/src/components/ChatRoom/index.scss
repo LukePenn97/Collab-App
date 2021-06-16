@@ -1,10 +1,12 @@
 .main-box {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: space-around;
+  
   position:relative;
+}
 
-  .chatBox {
+.chatBox {
     background-color: red;
     height:580px;
     margin-left: -30%;
@@ -19,4 +21,3 @@
       // background-color: royalblue;
     }
   }
-}

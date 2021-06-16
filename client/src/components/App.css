@@ -21,6 +21,20 @@ main {
   /* height: 75vh;
   overflow: scroll; */
 }
+
+.btn-ultra-voilet {
+  background: #654ea3;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #eaafc8, #654ea3);
+  color: #fff;
+  border: 3px solid #eee;
+  border-radius: 50px;
+  height: 100px;
+  width: 400px;
+  font-size: 30px;
+}
+
+
 /* Tooltip container */
 .tooltip {
   position: relative;
