@@ -4,6 +4,7 @@ import useChat from "../../hooks/useChat";
 import { findUserById } from "../../helpers/selectors";
 import MentorRequest from "../MentorRequest";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 
 import "./goal.css";
@@ -108,11 +109,15 @@ export default function ChatRoom(props) {
           ></button>
         </div>
       </section>
-      <div style={{position: "fixed", display: "block", marginTop: "200px", left: "350px"}}>
+      
+      <div style={{position: "absolute", display: "block", marginTop: "-40px", left: "30px"}}>
         <MentorRequest
         users={props.users}
         allSkills={props.allSkills}
         />
+      </div>
+      <div style={{position: "absolute", display: "block", marginTop: "-40px", left: "560px"}}>
+        <Button style ={{backgroundColor:"lightblue"}}>Join Us</Button>
       </div>
 
 
