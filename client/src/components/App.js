@@ -21,7 +21,7 @@ import CreateProject from "./CreateProject";
 import SkillList from "./SkillList";
 import SearchBar from "./SearchBar";
 import AutoMatch from "./AutoMatch";
-import { filterProjectsBySkills } from "../helpers/selectors";
+import { filterProjectsBySkills, findUserById } from "../helpers/selectors";
 
 import useVisualMode from "../hooks/useVisualMode";
 import useAppData from "../hooks/useAppData";
@@ -65,7 +65,10 @@ function App(props) {
   const SKILLS = "SKILLS";
   const CREATE = "CREATE";
 
-  const currentUser = cookies.get("currentUser");
+  const currentUserId = cookies.get("currentUser");
+  console.log("cookie",typeof currentUserId)
+  // const currentUser = findUserById(parseInt(currentUserId), state.users);
+  // console.log(currentUser);
   const { mode, transition, back } = useVisualMode(DISPLAY);
   if (props.mode === "REGISTER") {
     console.log("HELOOOOOO");
@@ -110,9 +113,8 @@ function App(props) {
   function createNewProject() {
     transition(CREATE);
   }
-  function myProfile(currentUser){
-    pickAUser(currentUser)
-    transition(PROFILE)
+  function myProfile(){
+    pickAUser(parseInt(currentUserId));
   }
 
   function skillFilter(skills, autoMatch) {
@@ -152,7 +154,7 @@ function App(props) {
           registration={registration}
           login={login}
           createNewProject={createNewProject}
-          pickAUser={pickAUser}
+          myProfile={myProfile}
         />
       </div>
       {mode === DISPLAY && (

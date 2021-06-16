@@ -39,6 +39,7 @@ export default function NavBar(props) {
         {isLoggedIn ? (
           <ul class="navbar-nav ml-auto">
           
+          
           <li className="nav-item">
             <a className="nav-link text-nowrap" onClick={props.createNewProject}>Create A Project</a>
           </li>
@@ -49,6 +50,9 @@ export default function NavBar(props) {
                 }}>
               Logout
             </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link text-nowrap" onClick={()=> props.myProfile()}>Profile</a>
           </li>
           </ul>
           
@@ -123,10 +127,10 @@ export default function NavBar(props) {
                   <a class="nav-link" onClick={props.pickAUser(props)}>
                     Profile
                   </a>
-                </li> */}
-          </ul>
+                // </li> }
+//           </ul>
 
 
 
-        </div>
-*/
+//         </div>
+// */

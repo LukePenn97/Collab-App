@@ -42,8 +42,9 @@ const Profile = (props) => {
   const userToShow = findUserById(props.user, props.users);
   let isMe;
   if (userToShow) {
-     isMe = (userToShow.id === currentUser);
+     isMe = (userToShow.id === parseInt(currentUser));
   };
+
 
   //find the projects created by the user
 
