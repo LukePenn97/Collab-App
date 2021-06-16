@@ -177,10 +177,10 @@ export default function ProjectListItem(props) {
   return (
     <>
       <NoSsr>
-        <GoogleFontLoader fonts={[{ font: 'Ubuntu', weights: [800, 700] }]} />
+        <GoogleFontLoader fonts={[{ font: 'Roboto', weights: [800, 700] }]} />
       </NoSsr>
       <Grid container spacing={4} justify="center" alignItems="center">
-        <Grid item xs={8}>
+        <Grid item xs={12}>
           <CustomCard
             thumbnail={props.imgUrl}
             title={props.name}

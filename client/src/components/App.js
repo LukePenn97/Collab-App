@@ -166,7 +166,7 @@ function App(props) {
         <section id="mainsection">
         <section id="content">
         {mode !== DISPLAY && 
-          <div style={{height: "100px"}}>
+          <div style={{height: "150px"}}>
 
           </div>
         }

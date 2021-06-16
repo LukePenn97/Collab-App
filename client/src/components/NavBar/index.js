@@ -66,7 +66,7 @@ export default function NavBar(props) {
           <ul class="navbar-nav ml-auto">
           <div style={{display: "flex", marginRight: "10px"}}>
             <li>
-              <a style={{color: "white"}} className="nav-link text-nowrap navbutton" onClick={props.register}>
+              <a style={{color: "white"}} className="nav-link text-nowrap navbutton" onClick={props.registration}>
                 Register
               </a>
             </li>
