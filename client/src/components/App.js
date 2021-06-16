@@ -230,6 +230,15 @@ function App(props) {
             />
           )}
           {mode === DETAIL && (
+            <JssProvider generateClassName={generateClassName}>
+            <MuiThemeProvider
+              theme={createMuiTheme({
+                typography: {
+                  useNextVariants: true,
+                },
+                overrides: ProjectDetail.getTheme(muiBaseTheme),
+              })}
+            >
             <ProjectDetail
               user={state.user}
               users={state.users}
@@ -244,6 +253,9 @@ function App(props) {
               setProjects={setProjects}
               setProject={setProject}
             />
+              
+            </MuiThemeProvider>
+          </JssProvider>
           )}
           {mode === CHAT && (
             <ChatRoom

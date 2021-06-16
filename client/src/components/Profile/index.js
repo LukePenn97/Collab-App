@@ -108,6 +108,7 @@ const Profile = (props) => {
           </div>
         </CardActions>
         <Divider className={"MuiDivider-root"} light />
+        <div className="projects-list">
         <ProjectList
           users={props.users}
           project={props.project}
@@ -115,6 +116,7 @@ const Profile = (props) => {
           pickAProject={props.pickAProject}
           pickAUser={props.pickAUser}
         />
+       </div>
       </Card>
     </article>
   );
@@ -127,15 +129,11 @@ Profile.getTheme = (muiBaseTheme) => ({
         maxWidth: "100%",
         margin: "auto",
         boxShadow: "0 0 20px 0 rgba(0,0,0,0.12)",
-        "&:hover": {
-          transform: "translateY(-3px)",
-          boxShadow: "0 4px 20px 0 rgba(0,0,0,0.12)",
-        },
         "& .MuiDivider-root": {
           margin: `${muiBaseTheme.spacing.unit * 5}px 0`,
         },
         "& .MuiCardMedia-root": {
-          paddingTop: "56.25%",
+          paddingTop: "30.25%",
           position: "relative",
           "& .MuiTag--ribbon": {
             position: "absolute",
@@ -167,7 +165,7 @@ Profile.getTheme = (muiBaseTheme) => ({
           },
           "& .MuiAvatar-root": {
             position: "absolute",
-            right: "12%",
+            left: "80%",
             bottom: 0,
             transform: "translateY(20%)",
             width: 120,
