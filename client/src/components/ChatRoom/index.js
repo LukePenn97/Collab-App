@@ -11,10 +11,11 @@ import "./chatBox.scss";
 import "./index.scss";
 import Cookies from "universal-cookie";
 
-//card
+//card material ui
 import JssProvider from "react-jss/lib/JssProvider";
 import { createGenerateClassName } from "@material-ui/core/styles";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import Grid from '@material-ui/core/Grid';
 
 const muiBaseTheme = createMuiTheme();
 
@@ -107,14 +108,15 @@ export default function ChatRoom(props) {
           ></button>
         </div>
       </section>
-      <div style={{position: "fixed", display: "block", marginTop: "650px", left: "350px" }}>
+      <div style={{position: "fixed", display: "block", marginTop: "200px", left: "350px"}}>
         <MentorRequest
         users={props.users}
         allSkills={props.allSkills}
         />
       </div>
 
-<div className="sideBar">
+
+  
 <JssProvider generateClassName={generateClassName}>
       <MuiThemeProvider
         theme={createMuiTheme({
@@ -137,7 +139,7 @@ export default function ChatRoom(props) {
     </JssProvider>
       </div>
       
-    </div>
+    // </div>
     
   );
 }
