@@ -165,6 +165,11 @@ function App(props) {
       )}
         <section id="mainsection">
         <section id="content">
+        {mode !== DISPLAY && 
+          <div style={{height: "100px"}}>
+
+          </div>
+        }
         {mode === DISPLAY && !cookies.get("currentUser") && (
           <div>
 
