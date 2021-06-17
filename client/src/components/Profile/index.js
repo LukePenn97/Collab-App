@@ -39,8 +39,10 @@ const Profile = (props) => {
   const projectsToShow = findAllById(props.user, props.projects);
 
   const currentUser = cookies.get("currentUser");
+  console.log(props.users);
   const userToShow = findUserById(props.user, props.users);
   let isMe;
+  console.log(props);
   if (userToShow) {
      isMe = (userToShow.id === parseInt(currentUser));
   };

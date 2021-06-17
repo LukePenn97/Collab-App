@@ -150,7 +150,7 @@ function App(props) {
       <div>
         <NavBar
           users={state.users}
-          userId={cookies.get("currentUser")}
+          userId={parseInt(cookies.get("currentUser"))}
           backToHome={backToHome}
           registration={registration}
           login={login}

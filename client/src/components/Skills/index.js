@@ -45,6 +45,7 @@ export default function Skills(props) {
   
 
   const currentUser = cookies.get("currentUser");
+  console.log(currentUser, typeof currentUser)
 
   const submitSkills = (props) => {
     const url = `http://localhost:5000/users/${currentUser}/skills`;
@@ -88,14 +89,16 @@ export default function Skills(props) {
   };
 
 const updateUsers = () =>{
-
+  
+  const newUser = parseInt(currentUser);
   const user = props.users.find(user => user.id === parseInt(currentUser));
   const userToUpdate = {...user};
   const skills =[...state.mySkills];
   const user_skills = skills.map(skill => props.allSkills[skill - 1]);
   userToUpdate.user_skills = user_skills;
-  const usersToUpdate = props.users.map(user => user.id === userToUpdate.id ? {userToUpdate} : {...user});
- props.setState(prev => ({...prev,user:currentUser, users :usersToUpdate}));
+  const usersToUpdate = props.users.map(user => user.id === userToUpdate.id ? {...userToUpdate} : {...user});
+  props.setState(prev => ({...prev,user: newUser, users :[...usersToUpdate]}));
+  console.log(props);
 }
 
   
