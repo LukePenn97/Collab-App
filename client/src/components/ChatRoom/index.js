@@ -30,7 +30,8 @@ export default function ChatRoom(props) {
   
   //TODO: button to submit request to join in a group
   const { roomId } = props.roomName;
-  const { messages, sendMessage } = useChat(roomId);
+  const leadId = props.project.project_users[0].id;
+  const { messages, sendMessage } = useChat(roomId,leadId);
   // Creates a websocket and manages messaging
   const [newMessage, setNewMessage] = React.useState(""); // Message to be sent
 
@@ -38,8 +39,16 @@ export default function ChatRoom(props) {
     setNewMessage(event.target.value);
     //   };
   };
+
+
+  
+  // console.log("leaddddddd",leaderId, typeof leaderId);
+  const welcomeMsg = {
+    body:"Thanks, join us now!!"
+  }
+
   const handleSendMessage = () => {
-    sendMessage(newMessage);
+    sendMessage(newMessage,welcomeMsg);
     setNewMessage("");
   };
 

@@ -8,7 +8,7 @@ const cookies = new Cookies();
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
 const SOCKET_SERVER_URL = "http://localhost:5000";
 
-const useChat = (roomId) => {
+const useChat = (roomId, leadId) => {
   const [messages, setMessages] = useState([]);
   const socketRef = useRef();
 
@@ -31,13 +31,24 @@ const useChat = (roomId) => {
   }, [roomId]);
 
   const currentUserId = cookies.get("currentUser");
+  const leaderId = leadId;
   
 
-  const sendMessage = (messageBody) => {
+  const sendMessage = (messageBody,welcomeMsg) => {
     socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
       body: messageBody,
       senderId: currentUserId,
     });
+
+    if(welcomeMsg){
+      setTimeout(()=>{socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
+        body: welcomeMsg.body,
+        senderId: leaderId,
+      })}
+      ,1000)
+    }
+
+    
   };
 
   return { messages, sendMessage };
