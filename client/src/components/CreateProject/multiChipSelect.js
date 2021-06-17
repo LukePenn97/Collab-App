@@ -20,7 +20,7 @@ const styles = {
   },
   paper: {
     maxHeight: "150px",
-    overflowY: "auto"
+    overflowY: "auto",
   }
 };
 
@@ -31,7 +31,7 @@ const renderInput = inputProps => {
 
   return (
     <TextField
-      //fullWidth
+      fullWidth
       label={
         allItemSelected ? "No more skill to add" : "Choose a skill"
       }

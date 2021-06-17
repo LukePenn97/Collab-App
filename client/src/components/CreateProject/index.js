@@ -51,39 +51,23 @@ import MultiChipSelect from "./multiChipSelect";
   const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
+      alignItems: 'center',
       flexDirection: 'column',
       justifyContent: 'center',
-      alignItems: 'center',
       padding: theme.spacing(2),
       padding: 10,
       margin: 'auto',
       maxWidth: '900px',
 
+
       '& .MuiTextField-root': {
-        margin: theme.spacing(1),
+        margin: 'theme.spacing(1)',
         width: '600px'
       },
       '& .MuiButtonBase-root': {
-        margin: theme.spacing(2),
+        margin: 'theme.spacing(2)',
       },
     },
-
-    // paper: {
-    //   backgroundColor: theme.palette.background.paper,
-    //   border: '2px solid #000',
-    //   boxShadow: theme.shadows[5],
-    //   padding: theme.spacing(2, 4, 3),
-    // },
-
-    Heading: {
-      margin: '0px',
-      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-      fontWeight: '500',
-      fontSize: '29px',
-      lineHeight: '1.2',
-      letterSpacing: '-0.24px',
-      color: 'rgb(23, 43, 77)'
-    }
   }));
 
 
@@ -169,7 +153,6 @@ export default function CreateProject(props) {
       // Change handler for selected skills
       const onSkillsChanged = (e) => {
        // e.preventDefault()
-        console.log(e);
         setNewProject(prev => ({
           ...prev,
           project_skills: state.mySkills
@@ -179,7 +162,10 @@ export default function CreateProject(props) {
   return (
 
     <form className={classes.root} noValidate onSubmit={submitNewProject}>
-    <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
+    <div style={{
+      padding: '20',
+      margin: 'auto'
+      }}>
       <CssBaseline />
       <Typography variant="h4" align="center" component="h1" gutterBottom>
       🏁🏁 New Project Form 🏁🏁
@@ -213,7 +199,7 @@ export default function CreateProject(props) {
           /><br />
       </div>
       <div>
-      <FormGroup>
+      <FormGroup className={classes.paper}>
         <FormControl>
           <FormLabel style={{marginLeft:7}}>Find the skill needed for your project</FormLabel>
           <MultiChipSelect
