@@ -20,18 +20,18 @@ const styles = {
   },
   paper: {
     maxHeight: "150px",
-    overflowY: "auto"
+    overflowY: "auto",
   }
 };
 
 const renderInput = inputProps => {
-  const { InputProps, classes, availableItems } = inputProps;
+  const { InputProps,  availableItems } = inputProps;
 
   const allItemSelected = availableItems.length === 0;
 
   return (
     <TextField
-      //fullWidth
+      fullWidth
       label={
         allItemSelected ? "No more skill to add" : "Choose a skill"
       }
@@ -47,7 +47,7 @@ const renderInput = inputProps => {
 };
 
 const renderChipList = inputProps => {
-  const { classes, selectedItem, onRemoveItem } = inputProps;
+  const {  selectedItem, onRemoveItem } = inputProps;
   return (
     <div className={styles.chipContainer}>
       {selectedItem.length > 0 &&

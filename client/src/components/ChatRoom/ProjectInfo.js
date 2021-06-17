@@ -13,6 +13,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import GitHubIcon from "@material-ui/icons/GitHub";
 
+const moment = require('moment');
+
 const ProjectInfo = (props) => {
   //logic for goals
   const goalToChange = props.project.project_goals;
@@ -167,16 +169,17 @@ const ProjectInfo = (props) => {
                                 gutterBottom
                                 className={"MuiTypography--subheading"}
                               >
-                                Deadline: {goal.deadline}
+                                Deadline: {moment(goal.deadline).format("MMM Do YY")}
                               </Typography>
                               {goal.completedAt ? (
                                 <Typography
                                   variant="body1"
                                   gutterBottom
                                   className={"MuiTypography--subheading"}
+                                  style={{backgroundColor:"lightblue",marginRight:140,borderRadius:5}}
                                 >
                                   Completed at:{" "}
-                                  {JSON.stringify(goal.completedAt)}
+                                  { moment((goal.completedAt)).format("MMM Do YY")}
                                 </Typography>
                               ) : 
                               (

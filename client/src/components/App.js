@@ -150,7 +150,7 @@ function App(props) {
       <div>
         <NavBar
           users={state.users}
-          userId={cookies.get("currentUser")}
+          userId={parseInt(cookies.get("currentUser"))}
           backToHome={backToHome}
           registration={registration}
           login={login}
@@ -341,6 +341,8 @@ function App(props) {
           {mode === SKILLS && (
             <Skills
               user={state.user}
+              users={state.users}
+              setState={setState}
               // project={state.project}
               // projects={state.projects}
               // pickAProject = {pickAProject}
