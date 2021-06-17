@@ -46,7 +46,7 @@ import Cookies from "universal-cookie";
   }));
 
 
-export default function CreateProject(props) {
+export default function CreateUser(props) {
   const classes = useStyles();
   const [newUser, setNewUser] = useState(initialValues);
 

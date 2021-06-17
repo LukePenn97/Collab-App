@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ProjectDetail = (props) => {
   const projectLead = findUserById(props.project.projectLeadId, props.users);
-
+  console.log("Projectdetail:", props.project)
   const classes = useStyles();
   return (
     <article className="project-detail">
@@ -38,7 +38,7 @@ const ProjectDetail = (props) => {
             </Typography>
           </div>
           <div>
-            {props.project.project_users.map((member) => (
+            {props.project.project_users.length > 0 && props.project.project_users.map((member) => (
               <Avatar
                 className={"MuiAvatar-root"}
                 src={member.photo}

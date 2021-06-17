@@ -104,7 +104,7 @@ function App(props) {
     transition(REGISTER);
   }
   function login() {
-    
+
     transition(LOGIN);
   }
   function pickSkills(user) {
@@ -165,7 +165,7 @@ function App(props) {
       )}
         <section id="mainsection">
         <section id="content">
-        {mode !== DISPLAY && 
+        {mode !== DISPLAY &&
           <div style={{height: "150px"}}>
 
           </div>
@@ -181,7 +181,7 @@ function App(props) {
           </div>
         )}
         {mode === DISPLAY && (
-          
+
             <div className="match-search" style={{ display: "flex", marginLeft: "20px" }}>
               {cookies.get("currentUser") &&
               <div style={{marginRight: "40px"}}>
@@ -194,7 +194,7 @@ function App(props) {
                   skillFilter={skillFilter}
                 />
               </div>}
-              
+
               <div>
 
                 <div style={{marginBottom: "10px", marginRight: "20px"}}>
@@ -205,16 +205,16 @@ function App(props) {
                     Filter By Skills
                   </button>
                   </div>
-                  
-                  
+
+
                 </div>
               </div>
-              
-           
+
+
             )}
-          
+
           <div style={{height: "10px"}}></div>
-          {mode === DISPLAY && state.showSkills ? 
+          {mode === DISPLAY && state.showSkills ?
             <div style={{width: "75vw"}}>
                 <SkillList
                   allSkills={state.allSkills}
@@ -276,7 +276,7 @@ function App(props) {
               setProjects={setProjects}
               setProject={setProject}
             />
-              
+
             </MuiThemeProvider>
           </JssProvider>
           )}
@@ -351,11 +351,12 @@ function App(props) {
           )}
           {mode === CREATE && (
             <CreateProject
-              // user = {state.user}
+              users = {state.users}
+              allSkills={state.allSkills}
               setProjects={setProjects}
               projects={state.projects}
               pickAProject={pickAProject}
-              // pickAUser = {pickAUser}
+              pickAUser = {pickAUser}
             />
           )}
         </section>
