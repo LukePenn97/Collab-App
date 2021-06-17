@@ -38,7 +38,7 @@ const renderInput = inputProps => {
       disabled={allItemSelected}
       InputProps={{
         classes: {
-          input: classes.input
+          input: styles.input
         },
         ...InputProps
       }}
@@ -49,12 +49,12 @@ const renderInput = inputProps => {
 const renderChipList = inputProps => {
   const { classes, selectedItem, onRemoveItem } = inputProps;
   return (
-    <div className={classes.chipContainer}>
+    <div className={styles.chipContainer}>
       {selectedItem.length > 0 &&
         selectedItem.map(item => (
           <Chip
             key={item}
-            className={classes.chip}
+            className={styles.chip}
             label={item}
             deleteIcon={<CancelIcon />}
             onDelete={() => onRemoveItem(item)}

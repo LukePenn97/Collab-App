@@ -107,7 +107,7 @@ const Profile = (props) => {
             </IconButton>
           </div>
         </CardActions>
-        <Divider className={"MuiDivider-root"} light />
+        
         <div className="projects-list">
         <ProjectList
           users={props.users}
