@@ -51,17 +51,14 @@ import MultiChipSelect from "./multiChipSelect";
   const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
-      flexWrap: 'wrap',
       alignItems: 'center',
       flexDirection: 'column',
       justifyContent: 'center',
-      padding: 'theme.spacing(2)',
-      padding: '10',
-      marginBottom: '10',
+      padding: theme.spacing(2),
+      padding: 10,
+      margin: 'auto',
       maxWidth: '900px',
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
+
 
       '& .MuiTextField-root': {
         margin: 'theme.spacing(1)',
@@ -71,23 +68,6 @@ import MultiChipSelect from "./multiChipSelect";
         margin: 'theme.spacing(2)',
       },
     },
-
-    paper: {
-      backgroundColor: 'theme.palette.background.paper',
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-    },
-
-    Heading: {
-      margin: '0px',
-      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-      fontWeight: '500',
-      fontSize: '29px',
-      lineHeight: '1.2',
-      letterSpacing: '-0.24px',
-      color: 'rgb(23, 43, 77)'
-    }
   }));
 
 

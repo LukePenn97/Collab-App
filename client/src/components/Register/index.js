@@ -1,83 +1,158 @@
-// import React from "react";
-import React, { useState } from "react";
-import axios from "axios";
-import Button from "../Button";
+import React, {useState} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+  TextField,
+  FormLabel,
+  Typography,
+  Button,
+  Checkbox,
+  CssBaseline
+} from '@material-ui/core';
+import axios from 'axios';
 import Cookies from "universal-cookie";
 
-const cookies = new Cookies();
+// creat new user initiation;
+  const cookies = new Cookies();
 
-
-export default function Register(props) {
-  const [firstName, setFirstName] = useState(props.firstName || "");
-  const [lastName, setLastName] = useState(props.lastName || "");
-  const [email, setEmail] = useState(props.email || "");
-  const [password, setPassword] = useState(props.email || "");
-
-  const submitRegister = () => {
-
-    const url = `http://localhost:5000/register`;
-    return axios
-      .post(url, {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-      })
-      .then((body) => {
-        cookies.set("currentUser", body.data.id, { path: "/" });
-        props.setUsers([...props.users, body.data])
-        props.pickSkills();
-      });
-
+  const initialValues = {
+    id: 0,
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    project_users: [],
   };
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      alignItems: 'center',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      padding: theme.spacing(2),
+      padding: 10,
+      margin: 'auto',
+      maxWidth: '900px',
+
+
+      '& .MuiTextField-root': {
+        margin: 'theme.spacing(1)',
+        width: '600px'
+      },
+      '& .MuiButtonBase-root': {
+        margin: 'theme.spacing(2)',
+      },
+    },
+  }));
+
+
+export default function CreateProject(props) {
+  const classes = useStyles();
+  const [newUser, setNewUser] = useState(initialValues);
+
+    // Final registration handler
+    //(axios returns a complete user object with the id of database and ubdates the state)
+    //new user available through the state:newUser
+    const submitNewUser = () => {
+
+      const url = `http://localhost:5000/register`
+      return axios
+      .post(url, {
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+        email: newUser.email,
+        password: newUser.password
+      })
+        .then((data) => {
+          cookies.set("currentUser", data.data.id, { path: "/" });
+          if (data.data.id !== 0) props.setUsers([...props.users, data.data]);
+          else alert("You ID has not been recieved");
+          props.pickSkills();
+        })
+        .catch(err => console.log(err))
+      }
+
+      // Change handler for all inputs except skills
+      const handleInputChange = (e) => {
+        e.preventDefault()
+        const { name, value } = e.target;
+        setNewUser({
+          ...newUser,
+          [name]: value,
+        });
+      };
+
   return (
-    <article>
-      <h2>--------------------Register-----------------</h2>
 
-      <div>
-        <input
-          className="appointment__create-input text--semi-bold"
-          name="firstName"
-          type="text"
-          value={firstName}
-          placeholder={"Enter First Name"}
-          onChange={(event) => setFirstName(event.target.value)}
-        />
+    <form className={classes.root} noValidate onSubmit={submitNewUser}>
+    <div style={{
+      padding: '20',
+      margin: 'auto'
+      }}>
+      <CssBaseline />
+      <Typography variant="h4" align="center" component="h1" gutterBottom>
+      🏁🏁 Registration Form 🏁🏁
+      </Typography>
+      <Typography variant="h6" align="center" component="h2" gutterBottom>
+        (All fields are required)
+      </Typography>
+    </div>
+    <div>
+          <TextField
+            id='firstName'
+            label="Your First Name"
+            variant="outlined"
+            type='text'
+            name='firstName'
+            value={newUser.firstName}
+            onChange={handleInputChange}
+          />
       </div>
       <div>
-        <input
-          className="appointment__create-input text--semi-bold"
-          name="lastName"
-          type="text"
-          value={lastName}
-          placeholder={"Enter Last Name"}
-          onChange={(event) => setLastName(event.target.value)}
-        />
+          <TextField
+             id='lasttName'
+             label="Your Last Name"
+             variant="outlined"
+             type='text'
+             name='lastName'
+             value={newUser.lastName}
+             onChange={handleInputChange}
+          /><br />
+      </div>
+       <div>
+          <TextField
+           id='email'
+           label="Your Email"
+           variant="outlined"
+           type='text'
+           name='email'
+           value={newUser.email}
+           onChange={handleInputChange}
+          />
       </div>
       <div>
-        <input
-          className="appointment__create-input text--semi-bold"
-          name="email"
-          type="text"
-          value={email}
-          placeholder={"Enter Email"}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-      </div>
-      <div>
-        <input
-          className="appointment__create-input text--semi-bold"
-          name="password"
-          type="text"
-          value={password}
-          placeholder={"Enter password"}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </div>
+          <TextField
+           id='password'
+           label="Your Password"
+           variant="outlined"
+           type='text'
+           name='password'
+           value={newUser.password}
+           onChange={handleInputChange}
+          />
+        </div>
+        <br />
 
-      <Button onClick={() => submitRegister()}>Register</Button>
+            <FormLabel width={[1/2, 1/4]} p={2}>
+            <Checkbox
+                id='remember'
+                name='remember'
+            />
+            Remember Me
+            </FormLabel>
+            <Button variant="secondary" style={{backgroundColor:"rgb(245, 133, 63)"}}
+             onClick={submitNewUser}>Register</Button>
+     </form>
 
-      <div></div>
-    </article>
-  );
+  )
 }
