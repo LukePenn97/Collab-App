@@ -175,6 +175,7 @@ export default function CreateProject(props) {
           project_skills: state.mySkills
         }))
       }
+      
   return (
 
     <form className={classes.root} noValidate onSubmit={submitNewProject}>

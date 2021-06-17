@@ -25,7 +25,7 @@ const styles = {
 };
 
 const renderInput = inputProps => {
-  const { InputProps, classes, availableItems } = inputProps;
+  const { InputProps,  availableItems } = inputProps;
 
   const allItemSelected = availableItems.length === 0;
 
@@ -47,7 +47,7 @@ const renderInput = inputProps => {
 };
 
 const renderChipList = inputProps => {
-  const { classes, selectedItem, onRemoveItem } = inputProps;
+  const {  selectedItem, onRemoveItem } = inputProps;
   return (
     <div className={styles.chipContainer}>
       {selectedItem.length > 0 &&

@@ -341,6 +341,8 @@ function App(props) {
           {mode === SKILLS && (
             <Skills
               user={state.user}
+              users={state.users}
+              setState={setState}
               // project={state.project}
               // projects={state.projects}
               // pickAProject = {pickAProject}
