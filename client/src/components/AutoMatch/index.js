@@ -17,8 +17,8 @@ const styles = {
 };
 
 export default function AutoMatch(props){
-
-  let thisUser = findUserById(1, props.users)
+  let thisUser = null;
+  thisUser = findUserById(Number(props.userId), props.users)
   console.log("USER IN AUTOMATCH:", thisUser)
   let currentUserSkills;
   if (thisUser) {
