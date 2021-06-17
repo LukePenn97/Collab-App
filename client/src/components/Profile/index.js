@@ -63,7 +63,7 @@ const Profile = (props) => {
         <CardContent className={"MuiCardContent-root"}>
           <Typography
             className={"MuiTypography--heading"}
-            variant={"h5"}
+              variant={"h5"}
             gutterBottom
           >
             {`${userToShow.firstName} ${userToShow.lastName}`}
@@ -71,10 +71,10 @@ const Profile = (props) => {
           <Typography
             className={"MuiTypography--subheading"}
             variant={"caption"}
-          ></Typography>
+          ><h4 style={{marginTop: "20px"}}>Skills:</h4></Typography>
           {userToShow.user_skills && userToShow.user_skills.map( skill => (
           <List component="nav" className={classes.root} aria-label="contacts">
-            <ListItem button>
+            <ListItem>
               <ListItemIcon>
                 <StarIcon />
               </ListItemIcon>
@@ -83,7 +83,7 @@ const Profile = (props) => {
           </List>
           ))}
           {isMe? (
-            <ListItemIcon>
+            <ListItemIcon style={{margin: "20px"}}>
               <EditIcon/>
           </ListItemIcon>
           ) : (
@@ -107,7 +107,6 @@ const Profile = (props) => {
             </IconButton>
           </div>
         </CardActions>
-        <Divider className={"MuiDivider-root"} light />
         <div className="projects-list">
         <ProjectList
           users={props.users}

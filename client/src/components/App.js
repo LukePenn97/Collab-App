@@ -355,6 +355,7 @@ function App(props) {
               setProjects={setProjects}
               projects={state.projects}
               pickAProject={pickAProject}
+              allSkills={state.allSkills}
               // pickAUser = {pickAUser}
             />
           )}

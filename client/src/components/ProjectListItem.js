@@ -90,7 +90,6 @@ const CustomCard = ({
   return (
     <div className={styles.root}>
       <Column className={styles.card}>
-        
         <Row p={2} gap={2}>
           
           <Avatar className={styles.logo} variant={'rounded'} src={thumbnail} />
@@ -116,8 +115,8 @@ const CustomCard = ({
         >
           <h5>{description}</h5>
         </Box>
-        <Row p={2} gap={2} position={'bottom'}>
-          <Item>
+        <Row p={2} gap={2} position={'middle'}>
+          <Item position={'bottom-left'}>
             <AvatarGroup max={4} classes={{ avatar: styles.avatar }}>
               {users.map((user, index) => (
                 <Avatar
@@ -127,7 +126,7 @@ const CustomCard = ({
               ))}
             </AvatarGroup>
           </Item>
-          <Item position={'middle-right'}>
+          <Item position={'right'}>
             <Button
               // className={styles.join}
               // classes={btnStyles}
@@ -140,10 +139,7 @@ const CustomCard = ({
               {joined ? 'Leave group' : 'Join group'}
             </Button>
           </Item>
-          <Item position={'middle-right'}>
-            
-          </Item>
-          <Item position={'middle-right'}>
+          <Item position={'right'}>
             <Button
               // className={styles.join}
               // classes={btnStyles}

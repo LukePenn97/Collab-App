@@ -24,14 +24,16 @@ import MultiChipSelect from "./multiChipSelect";
 // creat project initiation;
   const cookies = new Cookies();
   const currentUser = cookies.get("currentUser");
-  const options = [
-    { key: "skillId1", value: 1, label: 'Javascript', isFixed: true },
-    { key: "skillId2", value: 2, label: 'React', isFixed: true},
-    { key: "skillId3", value: 3, label: 'Ruby', isFixed: true },
-    { key: "skillId4", value: 4, label: 'SQL', isFixed: true },
-    { key: "skillId5", value: 5, label: 'Express', isFixed: true },
-  ];
- const  allItems = options.map(s => ({ name: s.label, id: s.value }));
+
+  
+
+  // const options = [
+  //   { key: "skillId1", value: 1, label: 'Javascript', isFixed: true },
+  //   { key: "skillId2", value: 2, label: 'React', isFixed: true},
+  //   { key: "skillId3", value: 3, label: 'Ruby', isFixed: true },
+  //   { key: "skillId4", value: 4, label: 'SQL', isFixed: true },
+  //   { key: "skillId5", value: 5, label: 'Express', isFixed: true },
+  // ];
 
   const initialValues = {
     id: 0,
@@ -88,6 +90,11 @@ import MultiChipSelect from "./multiChipSelect";
 
 
 export default function CreateProject(props) {
+  const options = props.allSkills.map((skill)=>{
+    //console.log(skill)
+    return {value: skill.id, label: skill.name, isFixed: true}
+  })
+  const  allItems = options.map(s => ({ name: s.label, id: s.value }));
   const classes = useStyles();
   const [newProject, setNewProject] = useState(initialValues);
   // const [items, setItems] = useState(allItems);
@@ -181,7 +188,7 @@ export default function CreateProject(props) {
     <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
       <CssBaseline />
       <Typography variant="h4" align="center" component="h1" gutterBottom>
-      🏁🏁 New Project Form 🏁🏁
+      New Project Form
       </Typography>
       <Typography variant="h6" align="center" component="h2" gutterBottom>
         (All fields are required)
@@ -211,7 +218,7 @@ export default function CreateProject(props) {
             rowsMax={4}
           /><br />
       </div>
-      <div>
+      <div style={{ width: "610px"}}>
       <FormGroup>
         <FormControl>
           <FormLabel>Find the skill needed for your project</FormLabel>
