@@ -23,7 +23,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import StarIcon from '@material-ui/icons/Star';
 import { makeStyles } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
-
+import SkillList from "../SkillList";
 
 const cookies = new Cookies();
 

@@ -1,8 +1,6 @@
 //import React from 'react';
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
 import {
   TextField,
   FormLabel,
@@ -24,16 +22,14 @@ import MultiChipSelect from "./multiChipSelect";
 // creat project initiation;
   const cookies = new Cookies();
   const currentUser = cookies.get("currentUser");
-
-  
-
-  // const options = [
-  //   { key: "skillId1", value: 1, label: 'Javascript', isFixed: true },
-  //   { key: "skillId2", value: 2, label: 'React', isFixed: true},
-  //   { key: "skillId3", value: 3, label: 'Ruby', isFixed: true },
-  //   { key: "skillId4", value: 4, label: 'SQL', isFixed: true },
-  //   { key: "skillId5", value: 5, label: 'Express', isFixed: true },
-  // ];
+//   const options = [
+//     { key: "skillId1", value: 1, label: 'Javascript', isFixed: true },
+//     { key: "skillId2", value: 2, label: 'React', isFixed: true},
+//     { key: "skillId3", value: 3, label: 'Ruby', isFixed: true },
+//     { key: "skillId4", value: 4, label: 'SQL', isFixed: true },
+//     { key: "skillId5", value: 5, label: 'Express', isFixed: true },
+//   ];
+//  const  allItems = options.map(s => ({ name: s.label, id: s.value }));
 
   const initialValues = {
     id: 0,
@@ -74,21 +70,18 @@ import MultiChipSelect from "./multiChipSelect";
 
 
 export default function CreateProject(props) {
-  const options = props.allSkills.map((skill)=>{
-    //console.log(skill)
-    return {value: skill.id, label: skill.name, isFixed: true}
-  })
-  const  allItems = options.map(s => ({ name: s.label, id: s.value }));
   const classes = useStyles();
   const [newProject, setNewProject] = useState(initialValues);
-  // const [items, setItems] = useState(allItems);
-  // const [selectedItem, setSelectedItem] = useState([]);
 
+  // The skill table from the propos
+  const  allItems = props.allSkills;
+
+// The state for skill select
   const [state, setState] = useState({
     initItems: allItems,
     items: allItems,
     selectedItem:[],
-    mySkills:[]
+    mySkills: []
   });
 
   const setItems = items => setState({ ...state, items });
@@ -113,7 +106,7 @@ export default function CreateProject(props) {
       ...prev,
       selectedItem: [...state.selectedItem, item],
       items: state.items.filter(i => i.name !== item),
-      mySkills: [...state.mySkills, elm.id]
+      mySkills: [...state.mySkills, elm]
     }));
   }
 
@@ -124,9 +117,10 @@ export default function CreateProject(props) {
       ...prev,
       selectedItem: state.selectedItem.filter(i => i !== item),
       items: [...state.items, { name: item, id: elm.id }],
-      mySkills: state.mySkills.filter(i => i !== elm.id)
+      mySkills: state.mySkills.filter(i => i !== elm)
     }));
   };
+  const lead = props.users.find(s => s.id === newProject.projectLeadId);
 
     // Final submit handler
     //(axios returns a complete project object with the id of database and ubdates the state)
@@ -137,12 +131,20 @@ export default function CreateProject(props) {
       const url = `http://localhost:5000/projects/new`
       return axios.post(url, {"projects": newProject})
         .then((data) => {
-          newProject.id = data.data;
-          const updateProject = props.projects.push(newProject);
-          props.setProjects(updateProject);
+
+          setNewProject(prev => ({
+            ...prev,
+            id: data.data,
+            project_users: [lead],
+            project_skills: []
+            }))
+          const updateProject = [...props.projects,newProject];
+          props.setProjects(prev => ({
+            ...prev,
+            updateProject}));
           const myProject = props.projects.find(project => project.id === data.data);
           console.log(myProject, newProject);
-          props.pickAProject(myProject);
+          props.pickAProject(newProject);
         })
         .catch(err => console.log(err))
       }
@@ -165,7 +167,6 @@ export default function CreateProject(props) {
           project_skills: state.mySkills
         }))
       }
-      
   return (
 
     <form className={classes.root} noValidate onSubmit={submitNewProject}>
@@ -175,7 +176,7 @@ export default function CreateProject(props) {
       }}>
       <CssBaseline />
       <Typography variant="h4" align="center" component="h1" gutterBottom>
-      New Project Form
+      🏁🏁 New Project Form 🏁🏁
       </Typography>
       <Typography variant="h6" align="center" component="h2" gutterBottom>
         (All fields are required)
@@ -205,8 +206,8 @@ export default function CreateProject(props) {
             rowsMax={4}
           /><br />
       </div>
-      <div style={{ width: "610px"}}>
-      <FormGroup>
+      <div>
+      <FormGroup className={classes.paper}>
         <FormControl>
           <FormLabel style={{marginLeft:7}}>Find the skill needed for your project</FormLabel>
           <MultiChipSelect

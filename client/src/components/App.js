@@ -275,6 +275,7 @@ function App(props) {
               setState={setState}
               setProjects={setProjects}
               setProject={setProject}
+              allSkills={state.allSkills}
             />
               
             </MuiThemeProvider>
@@ -312,6 +313,7 @@ function App(props) {
                   projects={state.projects}
                   pickAProject={pickAProject}
                   pickAUser={pickAUser}
+                  allSkills={state.allSkills}
                 />
               </MuiThemeProvider>
             </JssProvider>
@@ -354,6 +356,7 @@ function App(props) {
           {mode === CREATE && (
             <CreateProject
               // user = {state.user}
+              users={state.users}
               setProjects={setProjects}
               projects={state.projects}
               pickAProject={pickAProject}
