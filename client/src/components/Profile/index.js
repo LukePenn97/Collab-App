@@ -60,7 +60,7 @@ const Profile = (props) => {
             "https://images.unsplash.com/photo-1552083375-1447ce886485?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
           }
         >
-          <Avatar className={"MuiAvatar-root"} src={userToShow.photo || "https://image.flaticon.com/icons/png/512/3011/3011270.png"} />
+          <Avatar className={"MuiAvatar-root"} src={userToShow.photo || 'https://image.flaticon.com/icons/png/512/3135/3135715.png'} />
         </CardMedia>
         <CardContent className={"MuiCardContent-root"}>
           <Typography
