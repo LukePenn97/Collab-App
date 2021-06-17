@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Menu from "@mui-treasury/components/menu/collapsible";
 import { useJupiterCollapsibleMenuStyles } from "@mui-treasury/styles/collapsibleMenu/jupiter";
+import Grid from "@material-ui/core/Grid";
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -23,15 +24,13 @@ const cookies = new Cookies();
 
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
-    display: 'flex',
-    justifyContent: 'center',
-    position: 'fixed',
-    flexWrap: 'wrap',
-    '& > *': {
-      margin: theme.spacing(0.5),
-    },
+    
+    large: {
+      width: 50,
+      height: 50,
+    }
   },
 }));
 
@@ -108,7 +107,15 @@ const updateUsers = () =>{
   return (
     <article style={{ marginBottom: "300px" }}>
       
-      <Box minWidth={343}>
+      <Box minWidth={343} className={classes.root}>
+        <Grid container justify="center">
+        <Grid item>
+        <img  src={"https://image.flaticon.com/icons/png/512/616/616490.png"} 
+       style={{width: "100px",
+        height: "100px"}}>
+        </img>
+        </Grid>
+        </Grid>
         <Menu
           collapsed
           useStyles={useJupiterCollapsibleMenuStyles}
@@ -138,6 +145,9 @@ const updateUsers = () =>{
 
           </Menu.List>
         </Menu>
+        <Grid container justify="center"
+        >
+          <Grid item>
         <Button
               variant="contained"
               color="default"
@@ -146,6 +156,7 @@ const updateUsers = () =>{
             >
               Submit
             </Button>
+            </Grid></Grid>
       </Box>
 
     </article>
