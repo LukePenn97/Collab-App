@@ -77,7 +77,7 @@ export default function MentorRequest(props) {
   }))
   return (
     <div>
-    <Button variant="info" onClick={handleShow}>
+    <Button variant="info" onClick={handleShow} style={{backgroundColor:"lightblue",borderColor:"lightblue"}}>
       View Available Mentors
     </Button>
 

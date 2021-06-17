@@ -185,7 +185,7 @@ body {
     resize: none;
     overflow: scroll;
     padding-top: ($navHeight/2) - 8;
-    font-weight: 300;
+    font-weight: 400;
     
     &:focus {
       outline: none;
@@ -247,11 +247,12 @@ body {
   .text-wrapper {
     padding: ($navHeight - ($navHeight/1.5)) / 2;
     min-height: $navHeight/1.5;
-    width: 60%;
+    max-width: 60%;
+    min-width: 5%;
     margin: 0 ($navHeight - ($navHeight/1.5)) / 2;
     box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.3);
     border-radius: 2px;
-    font-weight: 300;
+    font-weight: 400;
     position: relative;
     /* word-break: break-all; */
     // opacity: 0;
