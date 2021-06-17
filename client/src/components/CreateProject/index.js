@@ -51,29 +51,33 @@ import MultiChipSelect from "./multiChipSelect";
   const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
+      flexWrap: 'wrap',
+      alignItems: 'center',
       flexDirection: 'column',
       justifyContent: 'center',
-      alignItems: 'center',
-      padding: theme.spacing(2),
-      padding: 10,
-      margin: 'auto',
+      padding: 'theme.spacing(2)',
+      padding: '10',
+      marginBottom: '10',
       maxWidth: '900px',
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
 
       '& .MuiTextField-root': {
-        margin: theme.spacing(1),
+        margin: 'theme.spacing(1)',
         width: '600px'
       },
       '& .MuiButtonBase-root': {
-        margin: theme.spacing(2),
+        margin: 'theme.spacing(2)',
       },
     },
 
-    // paper: {
-    //   backgroundColor: theme.palette.background.paper,
-    //   border: '2px solid #000',
-    //   boxShadow: theme.shadows[5],
-    //   padding: theme.spacing(2, 4, 3),
-    // },
+    paper: {
+      backgroundColor: 'theme.palette.background.paper',
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
 
     Heading: {
       margin: '0px',
@@ -169,7 +173,6 @@ export default function CreateProject(props) {
       // Change handler for selected skills
       const onSkillsChanged = (e) => {
        // e.preventDefault()
-        console.log(e);
         setNewProject(prev => ({
           ...prev,
           project_skills: state.mySkills
@@ -178,7 +181,10 @@ export default function CreateProject(props) {
   return (
 
     <form className={classes.root} noValidate onSubmit={submitNewProject}>
-    <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
+    <div style={{
+      padding: '20',
+      margin: 'auto'
+      }}>
       <CssBaseline />
       <Typography variant="h4" align="center" component="h1" gutterBottom>
       🏁🏁 New Project Form 🏁🏁
@@ -212,7 +218,7 @@ export default function CreateProject(props) {
           /><br />
       </div>
       <div>
-      <FormGroup>
+      <FormGroup className={classes.paper}>
         <FormControl>
           <FormLabel>Find the skill needed for your project</FormLabel>
           <MultiChipSelect
