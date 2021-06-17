@@ -5,6 +5,9 @@ import { findUserById } from "../../helpers/selectors";
 import MentorRequest from "../MentorRequest";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 
 import "./goal.css";
@@ -34,6 +37,20 @@ export default function ChatRoom(props) {
   // Creates a websocket and manages messaging
   const [newMessage, setNewMessage] = React.useState(""); // Message to be sent
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const handleNewMessageChange = (event) => {
     setNewMessage(event.target.value);
     //   };
@@ -48,6 +65,7 @@ export default function ChatRoom(props) {
     return (msg.name = sender.firstName + " " + sender.lastName);
   });
 
+  const projectLead = findUserById(props.project.projectLeadId, props.users)
   const roomMember = props.project.project_users;
   const currentUser = cookies.get("currentUser");
   const roomTalkers = [...roomMember];
@@ -56,6 +74,7 @@ export default function ChatRoom(props) {
 
   
   return (
+    <>
     <div className="main-box">
       <section className="wrapper chatBox">
         <div className="nav" id="nav">
@@ -85,7 +104,7 @@ export default function ChatRoom(props) {
                     src={
                       roomTalkers.find(
                         (ele) => ele.id === parseInt(message.senderId)
-                      ).photo
+                      ).photo || "https://image.flaticon.com/icons/png/512/3011/3011270.png"
                     }
                   ></img>
                 </div>
@@ -110,14 +129,14 @@ export default function ChatRoom(props) {
         </div>
       </section>
       
-      <div style={{position: "absolute", display: "block", marginTop: "-40px", left: "30px"}}>
+      <div style={{position: "absolute", display: "block", marginTop: "600px", left: "30px"}}>
         <MentorRequest
         users={props.users}
         allSkills={props.allSkills}
         />
       </div>
-      <div style={{position: "absolute", display: "block", marginTop: "-40px", left: "560px"}}>
-        <Button style ={{backgroundColor:"lightblue"}}>Join Us</Button>
+      <div style={{position: "absolute", display: "block", marginTop: "600px", left: "560px"}}>
+        <Button onClick={handleClick} style ={{backgroundColor:"lightblue"}}>Join Us</Button>
       </div>
 
 
@@ -143,8 +162,30 @@ export default function ChatRoom(props) {
       </MuiThemeProvider>
     </JssProvider>
       </div>
-      
-    // </div>
+      <div>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          message={`Your request has been sent to ${projectLead.firstName} ${projectLead.lastName}`}
+          action={
+            <React.Fragment>
+              <Button color="secondary" size="small" onClick={handleClose}>
+                UNDO
+              </Button>
+              <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </React.Fragment>
+          }
+        />
+      </div>
+
+    </>
     
   );
 }

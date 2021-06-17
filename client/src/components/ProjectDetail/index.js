@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProjectDetail = (props) => {
-  const projectLead = findUserById(props.project.projectLeadId, props.users);
+  //const projectLead = findUserById(props.project.projectLeadId, props.users);
 
   const classes = useStyles();
   return (
