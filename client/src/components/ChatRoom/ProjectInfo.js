@@ -181,7 +181,7 @@ const ProjectInfo = (props) => {
                               ) : 
                               (
                                 null
-                                // <Grid item></Grid>
+                      
                               )}
                             </Grid>
                           </Grid>

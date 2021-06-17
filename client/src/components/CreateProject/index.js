@@ -214,7 +214,7 @@ export default function CreateProject(props) {
       <div>
       <FormGroup>
         <FormControl>
-          <FormLabel>Find the skill needed for your project</FormLabel>
+          <FormLabel style={{marginLeft:7}}>Find the skill needed for your project</FormLabel>
           <MultiChipSelect
             onInputValueChange={(e) => onSkillsChanged(e)}
             inputValue={state.inputValue}
@@ -286,8 +286,8 @@ export default function CreateProject(props) {
             />
             Remember Me
             </FormLabel>
-            <Button variant="secondary" color="primary"
-             onClick={submitNewProject}>Register</Button>
+            <Button variant="secondary" style={{backgroundColor:"rgb(245, 133, 63)"}}
+             onClick={submitNewProject}>Create</Button>
      </form>
 
   )
