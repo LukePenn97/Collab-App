@@ -1,46 +1,51 @@
-# React + Express No-Fluff Boilerplate
+# CollabApp 
 
-A boilerplate project for anyone interested in making a project that uses React and Express.
+- An app for finding collaborators for online projects. Similar to dating apps that match based on preferences, it matches groups of people who are interested in working on the same kind of project. This app is tailored to people who want to work on side projects but don't have the networking skills to find collaborators.
 
-This repository is a bootleg of @NimaBoscarino's [React Rails Boilerplate](https://github.com/NimaBoscarino/react-rails-boilerplate). It uses the same React app, but replaces the Rails server with an Express server.
+Create your profile with your skills, and then search for a group based on those skills. You will be shown a selection of projects that match your settings. 
 
-Note! This boilerplate has _no fluff_! That means that there's nothing set up for you to do authentication stuff, there's no Redux stuff, and there's no React Router stuff. On the Express end, there is no session storage or database connection.
+Once you join a project, you are connected to the in app chat room.
 
-The main important bit is that the React project has `proxy` set to `localhost:8080` in the `package.json` file, and that the Express app listens to port 8080 in `server.js`. Take a look!
+Target Audience:
+People who have great ideas for a project, but need collaborators with specific skills
+People who want to join a project, but don’t have any ideas
+Any professionals or amatuer project makers
+Web designers, Software designers, youtubers, artists, writers, game designers
+Mentors
 
-You can (and perhaps should) rename the directories `express-back-end` and `react-front-end` if you want-- The name doesn't matter.
 
-## Running the projects
+## TODO: 
 
-You need **TWO** terminal windows/tabs for this (or some other plan for running two Node processes).
-
-In one terminal, `cd` into `react-front-end`. Run `npm install` or `yarn` to install the dependencies. Then run `npm start` or `yarn start`, and go to `localhost:3000` in your browser.
-
-In the other terminal, `cd` into `express-back-end`. Run `npm install` or `yarn` to install the dependencies, then `npm start` or `yarn start` to launch the server.
-
-In the browser, you can click on the button and see the data get loaded.
-
-If this doesn't work, please message me!
-
-## Next steps
-
-From here, you can start working on your project!
-
-As soon as the dependencies are installed, your Express server can serve JSON and static assets (like images) in response to API calls from the React app. You can get started on developing your React app, routing plan, etc. right away! Any request that isn't handled by React is passed on to the Express server. That means that you can call a route like `/api/users` from React using `fetch`, `axios`, or something else, and Express will receive it as though they originated from the same app. For routing, best practice is to namespace all of your data routes to `/api`, so that they don't clash with other routing schemes, like React Router.
-
-At some point, you'll likely want to install and configure a database driver for Postgres or MongoDB-- Refer to past projects for hints on how to do this.
-
-And don't forget to update the README!
-
-## Example Projects
-
-You might want to look at examples of projects that have used this boilerplate for hints on how to extend it. Here are a few:
-
-* [Later Cart](https://github.com/bonitac/later-cart)
-* [Buddi.io](https://github.com/Danny-Tran/buddi.io)
-
-If you'd like your project added to the list, please shoot me a message.
-
-## Contact
-
-Please contact me on Slack (@garrettgsb) or Nima at `nima@lighthouselabs.com` if you have any questions, requests, or feedback, or post an issue to this repo. If you are using the boilerplate, I'd love to hear from you as well!
+- refactor to remove unnesecary data stored on client side
+- refactor to use react router
+- Be able to block certain keywords
+- project preferences and interests - group size, language, working hours
+- other people could give you points for adding to the discussion and completing targets, like stack overflow.
+- Once the group decided the project was complete, it would be displayed on the "completed projects" page of the app, and data about the group could be added to "successful groups" to help organize other groups in the future. If the group decided to abandon the project, the data could be added to "failed groups". 
+- Analytics page, where you can see the success rate of your previous projects, timeline, points, etc.
+- Media connections, linking fb, twitter, discord and zoom.
+- Awards and badges to give to other people a la reddit
+- Mentorship connection: have the ability to chat either one on one or with the group to respected mentors in any field.
+- mentor dashboard
+- email/text notifications
+- one to one messaging
+- project categories
+- block access before login
+- testimonials
+- become a mentor button
+- more search options
+- project lead / mentor notifacations in site
+- project analytics
+- project lead moderation
+- public / private projects
+- invite friends
+- complete / fail project
+- modify project description / title
+- member limits
+- github / fb etc in profile / project page
+- chatroom polls
+- view other peoples analytics (behind paywall?)
+- text / email notifications
+- awards
+- message search / persist
+- fb / google login
