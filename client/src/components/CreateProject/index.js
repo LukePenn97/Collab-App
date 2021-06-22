@@ -182,7 +182,7 @@ export default function CreateProject(props) {
         (All fields are required)
       </Typography>
     </div>
-    <div>
+    <div style={{ margin: "10px" }}>
           <TextField
             id='title'
             label="Title"
@@ -193,7 +193,7 @@ export default function CreateProject(props) {
             onChange={handleInputChange}
           />
       </div>
-      <div>
+      <div style={{ margin: "10px" }}>
           <TextField
             id='description'
             label='Description'
@@ -208,7 +208,7 @@ export default function CreateProject(props) {
       </div>
       <div>
       <FormGroup className={classes.paper}>
-        <FormControl>
+        <FormControl style={{ margin: "20px" }}>
           <FormLabel style={{marginLeft:7}}>Find the skill needed for your project</FormLabel>
           <MultiChipSelect
             onInputValueChange={(e) => onSkillsChanged(e)}
@@ -221,7 +221,7 @@ export default function CreateProject(props) {
         </FormControl>
       </FormGroup>
        </div>
-       <div>
+       <div style={{ margin: "10px" }}>
           <TextField
             id='URL'
             label="URL"
@@ -232,7 +232,7 @@ export default function CreateProject(props) {
             onChange={handleInputChange}
           />
       </div>
-      <div>
+      <div style={{ margin: "10px" }}>
           <TextField
             id='imgURL'
             label="Image URL"

@@ -138,13 +138,13 @@ export default function ChatRoom(props) {
         </div>
       </section>
       
-      <div style={{position: "absolute", display: "block", marginTop: "600px", left: "30px"}}>
+      <div style={{position: "fixed", display: "block", marginTop: "590px", left: "30px"}}>
         <MentorRequest
         users={props.users}
         allSkills={props.allSkills}
         />
       </div>
-      <div style={{position: "absolute", display: "block", marginTop: "600px", left: "560px"}}>
+      <div style={{position: "fixed", display: "block", marginTop: "590px", left: "560px"}}>
         <Button onClick={handleClick} style ={{backgroundColor:"lightblue"}}>Join Us</Button>
       </div>
 
