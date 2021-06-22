@@ -92,7 +92,7 @@ const CustomCard = ({
       <Column className={styles.card}>
         <Row p={2} gap={2}>
           
-          <Avatar className={styles.logo} variant={'rounded'} src={thumbnail} />
+          {/* <Avatar className={styles.logo} variant={'rounded'} src={thumbnail} /> */}
           <Info position={'middle'} useStyles={useApexInfoStyles}>
             <InfoTitle><a style={{fontSize: 40, color: "black"}}>{title}</a></InfoTitle>
             <InfoSubtitle onClick={subtitle} style={{fontSize: 25, color: "black"}}>Created by: <a style={{fontSize: 25, color: "black"}}>{creator}</a></InfoSubtitle>
@@ -159,6 +159,15 @@ const CustomCard = ({
   );
 };
 export default function ProjectListItem(props) {
+    const id = props.project.id
+    const name= props.project.name
+    const imgUrl= props.project.imgUrl
+    const projectLeadId= props.project.projectLeadId
+    const description= props.project.description
+    const project_skills= props.project.project_skills
+    const project_messages= props.project.project_messages
+    const project_users= props.project.project_users
+    const project_goals= props.project.project_goals
 
   const [open, setOpen] = React.useState(false);
 
@@ -174,11 +183,10 @@ export default function ProjectListItem(props) {
     setOpen(false);
   };
  
-  const projectLead = findUserById(props.projectLeadId, props.users);
+  const projectLead = findUserById(projectLeadId, project_users);
 
-  const skills = [];
-  props.project_skills.map(skill => skills.push(skill.name))
-  const icons = props.project_skills.map(skill => {
+
+  const icons = project_skills.map(skill => {
     return (
       // <Box display="flex">
       <Tooltip title={skill.name} placement="top">
@@ -196,20 +204,20 @@ export default function ProjectListItem(props) {
     
     <>
       <NoSsr>
-        <GoogleFontLoader fonts={[{ font: 'Roboto', weights: [800, 700] }]} />
+        <GoogleFontLoader fonts={[{ font: 'Roboto', weights: [300, 200] }]} />
       </NoSsr>
       <Grid container spacing={10} justify="center" alignItems="center">
         <Grid item xs={12}>
           <CustomCard
             sendJoinRequest={handleClick}
-            thumbnail={props.imgUrl}
-            title={props.name}
-            titleAction={() => props.pickAProject(props)}
+            thumbnail={imgUrl}
+            title={name}
+            titleAction={() => props.pickAProject(props.project)}
             creator={`${projectLead.firstName} ${projectLead.lastName}`}
-            subtitle={() => props.pickAUser(props.projectLeadId)}
-            description={props.description}
-            users={props.project_users}
-            project_skills={props.project_skills}
+            subtitle={() => props.pickAUser(projectLeadId)}
+            description={description}
+            users={project_users}
+            project_skills={project_skills}
           />
         </Grid>
       </Grid>

@@ -2,25 +2,13 @@ import React from "react";
 import ProjectListItem from "./ProjectListItem";
 
 export default function ProjectList(props) {
-  // console.log("hi")
-  // console.log(props.projects)
 
-  const projects = props.projects.map((project, index) => {
+  const projects = props.projects.slice(0,10).map((project, index) => {
 
-    
     return (
       <ProjectListItem
         key={index}
-        users={props.users}
-        id = {project.id}
-        name={project.name}
-        imgUrl={project.imgUrl}
-        projectLeadId={project.projectLeadId}
-        description={project.description}
-        project_skills={project.project_skills}
-        project_messages={project.project_messages}
-        project_users={project.project_users}
-        project_goals={project.project_goals}
+        project={project}
         pickAProject={props.pickAProject}
         pickAUser={props.pickAUser}
       />

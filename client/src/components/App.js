@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import "./App.css";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import Avatar from "@material-ui/core/Avatar";
 
 import Display from "./Display";
 import NavBar from "./NavBar";
 import Header from "./Header";
+import ProjectList from "./ProjectList";
 
 import MatchProject from "./MatchProject";
 import ProjectDetail from "./ProjectDetail";
@@ -68,8 +68,6 @@ function App(props) {
 
   const currentUserId = cookies.get("currentUser");
   console.log("cookie",typeof currentUserId)
-  // const currentUser = findUserById(parseInt(currentUserId), state.users);
-  // console.log(currentUser);
   const { mode, transition, back } = useVisualMode(DISPLAY);
   if (props.mode === "REGISTER") {
     console.log("HELOOOOOO");
@@ -227,17 +225,11 @@ function App(props) {
             }
           <div style={{height: "20px"}}></div>
           {mode === DISPLAY && (
-            <Display
+            <ProjectList
               user={state.user}
-              currentUser={state.user}
-              project={state.project}
               projects={state.matchedProjects}
-              users={state.users}
-              // pickASkill={skillFilter}
-              // roomName = {state.roomName}
               pickAProject={pickAProject}
               pickAUser={pickAUser}
-              createNewProject={createNewProject}
             />
           )}
 

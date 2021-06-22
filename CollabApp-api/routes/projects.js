@@ -6,6 +6,7 @@ const { Op } = require("sequelize");
 router.get("/skills", (req, res) => {
   Skill.findAll()
     .then(skills => {
+      console.log("In /projects/skills route")
       res.set("Access-Control-Allow-Origin", "*");
       res.json(skills);
     })
@@ -22,7 +23,7 @@ router.get("/", (req, res) =>
     ],
   })
     .then((projects) => {
-      
+      console.log("In /projects route")
       res.set("Access-Control-Allow-Origin", "*");
       res.json(projects);
     })

@@ -6,7 +6,7 @@ const {Op} = require("sequelize");
 router.get('/', (req, res) =>
 User.findAll({include: ["user_skills", "user_messages"]})
   .then(users => {
-    // console.log("Users:", users);
+    console.log("In /users route")
     res.set('Access-Control-Allow-Origin','*');
     res.json(users);
   })
