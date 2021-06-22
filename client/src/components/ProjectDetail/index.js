@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProjectDetail = (props) => {
-  const projectLead = findUserById(props.project.projectLeadId, props.users);
+  //const projectLead = findUserById(props.project.projectLeadId, props.users);
 
   const classes = useStyles();
   return (
@@ -42,7 +42,7 @@ const ProjectDetail = (props) => {
               <Avatar
                 className={"MuiAvatar-root"}
                 src={member.photo}
-                onClick={() => props.pickAUser(props.project.projectLeadId)}
+                onClick={() => props.pickAUser(member.id)}
               />
             ))}
           </div>
