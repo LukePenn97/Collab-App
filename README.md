@@ -18,6 +18,7 @@ Mentors
 
 - refactor to remove unnesecary data stored on client side
 - refactor to use react router
+- search bar auto submit
 - Be able to block certain keywords
 - project preferences and interests - group size, language, working hours
 - other people could give you points for adding to the discussion and completing targets, like stack overflow.
